@@ -6,6 +6,10 @@
                 <a href="{{ url('/home') }}" class="button is-primary">
                     My Page
                 </a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="button is-light">Log Out</button>
+                </form>
             @else
                 <a href="{{ route('login') }}" class="button is-primary">
                     Login

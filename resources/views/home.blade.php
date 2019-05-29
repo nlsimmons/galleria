@@ -216,40 +216,6 @@ $control_labels = [
 
         </div>
 
-        {{-- <div id="photos-container">
-
-            <div class="home-photo">
-                <img src="http://via.placeholder.com/800x600">
-            </div>
-            <div class="home-photo">
-                <img src="http://via.placeholder.com/800x600">
-            </div>
-            <div class="home-photo">
-                <img src="http://via.placeholder.com/800x600">
-            </div>
-            <div class="home-photo">
-                <img src="http://via.placeholder.com/800x600">
-            </div>
-
-            <div id="add-photo"></div>
-
-        </div> --}}
-
-    </div>
-
-</div>
-
-<div class="section">
-
-    <div class="container-fluid">
-        <h1 class="title is-1">Albums</h1>
-
-        <div id="albums" style="display: flex">
-
-            <img src="http://via.placeholder.com/800x600">
-            <img src="http://via.placeholder.com/800x600">
-
-        </div>
     </div>
 
 </div>
