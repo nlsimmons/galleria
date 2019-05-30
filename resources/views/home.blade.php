@@ -39,7 +39,9 @@
                 @if($img instanceof App\Image)
 
                 <div class="carousel-slide">
-                    <a href="{{ $img->url }}"><img src="{{ $img->display_url }}"></a>
+                    <a href="{{ $img->url }}">
+                        <img class="slide-image" src="{{ asset($img->display_url) }}">
+                    </a>
                 </div>
 
                 @else

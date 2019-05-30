@@ -18,10 +18,10 @@ class CreateImagesTable extends Migration
             $table->string('url');
             $table->string('display_url');
             $table->string('thumbnail_url');
-            $table->string('title');
-            $table->text('description');
-            $table->string('location'); // Coordinates stored as a string
-            $table->boolean('hidden');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->string('location')->nullable(); // Coordinates stored as a string
+            $table->boolean('hidden')->default(false);
             $table->timestamps();
         });
     }
