@@ -1,0 +1,22 @@
+.add-photo-btn {
+    font-size: 10em;
+    border: 5px dotted #4a4a4a;
+    border-radius: 10%;
+}
+
+.add-photo-btn {
+	color: inherit;
+	height: 1.75em;
+	width: 1.75em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.add-photo-btn input[type=file].add-photo-input {
+	cursor: pointer;
+	opacity: 0;
+	height: 0;
+	width: 0;
+}

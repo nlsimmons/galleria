@@ -4,15 +4,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Image;
+use App\Slideshow;
+
 class PageController extends Controller
 {
     public function index()
     {
-    	if(Auth::check())
+    	if(!Auth::check())
     	{
-    		return view('home');
+    		return redirect()->route('welcome');
     	}
 
-    	return redirect()->route('welcome');
+    	$slides = ( new Slideshow( Image::all() ) )->data;
+
+		return view('home')->with( compact('slides') );
+    }
+
+    public function upload()
+    {
+    	if(!Auth::check())
+    	{
+    		return redirect()->route('welcome');
+    	}
+
+    	return view('upload');
     }
 }
