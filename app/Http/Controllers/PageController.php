@@ -21,12 +21,14 @@ class PageController extends Controller
 		return view('home')->with( compact('slides') );
     }
 
-    public function upload()
+    public function upload(Request $request)
     {
     	if(!Auth::check())
     	{
     		return redirect()->route('welcome');
     	}
+
+        dd($request);
 
     	return view('upload');
     }

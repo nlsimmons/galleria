@@ -20,6 +20,6 @@ Auth::routes();
 Route::get('/home', 'PageController@index')
 	->name('home');
 
-Route::get('/upload', 'PageController@upload')
+Route::post('/upload', 'PageController@upload')
 	->name('upload');
 

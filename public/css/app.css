@@ -18325,16 +18325,20 @@ readers do not read off random characters that represent icons */
   font-size: 10em;
   border: 5px dotted #4a4a4a;
   border-radius: 10%;
-}
-
-.add-photo-btn {
   color: inherit;
-  height: 1.75em;
-  width: 1.75em;
+  height: 1.5em;
+  width: 1.5em;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.add-photo-btn:hover {
+  color: #2366d1;
+  border-color: #2366d1;
+  transition: all 0.5s ease;
 }
 
 .add-photo-btn input[type=file].add-photo-input {

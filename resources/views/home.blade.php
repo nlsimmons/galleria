@@ -45,7 +45,8 @@
                 @else
 
                 <div class="carousel-slide add-photo-slide">
-                    <form method="post" id="upload-image-no-album">
+                    <form method="post" action="{{ route('upload') }}" id="upload-image-no-album">
+                        @csrf
                         <label class="add-photo-btn">
                             <input type="file" multiple class="add-photo-input" name="image-no-album">
                             <i class="fas fa-plus-circle"></i>
