@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <h1 class="title is-1" style="text-align: center">All Photos</h1>
 
-        <div class="carousel">
+        <div class="carousel" id="carousel-photos">
 
             @foreach( $slides as $img )
 
@@ -50,7 +50,7 @@
                     <form method="post" action="{{ route('upload') }}" id="upload-image-no-album" enctype="multipart/form-data">
                         @csrf
                         <label class="add-photo-btn">
-                            <input type="file" multiple class="add-photo-input" name="image-no-album">
+                            <input type="file" multiple class="add-photo-input" name="image-no-album[]">
                             <i class="fas fa-plus-circle"></i>
                         </label>
                     </form>

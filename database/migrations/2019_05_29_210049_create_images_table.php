@@ -15,6 +15,7 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('owner');
             $table->string('url');
             $table->string('display_url');
             $table->string('thumbnail_url');
@@ -23,6 +24,10 @@ class CreateImagesTable extends Migration
             $table->string('location')->nullable(); // Coordinates stored as a string
             $table->boolean('hidden')->default(false);
             $table->timestamps();
+
+            $table->foreign('owner')
+                ->references('id')
+                ->on('users');
         });
     }
 

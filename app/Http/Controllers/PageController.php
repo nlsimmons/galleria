@@ -13,6 +13,13 @@ use App\Slideshow;
 
 class PageController extends Controller
 {
+    public function main()
+    {
+        $slides = ( new Slideshow( Image::all() ) )->data;
+
+        return view('main')->with( compact('slides') );
+    }
+
     public function index()
     {
     	if(!Auth::check())
@@ -20,7 +27,10 @@ class PageController extends Controller
     		return redirect()->route('welcome');
     	}
 
-    	$slides = ( new Slideshow( Image::all() ) )->data;
+    	$slides = ( new Slideshow(
+            Image::where( ['owner' => Auth::id()] )
+                ->get() )
+        )->data;
 
 		return view('home')->with( compact('slides') );
     }
@@ -32,8 +42,17 @@ class PageController extends Controller
     		return redirect()->route('welcome');
     	}
 
-        $file = $request->file('image-no-album');
+        $files = $request->file('image-no-album');
+        foreach( $files as $file )
+        {
+            $this->storeFile($file);
+        }
 
+        return redirect('home');
+    }
+
+    protected function storeFile( \Illuminate\Http\UploadedFile $file )
+    {
         $name = md5($file);
         $img = ImageManager::make($file);;
 
@@ -54,8 +73,7 @@ class PageController extends Controller
         $image->url = $main_img;
         $image->display_url = $display_img;
         $image->thumbnail_url = $thumb_img;
+        $image->owner = Auth::id();
         $image->save();
-
-        return redirect('home');
     }
 }
