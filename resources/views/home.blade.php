@@ -15,7 +15,8 @@
 
         @component('components.slideshow', [
             'id' => 'carousel-photos',
-            'slides' => $slides
+            'slides' => $slides,
+            'options' => $options,
         ])
         @endcomponent
 

@@ -1,4 +1,5 @@
 function addEvent(el, type, handler) {
+	if(!el) return;
 	if (el.attachEvent) el.attachEvent('on'+type, handler);
 	else el.addEventListener(type, handler);
 }
@@ -14,6 +15,7 @@ addEvent(
 	document.querySelector('.carousel'),
 	'wheel',
 	function(e) {
+		e.preventDefault();
 		let slideshow_id = this.id;
 		scrollSlides(slideshow_id, e);
 	}

@@ -18,16 +18,18 @@
         @foreach( $slides as $img )
         @if($img instanceof App\Image)
 
-        <div class="carousel-slide">
+        <div class="carousel-slide carousel-slide-{{ $img->id }}">
             <a href="{{ $img->url }}">
                 <img class="slide-image" src="{{ asset($img->display_url) }}">
             </a>
+            @if( @ $options['allow_delete'] )
             <form class="box carousel-slide-control" name="slide-action" method="post">
                 @csrf
                 <button class="button button-no-border" name="delete" value="{{ $img->id }}">
                     <i class="fas fa-minus-circle"></i>
                 </button>
             </form>
+            @endif
         </div>
 
         @else

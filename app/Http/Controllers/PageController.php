@@ -25,12 +25,14 @@ class PageController extends Controller
     		return redirect()->route('welcome');
     	}
 
-    	$slides = ( new Slideshow(
+        $slides = ( new Slideshow(
             Image::where( ['owner' => Auth::id()] )
-                ->get() )
-        )->data;
+                ->latest()
+                ->get()
+        ) )->data;
+        $options = ['allow_delete' => true];
 
-		return view('home')->with( compact('slides') );
+		return view('home')->with( compact('slides', 'options') );
     }
 
     public function upload(Request $request)
@@ -43,7 +45,7 @@ class PageController extends Controller
         $files = $request->file('image-no-album');
         foreach( $files as $file )
         {
-            Image::upload( $file, Auth::id() );
+            Image::upload( $file, Auth::id() )->save();
         }
 
         return redirect('home');
@@ -57,5 +59,18 @@ class PageController extends Controller
         }
 
         return $this->home();
+    }
+
+    public function welcome()
+    {
+        $slides = ( new Slideshow(
+            Image::where( ['hidden' => '0'] )
+                ->latest()
+                ->get()
+        , false) )->data;
+        $options = [];
+
+        return view('welcome')
+            ->with( compact('slides', 'options') );
     }
 }

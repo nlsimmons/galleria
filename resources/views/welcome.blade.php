@@ -4,9 +4,23 @@
 
 <section class="section">
 
+	<div class="container-fluid">
+        <h1 class="title is-1" style="text-align: center">Recent Photos</h1>
+
+        @component('components.slideshow', [
+            'id' => 'carousel-photos',
+            'slides' => $slides
+        ])
+        @endcomponent
+
+    </div>
+
+</section>
+
+<section class="section">
+
 	<ul class="container">
 		<h3 class="title">Todo</h3>
-		<li>Make a buncha rando pics</li>
 		<li>Pick a domain</li>
 		<li>&nbsp;</li>
 		<li>Buttons:</li>
@@ -22,6 +36,8 @@
 		<li>Fillable title over slide</li>
 		<li>Mouseover shows fillable description</li>
 		<li>Host on heroku</li>
+		<li>Loading wheel</li>
+		<li>Prevent reupload on refresh</li>
 	</ul>
 
 </section>

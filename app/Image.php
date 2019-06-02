@@ -3,6 +3,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use \Illuminate\Http\UploadedFile;
 use ImageManager;
 
 class Image extends Model
@@ -10,10 +11,10 @@ class Image extends Model
 	private static $display_size = 500;
 	private static $thumb_size = 100;
 
-    public static function upload( \Illuminate\Http\UploadedFile $file, $owner_id )
+    public static function upload($file, $owner_id)
     {
     	$name = md5($file);
-        $img = ImageManager::make($file);;
+        $img = ImageManager::make($file);
 
         Storage::put(
             $main_img = 'public/images/' . $name . '.jpg',
@@ -33,7 +34,6 @@ class Image extends Model
         $new->display_url = $display_img;
         $new->thumbnail_url = $thumb_img;
         $new->owner = $owner_id;
-        $new->save();
 
         return $new;
     }

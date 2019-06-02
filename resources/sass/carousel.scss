@@ -46,7 +46,7 @@
     }
 }
 
-@for $i from 1 to 20 {
+@for $i from 1 to 50 {
     @include carousel-slide( $i )
 }
 
