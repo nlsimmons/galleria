@@ -1,8 +1,11 @@
 <div class="carousel" id="{{ $id }}">
 
     @foreach( $slides as $img )
+    @php
+        $first = isset($first) ? false : true;
+    @endphp
 
-    <input type="radio" id="{{ $img->id }}" class="carousel-activator" name="activator" {{ $img->id === 1 ? 'checked' : '' }}>
+    <input type="radio" id="{{ $img->id }}" class="carousel-activator" name="activator" {{ $first ? 'checked' : '' }}>
     <div class="carousel-controls">
         <label for="{{ $img->previous }}" class="carousel-control carousel-control-backward"></label>
         <label for="{{ $img->next }}" class="carousel-control carousel-control-forward"></label>
@@ -19,6 +22,12 @@
             <a href="{{ $img->url }}">
                 <img class="slide-image" src="{{ asset($img->display_url) }}">
             </a>
+            <form class="box carousel-slide-control" name="slide-action" method="post">
+                @csrf
+                <button class="button button-no-border" name="delete" value="{{ $img->id }}">
+                    <i class="fas fa-minus-circle"></i>
+                </button>
+            </form>
         </div>
 
         @else

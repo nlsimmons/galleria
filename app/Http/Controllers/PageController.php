@@ -20,7 +20,7 @@ class PageController extends Controller
         return view('main')->with( compact('slides') );
     }
 
-    public function index()
+    public function home()
     {
     	if(!Auth::check())
     	{
@@ -49,6 +49,32 @@ class PageController extends Controller
         }
 
         return redirect('home');
+    }
+
+    public function action(Request $request)
+    {
+        if( $request->has('delete') )
+        {
+            $this->delete($request->delete);
+        }
+
+        return $this->home();
+    }
+
+    protected function delete($id)
+    {
+        $image = Image::find($id);
+
+        if($image)
+        {
+            Storage::delete([
+                $image->url,
+                $image->display_url,
+                $image->thumbnail_url
+            ]);
+
+            Image::destroy($id);
+        }
     }
 
     protected function storeFile( \Illuminate\Http\UploadedFile $file )

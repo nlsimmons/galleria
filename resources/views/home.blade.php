@@ -4,15 +4,7 @@
 
 <!--
     Todo:
-    Make the carousel a component
-    Apply scrolling somehow
-    Also using arrow keys
-    Upload
-
-    Images:
-    size: Thumbnail, Display, Full
-    Clicking an image smoothly transitions to showing it in "Full"
-
+    Scroll using arrow keys
     Customize background
 -->
 

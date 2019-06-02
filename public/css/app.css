@@ -18300,8 +18300,8 @@ readers do not read off random characters that represent icons */
   align-items: center;
 }
 
-.carousel-slide > * {
-  padding: 5%;
+.carousel-slide img {
+  padding: 2% 5%;
 }
 
 .carousel-mask {
@@ -18350,5 +18350,18 @@ readers do not read off random characters that represent icons */
 
 img.slide-image {
   max-height: 500px;
+}
+
+.carousel-slide {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-slide .carousel-slide-control {
+  font-size: 1.5em;
+}
+
+.button.button-no-border {
+  border: none;
 }
 

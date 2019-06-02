@@ -17,8 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'PageController@index')
+Route::get('/home', 'PageController@home')
 	->name('home');
+Route::post('/home', 'PageController@action');
 
 Route::post('/upload', 'PageController@upload')
 	->name('upload');
