@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+use App\Image;
+
 class CreateImagesTable extends Migration
 {
     /**
@@ -38,6 +40,11 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
+        array_map(
+            'unlink',
+            glob(storage_path('app\\public\\images\\*'))
+        );
+
         Schema::dropIfExists('images');
     }
 }
