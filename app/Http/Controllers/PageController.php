@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Image;
 use App\Slideshow;
+use App\Waterfall;
 
 class PageController extends Controller
 {
@@ -63,14 +64,19 @@ class PageController extends Controller
 
     public function welcome()
     {
-        $slides = ( new Slideshow(
+        $slides = ( new Waterfall(
             Image::where( ['hidden' => '0'] )
                 ->latest()
                 ->get()
         , false) )->data;
         $options = [];
 
+        // dd($slides);
+
+        $slide_columns = $slides->chunk( $slides->count() / 3 );
+        // dd($slide_columns);
+
         return view('welcome')
-            ->with( compact('slides', 'options') );
+            ->with( compact('slide_columns', 'options') );
     }
 }

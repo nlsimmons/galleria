@@ -29,8 +29,6 @@ class Slideshow extends Model
             $i++;
         }
 
-        // dd($items);
-
     	$this->data = $items;
     }
 }

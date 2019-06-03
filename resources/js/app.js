@@ -1,25 +1,84 @@
 function addEvent(el, type, handler) {
 	if(!el) return;
-	if (el.attachEvent) el.attachEvent('on'+type, handler);
-	else el.addEventListener(type, handler);
+
+	if(el instanceof NodeList)
+	{
+		el.forEach( e => e.addEventListener(type, handler) )
+	}
+	else
+	{
+		el.addEventListener(type, handler);
+	}
 }
 
-addEvent(
-	document.querySelector('input.add-photo-input'),
+function listen(selector, trigger, callback) {
+	document.addEventListener(
+		trigger,
+		function (e) {
+			if (!e.target.matches(selector)) return;
+			callback(e);
+	});
+}
+
+function context(path, selector) {
+	for(let p of path) {
+		if(p.matches(selector)) return p;
+	}
+}
+
+/** * * * * * * * **/
+
+listen(
+	'input.add-photo-input',
 	'change',
 	function() {
 		document.querySelector('form#upload-image-no-album').submit();
-})
+	}
+)
 
 addEvent(
-	document.querySelector('.carousel'),
+	document.querySelectorAll('.carousel'),
 	'wheel',
 	function(e) {
 		e.preventDefault();
-		let slideshow_id = this.id;
+		let slideshow_id = context(e.path, '.carousel').id;
 		scrollSlides(slideshow_id, e);
 	}
 )
+
+
+
+// Toggle active state
+listen(
+	'.waterfall img.display_img',
+	'click',
+	function(e) {
+		console.log( e.target )
+
+		let display = e.target;
+		let full_id = display.id.replace('display', 'container');
+
+		// alert(full_id)
+
+		document.querySelector('#'+full_id)
+			.classList.add('active')
+
+		/*if( e.target.classList.contains('active') )
+			e.target.classList.remove('active')
+		else
+			e.target.classList.add('active')*/
+	}
+)
+// Remove active state
+listen(
+	'.waterfall .active, .waterfall .active *',
+	'click',
+	function(e) {
+		document.querySelector('.active')
+			.classList.remove('active');
+	}
+)
+
 
 var time = Date.now();
 function scrollSlides(slideshow_id, e) {

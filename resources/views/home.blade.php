@@ -24,4 +24,20 @@
 
 </div>
 
+<div class="section">
+
+    <div class="container-fluid">
+        <h1 class="title is-1" style="text-align: center">All Albums</h1>
+
+        @component('components.slideshow', [
+            'id' => 'carousel-albums',
+            'slides' => $slides,
+            'options' => $options,
+        ])
+        @endcomponent
+
+    </div>
+
+</div>
+
 @endsection

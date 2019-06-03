@@ -5,11 +5,9 @@
 <section class="section">
 
 	<div class="container-fluid">
-        <h1 class="title is-1" style="text-align: center">Recent Photos</h1>
-
-        @component('components.slideshow', [
+        @component('components.waterfall', [
             'id' => 'carousel-photos',
-            'slides' => $slides
+            'slide_columns' => $slide_columns
         ])
         @endcomponent
 

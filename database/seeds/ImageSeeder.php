@@ -18,7 +18,10 @@ class ImageSeeder extends Seeder
 
     	for($i=0; $i<30; $i++)
     	{
-    		$image = $faker->image($path, 1920, 1080);
+    		$image = $faker->image($path,
+                $faker->numberBetween(960, 1920),
+                $faker->numberBetween(540, 1028)
+            );
 
 		    $user = User::all()->random()->id;
 			Image::upload($image, $user)->save();

@@ -5,7 +5,7 @@
         $first = isset($first) ? false : true;
     @endphp
 
-    <input type="radio" id="{{ $img->id }}" class="carousel-activator" name="activator" {{ $first ? 'checked' : '' }}>
+    <input type="radio" id="{{ $img->id }}" class="carousel-activator" name="activator_{{ $id }}" {{ $first ? 'checked' : '' }}>
     <div class="carousel-controls">
         <label for="{{ $img->previous }}" class="carousel-control carousel-control-backward"></label>
         <label for="{{ $img->next }}" class="carousel-control carousel-control-forward"></label>
