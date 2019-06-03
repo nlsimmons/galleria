@@ -19,7 +19,6 @@
 
 	<ul class="container">
 		<h3 class="title">Todo</h3>
-		<li>Pick a domain</li>
 		<li>&nbsp;</li>
 		<li>Buttons:</li>
 		<li>&nbsp;</li>
@@ -36,6 +35,7 @@
 		<li>Host on heroku</li>
 		<li>Loading wheel</li>
 		<li>Prevent reupload on refresh</li>
+		<li>CSS Breakpoints</li>
 	</ul>
 
 </section>

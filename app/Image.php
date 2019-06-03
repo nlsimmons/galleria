@@ -11,6 +11,11 @@ class Image extends Model
 	private static $display_size = 500;
 	private static $thumb_size = 100;
 
+    public function download_link()
+    {
+        return '/download/image/' . pathinfo($this->url, PATHINFO_FILENAME);
+    }
+
     public static function upload($file, $owner_id)
     {
     	$name = md5($file);

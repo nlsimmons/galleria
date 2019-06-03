@@ -41,3 +41,25 @@ img.slide-image {
 .button.button-no-border {
 	border: none;
 }
+
+.carousel-slide-control .button {
+
+	font-size: 2rem;
+
+	i.fa-edit-circle:before {
+	    content: "\F044";
+	    color: white;
+	    background: #363636;
+	    padding: .5em;
+	    border-radius: 100%;
+	    font-size: 50%;
+	    align-self: center;
+	    width: 2em;
+	    height: 2em;
+	    display: flex;
+	}
+}
+
+.navbar.is-fixed-top {
+	z-index: 99999
+}

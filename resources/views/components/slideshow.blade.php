@@ -25,8 +25,16 @@
             @if( @ $options['allow_delete'] )
             <form class="box carousel-slide-control" name="slide-action" method="post">
                 @csrf
-                <button class="button button-no-border" name="delete" value="{{ $img->id }}">
+                <button class="button button-no-border" name="delete" title="Delete" value="{{ $img->id }}">
                     <i class="fas fa-minus-circle"></i>
+                </button>
+                <a class="button button-no-border" name="download" title="Download"
+                    href="{{ $img->download_link() }}"
+                    value="{{ $img->id }}">
+                    <i class="fas fa-arrow-alt-circle-down"></i>
+                </a>
+                <button class="button button-no-border" name="edit" title="Edit" value="{{ $img->id }}">
+                    <i class="fas fa-edit-circle"></i>
                 </button>
             </form>
             @endif
