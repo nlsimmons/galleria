@@ -26,14 +26,13 @@ class PageController extends Controller
     		return redirect()->route('welcome');
     	}
 
-        $slides = ( new Slideshow(
-            Image::where( ['owner' => Auth::id()] )
-                ->latest()
-                ->get()
-        ) )->data;
-        $options = ['allow_delete' => true];
+        $images = Auth::user()->my_images;
+        $albums = Auth::user()->my_albums;
 
-		return view('home')->with( compact('slides', 'options') );
+        $images = (new Slideshow( $images ))->get();
+        $albums = (new Slideshow( $albums ))->get();
+
+		return view('home')->with( compact('images', 'albums') );
     }
 
     public function upload(Request $request)

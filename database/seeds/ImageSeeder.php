@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Image;
+use App\Album;
 use App\User;
 
 class ImageSeeder extends Seeder
@@ -16,17 +17,37 @@ class ImageSeeder extends Seeder
     	$faker = Faker\Factory::create();
     	$path = storage_path('app\\public\\images');
 
-    	for($i=0; $i<30; $i++)
-    	{
-    		$image = $faker->image($path,
-                $faker->numberBetween(960, 1920),
-                $faker->numberBetween(540, 1028)
-            );
+        User::all()->each(function($user) use ($path, $faker) {
 
-		    $user = User::all()->random()->id;
-			Image::upload($image, $user)->save();
+            for($i=0; $i<3; $i++)
+            {
+                $album = new Album;
+                $album->owner = $user->id;
+                $album->name = $faker->sentence(3);
+                $album->description = $faker->sentence(10);
+                $album->save();
 
-			unlink($image);
-    	}
+                for($i=0; $i<3; $i++)
+                {
+                    $image_path = $faker->image($path,
+                        $faker->numberBetween(960, 1920),
+                        $faker->numberBetween(540, 1028)
+                    );
+
+                    $image = Image::upload($image_path, $user->id);
+                    $image->owner = $user->id;
+                    $image->title = $faker->sentence(3);
+                    $image->description = $faker->sentence(10);
+                    $image->save();
+
+                    unlink($image_path);
+
+                    $album->images()->save($image);
+                    $user->my_images()->save($image);
+                }
+
+                $user->my_albums()->save($album);
+            }
+        });
     }
 }

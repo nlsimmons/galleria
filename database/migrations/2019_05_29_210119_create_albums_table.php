@@ -16,9 +16,9 @@ class CreateAlbumsTable extends Migration
         Schema::create('albums', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('owner');
-            $table->string('name');
-            $table->text('description');
-            $table->string('location'); // Coordinates stored as a string
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->string('location')->nullable(); // Coordinates stored as a string
             $table->timestamps();
 
             $table->foreign('owner')

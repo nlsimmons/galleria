@@ -6,6 +6,18 @@
     Todo:
     Scroll using arrow keys
     Customize background
+    Mouseover / click photo:
+        show title
+        show description
+
+    mouseover / click album
+        show title
+        show description
+        show first 3? images
+
+    side by side compare images
+    color breakdown of album(s)
+
 -->
 
 <div class="section">
@@ -14,9 +26,13 @@
         <h1 class="title is-1" style="text-align: center">All Photos</h1>
 
         @component('components.slideshow', [
-            'id' => 'carousel-photos',
-            'slides' => $slides,
-            'options' => $options,
+            'id' => 'carousel-images',
+            'slides' => $images,
+            'options' => [
+                'buttons' => [
+                    'delete', 'download', 'edit'
+                ]
+            ]
         ])
         @endcomponent
 
@@ -31,8 +47,12 @@
 
         @component('components.slideshow', [
             'id' => 'carousel-albums',
-            'slides' => $slides,
-            'options' => $options,
+            'slides' => $albums,
+            'options' => [
+                'buttons' => [
+
+                ]
+            ],
         ])
         @endcomponent
 

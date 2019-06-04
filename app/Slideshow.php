@@ -6,30 +6,46 @@ use Illuminate\Support\Collection;
 
 class Slideshow extends Model
 {
-	public $data;
+	public $slides;
+
+    public function get()
+    {
+        return $this->slides;
+    }
 
     public function __construct(Collection $items, $allow_add=true)
     {
-    	if($allow_add)
-    	{
-    		$items->push( new class { public $id = 'add'; } );
-    	}
-
-        $slides = [];
-        $next_keys = $items->pluck('id');
-        $prev_keys = $items->pluck('id');
-        $next_keys = $next_keys->push( $next_keys->shift() )->toArray();
-        $prev_keys = $prev_keys->prepend( $prev_keys->pop() )->toArray();
-
-        $i = 0;
         foreach($items->all() as $item)
         {
-            $item->next = $next_keys[$i];
-            $item->previous = $prev_keys[$i];
-            $i++;
+            $this->slides[] = new Slide( $item );
         }
 
-    	$this->data = $items;
+        if($allow_add)
+        {
+            $this->slides[] = new Slide('add');
+        }
+
+        $this->assignOrder();
+    }
+
+    protected function assignOrder()
+    {
+        foreach($this->slides as $i => $v)
+        {
+            $this->slides[$i]->previous = $this->id_of($i - 1);
+            $this->slides[$i]->next = $this->id_of($i + 1);
+        }
+    }
+
+    protected function id_of($i)
+    {
+        if( $i < 0 )
+            return end($this->slides)->id();
+
+        if( $i >= count($this->slides) )
+            return reset($this->slides)->id();
+
+        return $this->slides[$i]->id();
     }
 }
 

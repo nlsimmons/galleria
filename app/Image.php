@@ -11,9 +11,24 @@ class Image extends Model
 	private static $display_size = 500;
 	private static $thumb_size = 100;
 
+    public function owner()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function albums()
+    {
+        return $this->belongsToMany('App\Album');
+    }
+
     public function download_link()
     {
         return '/download/image/' . pathinfo($this->url, PATHINFO_FILENAME);
+    }
+
+    public function display_url()
+    {
+        return $this->display_url;
     }
 
     public static function upload($file, $owner_id)

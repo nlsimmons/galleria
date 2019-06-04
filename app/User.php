@@ -10,6 +10,21 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function my_images()
+    {
+        return $this->hasMany('App\Image', 'owner');
+    }
+
+    public function my_albums()
+    {
+        return $this->hasMany('App\Album', 'owner');
+    }
+
+    public function albums()
+    {
+        return $this->belongsToMany('App\Album');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
