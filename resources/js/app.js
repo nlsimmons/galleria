@@ -38,6 +38,15 @@ listen(
 )
 
 addEvent(
+	document.querySelector('.add-photo-btn.add-album'),
+	'click',
+	function() {
+		document.querySelector('#modal-carousel-albums')
+			.classList.add('active');
+	}
+)
+
+addEvent(
 	document.querySelectorAll('.carousel-track'),
 	'wheel',
 	function(e) {
@@ -114,7 +123,6 @@ listen(
 	'.waterfall img.display_img',
 	'click',
 	function(e) {
-		console.log( e.target )
 
 		let display = e.target;
 		let full_id = display.id.replace('display', 'container');

@@ -8,7 +8,7 @@ use ImageManager;
 
 class Image extends Model
 {
-	private static $display_size = 500;
+	private static $display_size = 800;
 	private static $thumb_size = 100;
 
     public function owner()

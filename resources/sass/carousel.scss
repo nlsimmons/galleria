@@ -1,11 +1,11 @@
 .carousel {
     height: 600px;
-    width: 800px;
+    width: 600px;
     overflow: visible;
     text-align: center;
     position: relative;
     padding: 0;
-    margin: auto;
+    margin: 80px auto;
 }
 
 .carousel-controls,
@@ -69,12 +69,12 @@
     opacity: 1;
 }
 .carousel-control-backward {
-    left: 10px;
+    left: -40px;
     -webkit-transform: rotate(-135deg);
             transform: rotate(-135deg);
 }
 .carousel-control-forward {
-    right: 10px;
+    right: -40px;
     -webkit-transform: rotate(45deg);
             transform: rotate(45deg);
 }
@@ -113,6 +113,16 @@
     height: 100%;
     position: absolute;
     opacity: 0;
+    padding: 0 50px;
+
+    .slide-title {
+        position: absolute;
+        top: 0;
+    }
+
+    img {
+        padding: 2% 5%;
+    }
 }
 .carousel-track .carousel-slide {
     display: block;
@@ -123,22 +133,48 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.carousel-slide img {
-    padding: 2% 5%;
+
+    .slide-image-wrapper {
+        transform: translateY(calc(-150px + 25%));
+        width: 600px;
+        padding: 0 30px;
+    }
 }
 
 .carousel-mask {
-    height: 100%;
-    position: absolute;
+    height: 100vh;
+    position: fixed;
     width: calc(50vw - 400px);
-    z-index: 999;
+    z-index: 10;
+    top: 0;
 }
 .carousel-mask-left {
-    left: calc(400px - 50vw);
+    left: 0;
     background-image: linear-gradient(to left, rgba(255,0,0,0), $body-background-color, $body-background-color);
 }
 .carousel-mask-right {
-    right: calc(400px - 50vw);
+    right: 0;
     background-image: linear-gradient(to right, rgba(255,0,0,0), $body-background-color, $body-background-color);
+}
+
+.modal.active {
+    display: block;
+    z-index: 100
+}
+
+.modal .modal-card {
+    top: 30vh;
+}
+
+.box.carousel-slide-control {
+    height: 60px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 80px;
+
+    .button {
+        background: none;
+    }
 }

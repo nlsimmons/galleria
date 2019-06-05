@@ -23,7 +23,7 @@ class ImageSeeder extends Seeder
             {
                 $album = new Album;
                 $album->owner = $user->id;
-                $album->name = $faker->sentence(3);
+                $album->title = $faker->sentence(3);
                 $album->description = $faker->sentence(10);
                 $album->save();
 
