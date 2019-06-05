@@ -11,6 +11,8 @@
 |
 */
 
+// comment
+
 Route::get('/', 'PageController@welcome')
 	->name('welcome');
 
