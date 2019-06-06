@@ -3,11 +3,13 @@
 
     <div class="carousel-slide carousel-slide-{{ $slide->id }}">
 
-        <p class="title slide-title" contenteditable onfocusout="alert('potato')">{{ $slide->title }}</p>
+        <p id="title_{{ $type }}_{{ $slide->id }}" contenteditable class="title slide-title {{ $slide->title ? '' : 'placeholder'  }}">
+            {{ $slide->title ?: 'Click to add a title' }}
+        </p>
 
-        <a href="{{ $slide->url }}" class="slide-image-wrapper">
-            <img class="slide-image" src="{{ asset($slide->display_url) }}">
-        </a>
+        <div class="slide_image_wrapper display_wrapper" id="display_{{ $type }}_{{ $slide->id }}">
+            <img class="display_image" src="{{ asset($slide->display_url) }}">
+        </div>
 
         @if( !empty($buttons) )
             <form class="box carousel-slide-control" name="slide-action" method="post">
@@ -21,16 +23,28 @@
 
                 @if(in_array('download', $buttons))
                     <a class="button button-no-border" name="download" title="Download"
-                        href="{{ $slide->download_link }}"
-                        value="{{ $slide->id }}">
+                       href="{{ $slide->download_link }}"
+                       value="{{ $slide->id }}">
                         <i class="fas fa-arrow-alt-circle-down"></i>
                     </a>
                 @endif
 
                 @if(in_array('edit', $buttons))
                     <button class="button button-no-border" name="edit" title="Edit" value="{{ $slide->id }}">
-                        <i class="fas fa-edit-circle"></i>
+                        <i class="fas cs cs-edit-circle"></i>
                     </button>
+                @endif
+
+                @if(in_array('tags', $buttons))
+                    <span class="button button-no-border">
+                        <i class="fas cs cs-tags"></i>
+                    </span>
+                @endif
+
+                @if(in_array('album', $buttons))
+                    <span class="button button-no-border">
+                        <i class="fas cs cs-album"></i>
+                    </span>
                 @endif
 
             </form>
