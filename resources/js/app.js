@@ -142,7 +142,6 @@ listen(
 
 	}
 )
-// Remove focus state
 listen(
 	'.modal-background',
 	'click',
@@ -151,5 +150,15 @@ listen(
 			.forEach(e => e.classList.remove('active'))
 		document.querySelector('body')
 			.classList.remove('prevent-scroll')
+	}
+)
+
+listen(
+	'.carousel-slide .slide-title',
+	'change',
+	function(e, el) {
+		el.value
+		el.id
+		// change
 	}
 )

@@ -1,20 +1,20 @@
 @foreach( $slides as $slide )
 
-        {{-- <div class="carousel-slide carousel-slide-{{ $slide->id }}">
-
-            <p id="title_{{ $type }}_{{ $slide->id }}" contenteditable class="title slide-title {{ $slide->title ? '' : 'placeholder'  }}">
-                {{ $slide->title ?: 'Click to add a title' }}
-            </p>
-
-            <div class="slide_image_wrapper display_wrapper" id="display_{{ $type }}_{{ $slide->id }}">
-                <img class="display_image" src="{{ asset($slide->display_url) }}">
-            </div>
-
-        </div> --}}
-
     @if( !( $slide->item instanceof Illuminate\Database\Eloquent\Model ) )
 
-        @if($type == 'image')
+        <div class="carousel-slide">
+
+            <p id="title_{{ $type }}_new" contenteditable class="title slide-title placeholder">Add New</p>
+
+            <div class="slide_image_wrapper display_wrapper">
+                <label class="add-photo-btn">
+                    <i class="fas fa-plus-circle"></i>
+                </label>
+            </div>
+
+        </div>
+
+        {{-- @if($type == 'image')
 
             <div class="carousel-slide add-photo-slide">
                 <span class="title">Add New</span>
@@ -32,21 +32,25 @@
             <div class="carousel-slide add-photo-slide">
                 <span class="title">Add New</span>
                 <label class="add-photo-btn add-album">
-                    {{-- <input type="file" multiple class="add-photo-input" name="image-no-album[]"> --}}
+                    <input type="file" multiple class="add-photo-input" name="image-no-album[]">
                     <i class="fas fa-plus-circle"></i>
                 </label>
             </div>
 
-        @endif
+        @endif --}}
 
 
     @else
 
         <div class="carousel-slide">
 
-            <p id="title_{{ $type }}_{{ $slide->id }}" contenteditable class="title slide-title {{ $slide->title ? '' : 'placeholder'  }}">
+            <input type="text" id="title_{{ $type }}_{{ $slide->id }}" class="title slide-title"
+                placeholder="Click to add a title"
+                value="{{ $slide->title }}">
+
+            {{-- <p  contenteditable class="title slide-title {{ $slide->title ? '' : 'placeholder'  }}">
                 {{ $slide->title ?: 'Click to add a title' }}
-            </p>
+            </p> --}}
 
             <div class="slide_image_wrapper display_wrapper" id="display_{{ $type }}_{{ $slide->id }}">
                 <img class="display_image" src="{{ asset($slide->display_url) }}">
