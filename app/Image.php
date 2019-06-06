@@ -64,13 +64,13 @@ class Image extends Model
 
         if($image)
         {
+            parent::destroy($id);
+
             Storage::delete([
                 $image->url,
                 $image->display_url,
                 $image->thumbnail_url
             ]);
-
-            return parent::destroy($id);
         }
     }
 }
