@@ -23,6 +23,8 @@ class Album extends Model
 
     public function display_url()
     {
-    	return $this->images()->first()->display_url;
+    	$first_image = $this->images()->first();
+        return $first_image ? $first_image->display_url() : asset('/assets/placeholder.png');
+        ;
     }
 }

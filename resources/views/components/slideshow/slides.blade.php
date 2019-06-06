@@ -6,8 +6,13 @@
 
             <p class="title slide-title not-editable">Add New</p>
 
+            {{--
+
+             --}}
+
             <div class="slide_image_wrapper display_wrapper">
                 <label class="add-photo-btn">
+                    <input type="file" multiple class="add-photo-input" name="image-no-album[]">
                     <i class="fas fa-plus-circle"></i>
                 </label>
             </div>
@@ -21,7 +26,7 @@
                 <form method="post" action="{{ route('upload') }}" id="upload-image-no-album" enctype="multipart/form-data">
                     @csrf
                     <label class="add-photo-btn">
-                        <input type="file" multiple class="add-photo-input" name="image-no-album[]">
+
                         <i class="fas fa-plus-circle"></i>
                     </label>
                 </form>
