@@ -4,7 +4,7 @@
 
         <div class="carousel-slide">
 
-            <p id="title_{{ $type }}_new" contenteditable class="title slide-title placeholder">Add New</p>
+            <p class="title slide-title not-editable">Add New</p>
 
             <div class="slide_image_wrapper display_wrapper">
                 <label class="add-photo-btn">
@@ -44,7 +44,7 @@
 
         <div class="carousel-slide">
 
-            <input type="text" id="title_{{ $type }}_{{ $slide->id }}" class="title slide-title"
+            <input type="text" id="{{ $type }}_{{ $slide->id }}_title" class="title slide-title"
                 placeholder="Click to add a title"
                 value="{{ $slide->title }}">
 
