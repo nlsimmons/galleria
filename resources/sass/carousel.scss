@@ -116,8 +116,20 @@
     padding: 0 50px;
 
     .slide-title {
+        padding: 10px 20px;
         position: absolute;
         top: 0;
+    }
+
+    .slide-title:hover,
+    .slide-title:focus {
+        border: 2px solid rgba(10,10,10,.5);
+        border-radius: 30px;
+        box-shadow: 3px 3px 10px 1px rgba(10, 10, 10, 0.5) inset;
+    }
+
+    .slide-title.placeholder {
+        color: rgba(10,10,10, 0.5);
     }
 
     img {
@@ -134,7 +146,7 @@
     justify-content: center;
     align-items: center;
 
-    .slide-image-wrapper {
+    .slide_image_wrapper {
         transform: translateY(calc(-150px + 25%));
         width: 600px;
         padding: 0 30px;
@@ -155,15 +167,6 @@
 .carousel-mask-right {
     right: 0;
     background-image: linear-gradient(to right, rgba(255,0,0,0), $body-background-color, $body-background-color);
-}
-
-.modal.active {
-    display: block;
-    z-index: 100
-}
-
-.modal .modal-card {
-    top: 30vh;
 }
 
 .box.carousel-slide-control {

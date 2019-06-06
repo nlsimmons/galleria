@@ -34,7 +34,7 @@
         Mouseover
             show description expanding from bottom
             show options
-        Click title edit
+        Click title edit /
 
     Album
         mouseover
@@ -68,7 +68,7 @@
             'type' => 'image',
             'options' => [
                 'buttons' => [
-                    'delete', 'download', 'edit'
+                    'delete', 'download', 'edit', 'tags', 'album'
                 ]
             ]
         ])

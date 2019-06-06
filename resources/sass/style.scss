@@ -45,21 +45,65 @@ img.slide-image {
 .carousel-slide-control .button {
 
 	font-size: 2rem;
-
-	i.fa-edit-circle:before {
-	    content: "\F044";
-	    color: white;
-	    background: #363636;
-	    padding: .5em;
-	    border-radius: 100%;
-	    font-size: 50%;
-	    align-self: center;
-	    width: 2em;
-	    height: 2em;
-	    display: flex;
-	}
 }
 
 .navbar.is-fixed-top {
 	z-index: 99999
+}
+
+.modal.active {
+    display: block;
+    z-index: 100
+}
+
+.modal .modal-card {
+    top: 30vh;
+}
+
+.expanded-image-container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    .expanded-image {
+		max-width: 80vw;
+		max-height: 80vh;
+		z-index: 999;
+    }
+}
+
+.modal .expanded-image {
+	box-shadow: 0 0 50px 30px rgba(10, 10, 10);
+}
+
+i.fas.cs,
+i.far.cs {
+	color: white;
+    background: #363636;
+    padding: .5em;
+    border-radius: 100%;
+    font-size: 50%;
+    align-self: center;
+    width: 2em;
+    height: 2em;
+    display: flex;
+}
+
+i.fas.cs-edit-circle:before {
+    content: "\F044";
+}
+
+i.fas.cs-tags:before {
+    content: "\F02C";
+}
+
+i.far.cs-album:before,
+i.fas.cs-album:before {
+	content: "\F302";
+}
+
+img.display_img {
+	cursor: pointer;
 }

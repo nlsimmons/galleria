@@ -6,10 +6,13 @@
 
         @foreach($column as $img)
 
-        <div class="display_wrapper">
-            <img src="{{ $img->display_url }}" class="display_img" id="display_{{ $img->id }}">
-            <div class="full_image_container" id="container_{{ $img->id }}">
-                <img src="{{ $img->url }}" class="full_img">
+        <div class="display_wrapper" id="display_{{ $img->id }}">
+            <img src="{{ asset($img->display_url) }}" class="display_img">
+        </div>
+        <div class="modal" id="modal_{{ $img->id }}">
+            <div class="modal-background"></div>
+            <div class="expanded-image-container">
+                <img class="expanded-image" src="{{ asset($img->url) }}" class="full_img">
             </div>
         </div>
 

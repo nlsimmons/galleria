@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/app.css">
 
 </head>
-<body class="has-navbar-fixed-top">
+<body class="has-navbar-fixed-top" spellcheck="false">
 
 @include('components.navbar')
 

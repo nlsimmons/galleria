@@ -15,9 +15,17 @@ function listen(selector, trigger, callback) {
 	document.addEventListener(
 		trigger,
 		function (e) {
-			if (!e.target.matches(selector)) return;
-			callback(e);
-	});
+			let path = e.path ? e.path : e.composedPath()
+			for(let el of path) {
+				if ( el.matches && el.matches(selector) ) {
+					callback(e, el);
+					return;
+				}
+			}
+
+			return;
+		}
+	);
 }
 
 function context(path, selector) {
@@ -117,33 +125,31 @@ function scrollSlides(slideshow_id, e) {
 	}
 }
 
-/* Waterfall */
-// Toggle active state
 listen(
-	'.waterfall img.display_img',
+	'.display_wrapper',
 	'click',
-	function(e) {
+	function(e, el) {
+		let modal_id = el.id.replace('display', 'modal');
 
-		let display = e.target;
-		let full_id = display.id.replace('display', 'container');
-
-		// alert(full_id)
-
-		document.querySelector('#'+full_id)
-			.classList.add('active')
-
-		/*if( e.target.classList.contains('active') )
-			e.target.classList.remove('active')
+		let modal = document.querySelector('#'+modal_id)
+		if(modal)
+			modal.classList.add('active')
 		else
-			e.target.classList.add('active')*/
+			return
+
+		document.querySelector('body')
+			.classList.add('prevent-scroll')
+
 	}
 )
-// Remove active state
+// Remove focus state
 listen(
-	'.waterfall .active, .waterfall .active *',
+	'.modal-background',
 	'click',
 	function(e) {
-		document.querySelector('.active')
-			.classList.remove('active');
+		document.querySelectorAll('.modal.active')
+			.forEach(e => e.classList.remove('active'))
+		document.querySelector('body')
+			.classList.remove('prevent-scroll')
 	}
 )
