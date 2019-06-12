@@ -20,7 +20,8 @@ class CreateImagesTable extends Migration
             $table->unsignedBigInteger('owner');
             $table->string('url');
             $table->string('display_url');
-            $table->string('thumbnail_url');
+            $table->string('mid_url');
+            $table->string('thumb_url');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('location')->nullable(); // Coordinates stored as a string
