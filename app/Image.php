@@ -8,6 +8,11 @@ use ImageManager;
 
 class Image extends Model
 {
+    private static $sizes = [
+        'display' => 1000,
+        'mid' => 500,
+        'thumb' => 100,
+    ];
 	private static $display_size = 800;
 	private static $thumb_size = 100;
 
@@ -33,27 +38,26 @@ class Image extends Model
 
     public static function upload($file, $owner_id)
     {
-    	$name = md5($file);
+    	$image_name = md5($file);
         $img = ImageManager::make($file);
 
+        $new = new self;
+        $new->owner = $owner_id;
+
         Storage::put(
-            $main_img = 'public/images/' . $name . '.jpg',
+            $main_img = 'public/images/' . $image_name . '.jpg',
             $img->encode('jpg')
         );
-        Storage::put(
-            $display_img = 'public/images/' . $name . '_display.jpg',
-            $img->widen( self::$display_size )->encode('jpg')
-        );
-        Storage::put(
-            $thumb_img = 'public/images/' . $name . '_thumb.jpg',
-            $img->widen( self::$thumb_size )->encode('jpg')
-        );
-
-        $new = new self;
         $new->url = $main_img;
-        $new->display_url = $display_img;
-        $new->thumbnail_url = $thumb_img;
-        $new->owner = $owner_id;
+
+        foreach( self::$sizes as $size => $width )
+        {
+            Storage::put(
+                $display_img = 'public/images/' . $image_name . '_' . $size .'.jpg',
+                $img->widen($width)->encode('jpg')
+            );
+            $new->{$size.'_url'} = $display_img;
+        }
 
         return $new;
     }

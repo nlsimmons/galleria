@@ -1,5 +1,13 @@
+body {
+	overflow-x: hidden;
+}
+
 :focus {
 	outline: none;
+}
+
+.has-pointer {
+	cursor: pointer;
 }
 
 .add-photo-btn {
@@ -23,8 +31,7 @@
 	transition: all 0.5s ease;
 }
 
-.add-photo-btn input[type=file].add-photo-input {
-	cursor: pointer;
+input[type=file].add-photo-input {
 	opacity: 0;
 	height: 0;
 	width: 0;
@@ -97,5 +104,4 @@ i.fas.cs-album:before {
 
 img.display_image {
 	cursor: pointer;
-	max-height: 450px
 }

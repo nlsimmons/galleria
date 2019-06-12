@@ -60,8 +60,9 @@
 <div class="section">
 
     <div class="container-fluid">
-        <h1 class="title is-1" style="text-align: center">All Photos</h1>
+        {{-- <h1 class="title is-1" style="text-align: center">All Photos</h1> --}}
 
+        @if(count($images) > 1)
         @component('components.slideshow', [
             'id' => 'carousel-images',
             'slides' => $images,
@@ -73,6 +74,13 @@
             ]
         ])
         @endcomponent
+        @else
+
+        <div>
+            <p>You have no images in your gallery yet. Click to add some.</p>
+        </div>
+
+        @endif
 
     </div>
 
@@ -81,9 +89,9 @@
 <div class="section">
 
     <div class="container-fluid">
-        <h1 class="title is-1" style="text-align: center">All Albums</h1>
+        {{-- <h1 class="title is-1" style="text-align: center">All Albums</h1> --}}
 
-        @component('components.slideshow', [
+        {{-- @component('components.slideshow', [
             'id' => 'carousel-albums',
             'slides' => $albums,
             'type' => 'album',
@@ -93,7 +101,7 @@
                 ]
             ],
         ])
-        @endcomponent
+        @endcomponent --}}
 
     </div>
 

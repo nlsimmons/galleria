@@ -29,6 +29,11 @@ class PageController extends Controller
         $images = Auth::user()->my_images;
         $albums = Auth::user()->my_albums;
 
+        if(count($images) == 0)
+        {
+            return view('empty_gallery');
+        }
+
         $images = (new Slideshow( $images ))->get();
         $albums = (new Slideshow( $albums ))->get();
 
