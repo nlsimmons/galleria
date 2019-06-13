@@ -15,7 +15,7 @@ class ImageSeeder extends Seeder
     public function run()
     {
     	$faker = Faker\Factory::create();
-    	$path = storage_path('app\\public\\images');
+    	$path = storage_path('app/public/images');
 
         User::all()->each(function($user) use ($path, $faker) {
 

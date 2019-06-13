@@ -43,7 +43,7 @@ class CreateImagesTable extends Migration
     {
         array_map(
             'unlink',
-            glob(storage_path('app\\public\\images\\*'))
+            glob(storage_path('app/public/images/*'))
         );
 
         Schema::dropIfExists('images');
