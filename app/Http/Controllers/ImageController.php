@@ -14,4 +14,9 @@ class ImageController extends Controller
     	$image->title = $request->value;
     	$image->save();
     }
+
+    public function getFile($file) 
+    {
+		return response()->download( storage_path('app/public/images/' . $file . '.jpg') );
+	}
 }

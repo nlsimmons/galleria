@@ -18,9 +18,7 @@ Route::get('/', 'PageController@welcome')
 
 Auth::routes();
 
-Route::get('/download/image/{file}', function($file) {
-	return response()->download( storage_path('app/public/images/' . $file . '.jpg') );
-});
+Route::get('/download/image/{file}', 'ImageController@getFile');
 
 Route::get('/home', 'PageController@home')
 	->name('home');
