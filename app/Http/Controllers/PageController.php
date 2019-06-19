@@ -77,7 +77,7 @@ class PageController extends Controller
 
         // dd($slides);
 
-        $slide_columns = $slides->chunk( $slides->count() / 3 );
+        $slide_columns = $slides->chunk( ceil($slides->count() / 3) );
         // dd($slide_columns);
 
         return view('welcome')
