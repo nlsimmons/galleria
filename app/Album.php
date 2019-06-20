@@ -21,6 +21,11 @@ class Album extends Model
     	return $this->belongsToMany('App\Image');
     }
 
+    public function slideImages()
+    {
+        return $this->images->take(3);
+    }
+
     public function display_url()
     {
     	$first_image = $this->images()->first();

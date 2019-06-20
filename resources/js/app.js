@@ -71,6 +71,7 @@ fn.listen(
 		}
 
 		let uri = '/'+el.id.replace(/\_/g, '/')
+		console.log(uri)
 
 		fn.request('put', uri, { field: 'title', value: new_val })
 			.then( e => {

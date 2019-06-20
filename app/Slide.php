@@ -35,5 +35,13 @@ class Slide
 
         return $this->item->id;
     }
+
+    public function images()
+    {
+        if( !is_array($this->item) )
+        {
+            return $this->item->slideImages();
+        }
+    }
 }
 

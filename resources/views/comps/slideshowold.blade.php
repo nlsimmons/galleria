@@ -1,6 +1,6 @@
 <div class="carousel" id="carousel-{{ $id }}">
 
-    @component('components.slideshow.slides', [
+    @component('comps.slideshow.slides', [
         'slides' => $slides,
         'id' => $id,
         'type' => $type,
@@ -23,7 +23,7 @@
         @endif
     @endforeach
 
-    <div class="modal" id="modal-{{ $id }}">
+    {{-- <div class="modal" id="modal-{{ $id }}">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -36,6 +36,6 @@
                 <button class="button">Submit</button>
             </footer>
         </div>
-    </div>
+    </div> --}}
 
 </div>

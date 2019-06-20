@@ -40,10 +40,10 @@ class PageController extends Controller
             return view('empty_gallery');
         }
 
-        $images = (new Slideshow( $images ))->get();
-        $albums = (new Slideshow( $albums ))->get();
+        // $images = (new Slideshow( $images ));
+        $album_slides = (new Slideshow( $albums ));
 
-		return view('home')->with( compact('images', 'albums') );
+		return view('home')->with( compact('images', 'album_slides') );
     }
 
     public function upload(Request $request)

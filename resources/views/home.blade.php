@@ -60,16 +60,41 @@
 <div class="section">
 
     <div class="container-fluid">
+
+        @component('comps.slideshow', [
+            'id' => 'carousel-albums',
+            'slides' => $album_slides->slides->all(),
+        ])
+
+            @if( $album_slides->slides->count() > 1)
+                @php
+                $slides = $album_slides->slides;
+                $add_slide = $slides->pop();
+                @endphp
+
+                @foreach($slides as $slide)
+                    @component('comps.album.slide', ['slide' => $slide]) @endcomponent
+                @endforeach
+            @endif
+
+            @component('comps.album.new')
+            @endcomponent
+
+        @endcomponent
+    </div>
+
+    @if(false)
+    <div class="container-fluid">
         {{-- <h1 class="title is-1" style="text-align: center">All Photos</h1> --}}
 
         @if(count($images) > 1)
-        @component('components.slideshow', [
+        @component('comps.slideshow', [
             'id' => 'carousel-images',
             'slides' => $images,
             'type' => 'image',
             'options' => [
                 'buttons' => [
-                    'delete', 'download', 'edit', 'tags', 'album'
+                    // 'delete', 'download', 'edit', 'tags', 'album'
                 ]
             ]
         ])
@@ -83,6 +108,7 @@
         @endif
 
     </div>
+    @endif
 
 </div>
 

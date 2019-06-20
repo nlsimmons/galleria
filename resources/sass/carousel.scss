@@ -1,4 +1,60 @@
-$slideshow-width: 60vw;
+$slideshow-width: 600px;
+
+$album-image-width: 400px;
+$album-image-height: 400px;
+
+$album-cover-width: 600px;
+$album-cover-height: 600px;
+
+@mixin album-slide-cover( $s ) {
+
+    @for $i from 1 through $s {
+        $step-x: ($album-cover-width - $album-image-width) / 4;
+        $step-y: ($album-cover-height - $album-image-height) / 4;
+        $padding: ($s * 25) - 125;
+
+        &.img-#{$i}-of-#{$s} {
+            $sp-x: ($step-x * ($i - 1)) - $padding;
+            $sp-y: ($step-y * ($i - 1)) - $padding;
+
+            z-index: (10 - $i);
+            left: $sp-x;
+            bottom: $sp-y;
+        }
+    }
+}
+
+.album-slide {
+    width: $album-cover-width;
+    height: $album-cover-height;
+    margin: auto;
+    position: relative;
+
+    .album-image-wrapper {
+        width: $album-image-width;
+        height: $album-image-height;
+        border: 1px solid black;
+        background-color: white;
+        padding: 10px;
+        position: absolute;
+
+        @for $s from 1 through 5 {
+            @include album-slide-cover( $s )
+        }
+
+        .album-image {
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+}
+
+/*
+    https://codepen.io/jh3y/pen/WwVKLN
+*/
 
 .carousel {
     height: 600px;

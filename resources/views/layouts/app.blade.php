@@ -13,7 +13,7 @@
 </head>
 <body class="has-navbar-fixed-top" spellcheck="false">
 
-@include('components.navbar')
+@include('comps.navbar')
 
 @yield('content')
 

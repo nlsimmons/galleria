@@ -9,7 +9,7 @@
 <section class="section">
 
 	<div class="container-fluid">
-        @component('components.waterfall', [
+        @component('comps.waterfall', [
             'id' => 'carousel-photos',
             'slide_columns' => $slide_columns
         ])

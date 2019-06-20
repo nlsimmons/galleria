@@ -4,6 +4,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * Wrapper for Collection class
+ */
 class Slideshow extends Model
 {
 	public $slides;
@@ -25,6 +28,7 @@ class Slideshow extends Model
             $this->slides[] = new Slide('add');
         }
 
+        $this->slides = collect($this->slides);
         $this->assignOrder();
     }
 
@@ -40,10 +44,10 @@ class Slideshow extends Model
     protected function id_of($i)
     {
         if( $i < 0 )
-            return end($this->slides)->id();
+            return $this->slides->last()->id();
 
-        if( $i >= count($this->slides) )
-            return reset($this->slides)->id();
+        if( $i >= $this->slides->count() )
+            return $this->slides->first()->id();
 
         return $this->slides[$i]->id();
     }

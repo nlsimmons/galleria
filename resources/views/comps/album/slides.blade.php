@@ -1,17 +1,17 @@
-@if(count($slides) > 1) @foreach( $slides as $slide )
+@foreach( $albums as $album )
 @php $first = isset($first) ? false : true; @endphp
 
-    <input type="radio" id="{{ $slide->id }}" class="carousel-activator" name="activator_{{ $id }}" {{ $first ? 'checked' : '' }}>
+    <input type="radio" id="{{ $album->id }}" class="carousel-activator" name="activator_{{ $id }}" {{ $first ? 'checked' : '' }}>
 
-@endforeach @endif
+@endforeach
 
-@if(count($slides) > 1)
+@if(count($albums) > 1)
 
 <div class="carousel-indicators">
 
-    @foreach( $slides as $slide )
+    @foreach( $albums as $album )
 
-        <label for="{{ $slide->id }}" class="carousel-indicator"></label>
+        <label for="{{ $album->id }}" class="carousel-indicator"></label>
 
     @endforeach
 
@@ -23,33 +23,26 @@
 
 <div class="carousel-track">
 
-    @foreach( $slides as $slide )
+    @foreach( $albums as $album )
 
-        @if( !( $slide->item instanceof Illuminate\Database\Eloquent\Model ) )
-
-            <div class="carousel-slide">
-
-                <p class="title slide-title not-editable">Add New</p>
-
-                {{--
-
-                 --}}
-
-                <div class="slide_image_wrapper display_wrapper">
-                    <form method="post" action="{{ route('upload') }}" id="upload-image-no-album" enctype="multipart/form-data">
-                        @csrf
-                        <label class="add-photo-btn">
-                            <input type="file" multiple class="add-photo-input" name="image-no-album[]">
-                            <i class="fas fa-plus-circle"></i>
-                        </label>
-                    </form>
+        <div class="album-slide">
+            @foreach($album->images as $image)
+                <div class="album-image-wrapper">
+                    <div class="album-image" style="background-image: url({{ asset($image->url) }})"></div>
                 </div>
+            @endforeach
+        </div>
 
-            </div>
+
+        @break
+
+        @if( !( $album->item instanceof Illuminate\Database\Eloquent\Model ) )
+
+
 
             {{-- @if($type == 'image')
 
-                <div class="carousel-slide add-photo-slide">
+                <div class="carousel-album add-photo-album">
                     <span class="title">Add New</span>
                     <form method="post" action="{{ route('upload') }}" id="upload-image-no-album" enctype="multipart/form-data">
                         @csrf
@@ -62,7 +55,7 @@
 
             @elseif($type == 'album')
 
-                <div class="carousel-slide add-photo-slide">
+                <div class="carousel-album add-photo-album">
                     <span class="title">Add New</span>
                     <label class="add-photo-btn add-album">
                         <input type="file" multiple class="add-photo-input" name="image-no-album[]">
@@ -75,18 +68,18 @@
 
         @else
 
-            <div class="carousel-slide">
+            <div class="carousel-album">
 
-                <input type="text" id="{{ $type }}_{{ $slide->id }}_title" class="title slide-title"
+                <input type="text" id="album_{{ $album->id }}_title" class="title album-title"
                     placeholder="Click to add a title"
-                    value="{{ $slide->title }}">
+                    value="{{ $album->title }}">
 
-                {{-- <p  contenteditable class="title slide-title {{ $slide->title ? '' : 'placeholder'  }}">
-                    {{ $slide->title ?: 'Click to add a title' }}
+                {{-- <p  contenteditable class="title album-title {{ $album->title ? '' : 'placeholder'  }}">
+                    {{ $album->title ?: 'Click to add a title' }}
                 </p> --}}
 
-                <div class="slide_image_wrapper display_wrapper" id="display_{{ $type }}_{{ $slide->id }}">
-                    <img class="display_image" src="{{ asset($slide->url) }}">
+                <div class="album_image_wrapper display_wrapper" id="display_album_{{ $album->id }}">
+                    <img class="display_image" src="{{ asset($album->url) }}">
                 </div>
 
             </div>
@@ -99,29 +92,29 @@
 
 <div class="carousel-buttons">
 
-@foreach($slides as $slide)
-    @if( $slide->item instanceof Illuminate\Database\Eloquent\Model && !empty($buttons) )
-        <form class="box carousel-slide-control" name="slide-action" method="post">
+@foreach($albums as $album)
+    @if( $album->item instanceof Illuminate\Database\Eloquent\Model && !empty($buttons) )
+        <form class="box carousel-album-control" name="album-action" method="post">
             @csrf
 
             @if(in_array('delete', $buttons))
                 <button class="button button-no-border" name="delete" title="Delete"
-                    value="{{ $slide->id }}">
+                    value="{{ $album->id }}">
                     <i class="fas fa-minus-circle"></i>
                 </button>
             @endif
 
             @if(in_array('download', $buttons))
                 <a class="button button-no-border" name="download" title="Download"
-                   href="{{ $slide->download_link }}"
-                   value="{{ $slide->id }}">
+                   href="{{ $album->download_link }}"
+                   value="{{ $album->id }}">
                     <i class="fas fa-arrow-alt-circle-down"></i>
                 </a>
             @endif
 
             @if(in_array('edit', $buttons))
                 <button class="button button-no-border" name="edit" title="Edit"
-                    value="{{ $slide->id }}">
+                    value="{{ $album->id }}">
                     <i class="fas cs cs-edit-circle"></i>
                 </button>
             @endif
