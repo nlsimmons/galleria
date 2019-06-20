@@ -150,6 +150,10 @@ $slideshow-width: 60vw;
     left: 0;
     right: 0;
 
+    .display_image {
+        max-height: 600px;
+    }
+
     .slide_image_wrapper {
         // transform: translateY(calc(-150px + 25%));
         // width: 600px;

@@ -86,7 +86,7 @@
                 </p> --}}
 
                 <div class="slide_image_wrapper display_wrapper" id="display_{{ $type }}_{{ $slide->id }}">
-                    <img class="display_image" src="{{ asset($slide->display_url) }}">
+                    <img class="display_image" src="{{ asset($slide->url) }}">
                 </div>
 
             </div>

@@ -7,7 +7,7 @@
         @foreach($column as $img)
 
         <div class="display_wrapper" id="display_{{ $img->id }}">
-            <img src="{{ asset($img->display_url) }}" class="display_img">
+            <img src="{{ asset($img->url) }}" class="display_img">
         </div>
         <div class="modal" id="modal_{{ $img->id }}">
             <div class="modal-background"></div>

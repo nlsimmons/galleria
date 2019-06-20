@@ -28,3 +28,5 @@ Route::post('/upload', 'PageController@upload')
 	->name('upload');
 
 Route::put('/image/{id}/title', 'ImageController@editTitle');
+
+Route::fallback('PageController@default');

@@ -8,14 +8,6 @@ use ImageManager;
 
 class Image extends Model
 {
-    private static $sizes = [
-        'display' => 1000,
-        'mid' => 500,
-        'thumb' => 100,
-    ];
-	private static $display_size = 800;
-	private static $thumb_size = 100;
-
     public function owner()
     {
         return $this->belongsTo('App\User');
@@ -36,7 +28,7 @@ class Image extends Model
         return $this->display_url;
     }
 
-    public static function upload($file, $owner_id)
+    public static function upload($file, $owner_id, $album=null)
     {
     	$image_name = md5($file);
         $img = ImageManager::make($file);
@@ -45,19 +37,10 @@ class Image extends Model
         $new->owner = $owner_id;
 
         Storage::put(
-            $main_img = 'public/images/' . $image_name . '.jpg',
+            $url = 'public/images/' . $image_name . '.jpg',
             $img->encode('jpg')
         );
-        $new->url = $main_img;
-
-        foreach( self::$sizes as $size => $width )
-        {
-            Storage::put(
-                $display_img = 'public/images/' . $image_name . '_' . $size .'.jpg',
-                $img->widen($width)->encode('jpg')
-            );
-            $new->{$size.'_url'} = $display_img;
-        }
+        $new->url = $url;
 
         return $new;
     }
@@ -70,11 +53,7 @@ class Image extends Model
         {
             parent::destroy($id);
 
-            Storage::delete([
-                $image->url,
-                $image->display_url,
-                $image->thumbnail_url
-            ]);
+            Storage::delete($image->url);
         }
     }
 }

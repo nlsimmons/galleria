@@ -23,7 +23,8 @@ fn.addEvent(
 	'wheel',
 	function(e) {
 		e.preventDefault();
-		let slideshow_id = fn.context(e.path, '.carousel').id;
+		let path = e.path ? e.path : e.composedPath()
+		let slideshow_id = fn.context(path, '.carousel').id;
 		fn.scrollSlides(slideshow_id, e);
 	}
 )
@@ -66,12 +67,6 @@ fn.listen(
 
 		if( old_val == new_val )
 		{
-			return;
-		}
-
-		if( new_val == '' )
-		{
-			el.value = old_val;
 			return;
 		}
 

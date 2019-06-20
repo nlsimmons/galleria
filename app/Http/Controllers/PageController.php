@@ -7,11 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 use App\Image;
+use App\Album;
 use App\Slideshow;
 use App\Waterfall;
 
 class PageController extends Controller
 {
+    public function default()
+    {
+        return redirect()->route('welcome');
+    }
+
     public function main()
     {
         $slides = ( new Slideshow( Image::all() ) )->data;
@@ -47,10 +53,29 @@ class PageController extends Controller
     		return redirect()->route('welcome');
     	}
 
-        $files = $request->file('image-no-album');
+        $user = Auth::user();
+
+        if( $request->album == 'new' )
+        {
+            $album = new Album;
+            $album->owner = $user->id;
+            $album->save();
+
+            $user->my_albums()->save($album);
+        }
+
+        $files = $request->file('images');
+
         foreach( $files as $file )
         {
-            Image::upload( $file, Auth::id() )->save();
+            $image = Image::upload( $file, Auth::id() );
+            $image->owner = $user->id;
+            $image->save();
+
+
+
+            $album->images()->save($image);
+            $user->my_images()->save($image);
         }
 
         return redirect('home');
