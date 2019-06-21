@@ -2,7 +2,7 @@
 	<input type="text" id="album_{{ $slide->id }}_title" class="title slide-title"
         placeholder="Click to add a title"
         value="{{ $slide->title }}">
-	<a href="/albums/{{ $slide->id }}/">
+	<a href="/album/{{ $slide->id }}/">
 		@php $t = $slide->images()->count(); @endphp
 	    @foreach($slide->images() as $image)
 	    	@php $s = !isset($s) ? 1 : ++$s; @endphp
@@ -28,6 +28,5 @@
         {{-- <span class="button button-no-border" title="Add Person to Album">
             <span>add person to this album</span>
         </span> --}}
-        {{-- <span>view</span> --}}
 	</div>
 </div>

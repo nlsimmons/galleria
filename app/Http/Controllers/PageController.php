@@ -22,7 +22,8 @@ class PageController extends Controller
     {
         $slides = ( new Slideshow( Image::all() ) )->data;
 
-        return view('main')->with( compact('slides') );
+        return view('main')
+            ->with( compact('slides') );
     }
 
     public function home()
@@ -32,18 +33,16 @@ class PageController extends Controller
     		return redirect()->route('welcome');
     	}
 
-        $images = Auth::user()->my_images;
         $albums = Auth::user()->my_albums;
 
-        if(count($images) == 0)
-        {
-            return view('empty_gallery');
-        }
+        // if(count($images) == 0)
+        // {
+        //     return view('empty_gallery');
+        // }
 
-        // $images = (new Slideshow( $images ));
-        $album_slides = (new Slideshow( $albums ));
+        $album_slides = new Slideshow( $albums );
 
-		return view('home')->with( compact('images', 'album_slides') );
+		return view('home')->with( compact('album_slides') );
     }
 
     public function upload(Request $request)
@@ -72,8 +71,6 @@ class PageController extends Controller
             $image->owner = $user->id;
             $image->save();
 
-
-
             $album->images()->save($image);
             $user->my_images()->save($image);
         }
@@ -100,10 +97,7 @@ class PageController extends Controller
         , false) )->data;
         $options = [];
 
-        // dd($slides);
-
         $slide_columns = $slides->chunk( ceil($slides->count() / 3) );
-        // dd($slide_columns);
 
         return view('welcome')
             ->with( compact('slide_columns', 'options') );

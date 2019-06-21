@@ -18,7 +18,7 @@ Route::get('/', 'PageController@welcome')
 
 Auth::routes();
 
-Route::get('/download/image/{file}', 'ImageController@getFile');
+
 
 Route::get('/home', 'PageController@home')
 	->name('home');
@@ -28,6 +28,9 @@ Route::post('/upload', 'PageController@upload')
 	->name('upload');
 
 Route::put('/image/{id}/title', 'ImageController@editTitle');
+Route::get('/download/image/{file}', 'ImageController@getFile');
+
 Route::put('/album/{id}/title', 'AlbumController@editTitle');
+Route::get('/album/{id}/', 'AlbumController@show');
 
 Route::fallback('PageController@default');

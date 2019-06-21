@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Album;
+use App\Slideshow;
 
 class AlbumController extends Controller
 {
@@ -13,5 +14,16 @@ class AlbumController extends Controller
 
     	$image->title = $request->value;
     	$image->save();
+    }
+
+    public function show($id)
+    {
+    	$images = Album::find($id)->images;
+    	$image_slides = new Slideshow($images);
+
+        // return $image_slides;
+        // return $images;
+    	return view('album')
+    		->with( compact('image_slides') );
     }
 }

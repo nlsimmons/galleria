@@ -6,6 +6,10 @@ $album-image-height: 400px;
 $album-cover-width: 600px;
 $album-cover-height: 600px;
 
+.carousel#carousel-images {
+    min-width: 60vw;
+}
+
 @mixin album-slide-cover( $s ) {
 
     @for $i from 1 through $s {

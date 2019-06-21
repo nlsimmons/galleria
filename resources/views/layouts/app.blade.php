@@ -8,7 +8,7 @@
 <title>{{ env('APP_NAME') }}</title>
 
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/app.css">
+<link rel="stylesheet" type="text/css" href="/css/app.css">
 
 </head>
 <body class="has-navbar-fixed-top" spellcheck="false">
@@ -17,7 +17,7 @@
 
 @yield('content')
 
-<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="/js/app.js"></script>
 
 </body>
 </html>
