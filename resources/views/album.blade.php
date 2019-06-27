@@ -22,7 +22,7 @@
                 @endforeach
             @endif
 
-            @component('comps.image.new')
+            @component('comps.image.new', ['id' => $id])
             @endcomponent
         @endcomponent
 

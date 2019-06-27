@@ -11,26 +11,24 @@
 |
 */
 
-// comment
-
 Route::get('/', 'PageController@welcome')
 	->name('welcome');
 
 Auth::routes();
 
-
-
 Route::get('/home', 'PageController@home')
 	->name('home');
 Route::post('/home', 'PageController@action');
 
-Route::post('/upload', 'PageController@upload')
+Route::get('/album/{id}/', 'AlbumController@show')
+	->name('album');
+Route::post('/upload/{album}', 'PageController@upload')
 	->name('upload');
 
 Route::put('/image/{id}/title', 'ImageController@editTitle');
 Route::get('/download/image/{file}', 'ImageController@getFile');
 
 Route::put('/album/{id}/title', 'AlbumController@editTitle');
-Route::get('/album/{id}/', 'AlbumController@show');
+
 
 Route::fallback('PageController@default');

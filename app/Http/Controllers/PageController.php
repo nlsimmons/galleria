@@ -45,7 +45,7 @@ class PageController extends Controller
 		return view('home')->with( compact('album_slides') );
     }
 
-    public function upload(Request $request)
+    public function upload(Request $request, $album)
     {
     	if(!Auth::check())
     	{
@@ -59,6 +59,7 @@ class PageController extends Controller
             $album = new Album;
             $album->owner = $user->id;
             $album->save();
+            $album_id = $album->id;
 
             $user->my_albums()->save($album);
         }
@@ -73,6 +74,11 @@ class PageController extends Controller
 
             $album->images()->save($image);
             $user->my_images()->save($image);
+        }
+
+        if( $request->album == 'new' )
+        {
+            return redirect()->route('album', ['id' => $album_id]);
         }
 
         return redirect('home');

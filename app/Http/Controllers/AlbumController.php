@@ -24,6 +24,6 @@ class AlbumController extends Controller
         // return $image_slides;
         // return $images;
     	return view('album')
-    		->with( compact('image_slides') );
+    		->with( compact('image_slides', 'id') );
     }
 }
