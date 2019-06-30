@@ -13,6 +13,11 @@ use App\Waterfall;
 
 class PageController extends Controller
 {
+    public function phpinfo()
+    {
+        return view('phpinfo');
+    }
+
     public function default()
     {
         return redirect()->route('welcome');

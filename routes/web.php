@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/etc/phpinfo', 'PageController@phpinfo');
+
 Route::get('/', 'PageController@welcome')
 	->name('welcome');
 
