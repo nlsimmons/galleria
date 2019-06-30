@@ -2,6 +2,14 @@
 
 @section('content')
 
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h3 class="title">Here should be a mini slideshow of other albums</h3>
+        </div>
+    </div>
+</section>
+
 <div class="section">
 
     <div class="container-fluid">

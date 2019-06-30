@@ -1,13 +1,48 @@
 import * as fn from './functions.js'
 /* Carousel */
 
+// Sync
 fn.listen(
-	'input.add-photo-input',
+	'input#images-new-album',
 	'change',
 	function() {
-		document.querySelector('form#upload-image-no-album').submit();
+		document.querySelector('form#form-new-album').submit();
 	}
 )
+fn.listen(
+	'input#images-album',
+	'change',
+	function() {
+		document.querySelector('form#form-album').submit();
+	}
+)
+
+// Async
+/*fn.listen(
+	'input#images-new-album',
+	'change',
+	function() {
+		document.querySelector("#images-new-album-modal").classList.add('is-active')
+		let files = document.querySelector("input#images-new-album").files
+		const image_display = document.querySelector("#images-uploading")
+
+		for(let file of files)
+		{
+			let fr = new FileReader();
+
+			fr.onload = function(e) {
+				console.log(e)
+				let src = e.target.result
+				let html = `<div>
+					<img class="img-preview" src="${src}">
+				</div>`
+				image_display.innerHTML += html
+		    }
+
+	    	fr.readAsDataURL(file);
+		}
+	}
+)*/
 
 fn.addEvent(
 	document.querySelector('.add-photo-btn.add-album'),

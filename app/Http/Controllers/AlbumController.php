@@ -21,8 +21,6 @@ class AlbumController extends Controller
     	$images = Album::find($id)->images;
     	$image_slides = new Slideshow($images);
 
-        // return $image_slides;
-        // return $images;
     	return view('album')
     		->with( compact('image_slides', 'id') );
     }

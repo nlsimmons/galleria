@@ -57,9 +57,17 @@
 
 -->
 
+<style>
+
+.images-input-label {
+    cursor: pointer;
+}
+
+</style>
+
 <div class="section">
 
-    <div class="container-fluid">
+    @if( count($album_slides->slides) > 1 )
 
         @component('comps.slideshow', [
             'id' => 'carousel-albums',
@@ -77,60 +85,54 @@
                 @endforeach
             @endif
 
-            @component('comps.album.new')
-            @endcomponent
+            <div class="carousel-slide album-slide">
+                <div class="album_image_wrapper display_wrapper">
+                    <form method="post" action="{{ route('upload', ['album' => 'new']) }}" enctype="multipart/form-data" id="form-new-album">
+                        @csrf
+                        <label for="images-new-album" class="images-input-label">
+                            <input type="file" multiple class="add-photo-input" name="images[]" id="images-new-album">
+                            <i class="fas fa-plus-circle"></i>
+                        </label>
+                    </form>
+                </div>
+            </div>
 
         @endcomponent
+
+    @else
+
+    <div class="container">
+        {{-- Async --}}
+        {{-- <label for="images-new-album" class="images-input-label">
+            <input type="file" multiple class="add-photo-input" name="images[]" id="images-new-album">
+            <p class="title is-5">You have no images in your gallery. Click to add some.</p>
+            <p class="is-size-4">¯\_(ツ)_/¯</p>
+        </label> --}}
+        <form method="post" action="{{ route('upload', ['album' => 'new']) }}" enctype="multipart/form-data" id="form-new-album">
+            @csrf
+            <label for="images-new-album" class="images-input-label">
+                <input type="file" multiple class="add-photo-input" name="images[]" id="images-new-album">
+                <p class="title is-5">You have no images in your gallery. Click to add some.</p>
+                <p class="is-size-4">¯\_(ツ)_/¯</p>
+            </label>
+        </form>
     </div>
 
-    @if(false)
-    <div class="container-fluid">
-        {{-- <h1 class="title is-1" style="text-align: center">All Photos</h1> --}}
-
-        @if(count($images) > 1)
-        @component('comps.slideshow', [
-            'id' => 'carousel-images',
-            'slides' => $images,
-            'type' => 'image',
-            'options' => [
-                'buttons' => [
-                    // 'delete', 'download', 'edit', 'tags', 'album'
-                ]
-            ]
-        ])
-        @endcomponent
-        @else
-
-        <div>
-            <p>You have no images in your gallery yet. Click to add some.</p>
-        </div>
-
-        @endif
-
-    </div>
     @endif
 
 </div>
 
-<div class="section">
+{{-- <div class="modal" id="images-new-album-modal">
+    <div class="modal-background"></div>
 
-    <div class="container-fluid">
-        {{-- <h1 class="title is-1" style="text-align: center">All Albums</h1> --}}
-
-        {{-- @component('components.slideshow', [
-            'id' => 'carousel-albums',
-            'slides' => $albums,
-            'type' => 'album',
-            'options' => [
-                'buttons' => [
-
-                ]
-            ],
-        ])
-        @endcomponent --}}
-
+    <div class="modal-content">
+        <div class="box" id="images-uploading"></div>
     </div>
 
-</div>
+</div> --}}
+
+<style>
+
+</style>
 
 @endsection
