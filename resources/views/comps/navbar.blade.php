@@ -1,7 +1,7 @@
 <nav class="navbar is-dark">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <span class="title has-text-white">{{ env('APP_NAME') }}</span>
+            <span class="title has-text-white">{{ config('app.name') }}</span>
         </a>
     </div>
 
