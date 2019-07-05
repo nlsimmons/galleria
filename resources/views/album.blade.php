@@ -10,7 +10,7 @@
     </div>
 </section>
 
-<div class="section">
+<div class="section is-paddingless">
 
     <div class="container-fluid">
 
@@ -26,7 +26,11 @@
                 @endphp
 
                 @foreach($slides as $slide)
-                    @component('comps.image.slide', ['slide' => $slide]) @endcomponent
+                    @component('comps.image.slide', [
+                        'slide' => $slide,
+                        'album_id' => $id,
+                    ])
+                    @endcomponent
                 @endforeach
             @endif
 

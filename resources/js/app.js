@@ -64,7 +64,7 @@ fn.addEvent(
 	}
 )
 
-fn.listen(
+/*fn.listen(
 	'.display_wrapper',
 	'click',
 	function(e, el) {
@@ -80,7 +80,7 @@ fn.listen(
 			.classList.add('prevent-scroll')
 
 	}
-)
+)*/
 fn.listen(
 	'.modal-background',
 	'click',

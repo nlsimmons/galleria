@@ -23,7 +23,7 @@ class Album extends Model
 
     public function slideImages()
     {
-        return $this->images->take(3);
+        return $this->images->take(4);
     }
 
     public function display_url()

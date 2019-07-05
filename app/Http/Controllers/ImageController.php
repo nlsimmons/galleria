@@ -15,8 +15,25 @@ class ImageController extends Controller
     	$image->save();
     }
 
-    public function getFile($file) 
+    public function getFile($file)
     {
 		return response()->download( storage_path('app/public/images/' . $file . '.jpg') );
 	}
+
+    private function delete($id)
+    {
+        Image::destroy($id);
+    }
+
+    public function action($image_id, Request $request)
+    {
+        switch($request->action)
+        {
+            case 'delete':
+                $this->delete($image_id);
+                break;
+        }
+
+        return redirect()->route('album', ['id' => $request->album_id] );
+    }
 }

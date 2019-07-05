@@ -32,5 +32,6 @@ Route::get('/download/image/{file}', 'ImageController@getFile');
 
 Route::put('/album/{id}/title', 'AlbumController@editTitle');
 
+Route::post('/image/{image_id}', 'ImageController@action');
 
 Route::fallback('PageController@default');

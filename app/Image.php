@@ -31,7 +31,7 @@ class Image extends Model
     public static function upload($file, $owner_id, $album=null)
     {
     	$image_name = md5($file);
-        $img = ImageManager::make($file);
+        $img = ImageManager::make($file)->orientate();
 
         $new = new self;
         $new->owner = $owner_id;

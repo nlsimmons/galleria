@@ -65,7 +65,7 @@
 
 </style>
 
-<div class="section">
+<div class="section is-paddingless">
 
     @if( count($album_slides->slides) > 1 )
 
@@ -85,17 +85,8 @@
                 @endforeach
             @endif
 
-            <div class="carousel-slide album-slide">
-                <div class="album_image_wrapper display_wrapper">
-                    <form method="post" action="{{ route('upload', ['album' => 'new']) }}" enctype="multipart/form-data" id="form-new-album">
-                        @csrf
-                        <label for="images-new-album" class="images-input-label">
-                            <input type="file" multiple class="add-photo-input" name="images[]" id="images-new-album">
-                            <i class="fas fa-plus-circle"></i>
-                        </label>
-                    </form>
-                </div>
-            </div>
+            @component('comps.album.new')
+            @endcomponent
 
         @endcomponent
 

@@ -76,9 +76,14 @@ class PageController extends Controller
         else
         {
             $album = Album::find($request->album);
+            $album_id = $album->id;
         }
 
+        // dd($request);
+
         $files = $request->file('images');
+
+        // dd($files);
 
         foreach( $files as $file )
         {
@@ -90,12 +95,7 @@ class PageController extends Controller
             $user->my_images()->save($image);
         }
 
-        if( $request->album == 'new' )
-        {
-            return redirect()->route('album', ['id' => $album_id]);
-        }
-
-        return redirect('home');
+        return redirect()->route('album', ['id' => $album_id]);
     }
 
     public function action(Request $request)

@@ -1,13 +1,13 @@
-$slideshow-width: 600px;
+$slideshow-width: 50vw;
 
 $album-image-width: 400px;
 $album-image-height: 400px;
 
-$album-cover-width: 600px;
+$album-cover-width: 500px;
 $album-cover-height: 600px;
 
 .carousel#carousel-images {
-    min-width: 60vw;
+    min-width: 50vw;
 }
 
 @mixin album-slide-cover( $s ) {
@@ -29,8 +29,8 @@ $album-cover-height: 600px;
 }
 
 .album-slide {
-    width: $album-cover-width;
-    height: $album-cover-height;
+    // width: $album-cover-width;
+    // height: $album-cover-height;
     margin: auto;
     position: relative;
 
@@ -71,8 +71,13 @@ $album-cover-height: 600px;
 
     .carousel-image-control {
         opacity: 0;
+        z-index: 999;
+        position: absolute;
+        bottom: 40px;
+    }
 
-        &:hover {
+    .carousel-slide:hover {
+        .carousel-image-control {
             opacity: 1;
         }
     }
@@ -217,6 +222,14 @@ $album-cover-height: 600px;
     top: 0;
     left: 0;
     right: 0;
+
+    .slide-image-container {
+        height: 100%;
+
+        & > img {
+            height: 100%;
+        }
+    }
 
     .display_image {
         max-height: 600px;

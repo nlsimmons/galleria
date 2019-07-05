@@ -3,7 +3,7 @@
         placeholder="Click to add a title"
         value="{{ $slide->title }}">
 
-    <div>
+    <div class="slide-image-container">
         <img src="{{ asset($slide->url) }}">
     </div>
 
@@ -18,19 +18,21 @@
 
     </div>
 
-	<div class="buttons carousel-image-control" style="z-index:999">
-        <span class="button button-no-border" title="Add">
+	<form class="buttons carousel-image-control" method="post" action="/image/{{ $slide->id }}">
+        <input type="hidden" name="album_id" value="{{ $album_id }}">
+        @csrf
+        <button class="button button-no-border" title="Add" name="action" value="add">
             <i class="fas fa-plus-circle"></i>
-        </span>
-        <span class="button button-no-border" title="Tags">
+        </button>
+        <button class="button button-no-border" title="Add Tag" name="action" value="tag">
             <i class="fas cs cs-tags"></i>
-        </span>
-        <span class="button button-no-border" title="Download">
+        </button>
+        <button class="button button-no-border" title="Download" name="action" value="download">
             <i class="fas fa-arrow-alt-circle-down"></i>
-        </span>
-        <span class="button button-no-border" title="Delete">
+        </button>
+        <button class="button button-no-border" title="Delete" name="action" value="delete">
             <i class="fas fa-minus-circle"></i>
-        </span>
-	</div>
+        </button>
+	</form>
 </div>
 
