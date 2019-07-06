@@ -1,5 +1,5 @@
 <div class="carousel-slide image-slide">
-	<input type="text" id="image{{ $slide->id }}_title" class="title slide-title"
+	<input type="text" id="image_{{ $slide->id }}_title" class="title slide-title"
         placeholder="Click to add a title"
         value="{{ $slide->title }}">
 

@@ -57,59 +57,28 @@
 
 -->
 
-<style>
-
-.images-input-label {
-    cursor: pointer;
-}
-
-</style>
-
 <div class="section is-paddingless">
 
-    @if( count($album_slides->slides) > 1 )
+    @component('comps.slideshow', [
+        'id' => 'carousel-albums',
+        'slides' => $album_slides->slides->all(),
+    ])
 
-        @component('comps.slideshow', [
-            'id' => 'carousel-albums',
-            'slides' => $album_slides->slides->all(),
-        ])
+        @if( $album_slides->slides->count() > 1)
+            @php
+            $slides = $album_slides->slides;
+            $add_slide = $slides->pop();
+            @endphp
 
-            @if( $album_slides->slides->count() > 1)
-                @php
-                $slides = $album_slides->slides;
-                $add_slide = $slides->pop();
-                @endphp
+            @foreach($slides as $slide)
+                @component('comps.album.slide', ['slide' => $slide]) @endcomponent
+            @endforeach
+        @endif
 
-                @foreach($slides as $slide)
-                    @component('comps.album.slide', ['slide' => $slide]) @endcomponent
-                @endforeach
-            @endif
-
-            @component('comps.album.new')
-            @endcomponent
-
+        @component('comps.album.new')
         @endcomponent
 
-    @else
-
-    <div class="container">
-        {{-- Async --}}
-        {{-- <label for="images-new-album" class="images-input-label">
-            <input type="file" multiple class="add-photo-input" name="images[]" id="images-new-album">
-            <p class="title is-5">You have no images in your gallery. Click to add some.</p>
-            <p class="is-size-4">¯\_(ツ)_/¯</p>
-        </label> --}}
-        <form method="post" action="{{ route('upload', ['album' => 'new']) }}" enctype="multipart/form-data" id="form-new-album">
-            @csrf
-            <label for="images-new-album" class="images-input-label">
-                <input type="file" multiple class="add-photo-input" name="images[]" id="images-new-album">
-                <p class="title is-5">You have no images in your gallery. Click to add some.</p>
-                <p class="is-size-4">¯\_(ツ)_/¯</p>
-            </label>
-        </form>
-    </div>
-
-    @endif
+    @endcomponent
 
 </div>
 

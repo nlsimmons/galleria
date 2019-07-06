@@ -6,20 +6,31 @@ $album-image-height: 400px;
 $album-cover-width: 500px;
 $album-cover-height: 600px;
 
+#form-new-album {
+    text-align: center;
+    margin: auto;
+    margin-top: 200px;
+}
+
 .carousel#carousel-images {
     min-width: 50vw;
+}
+
+.images-input-label {
+    cursor: pointer;
 }
 
 @mixin album-slide-cover( $s ) {
 
     @for $i from 1 through $s {
-        $step-x: ($album-cover-width - $album-image-width) / 4;
-        $step-y: ($album-cover-height - $album-image-height) / 4;
-        $padding: ($s * 25) - 125;
+        $step-x: 8%;
+        $step-y: 8%;
+        $padding-x: 15 + $i/$s;
+        $padding-y: 5%;
 
         &.img-#{$i}-of-#{$s} {
-            $sp-x: ($step-x * ($i - 1)) - $padding;
-            $sp-y: ($step-y * ($i - 1)) - $padding;
+            $sp-x: ($step-x * ($i - 1)) + $padding-x;
+            $sp-y: ($step-y * ($i - 1)) + $padding-y;
 
             z-index: (10 - $i);
             left: $sp-x;

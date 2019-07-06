@@ -40,62 +40,15 @@ class PageController extends Controller
 
         $albums = Auth::user()->my_albums;
 
-        foreach($albums as $album)
+        if( ! $albums->count() )
         {
-            if( ! $album->images->count() )
-            {
-                $album->delete();
-                return redirect('home');
-            }
+            return view('home_empty');
         }
 
         $album_slides = new Slideshow( $albums );
 
 		return view('home')
             ->with( compact('album_slides') );
-    }
-
-    public function upload(Request $request, $album)
-    {
-    	if(!Auth::check())
-    	{
-    		return redirect()->route('welcome');
-    	}
-
-        $user = Auth::user();
-
-        if( $request->album == 'new' )
-        {
-            $album = new Album;
-            $album->owner = $user->id;
-            $album->save();
-            $album_id = $album->id;
-
-            $user->my_albums()->save($album);
-        }
-        else
-        {
-            $album = Album::find($request->album);
-            $album_id = $album->id;
-        }
-
-        // dd($request);
-
-        $files = $request->file('images');
-
-        // dd($files);
-
-        foreach( $files as $file )
-        {
-            $image = Image::upload( $file, Auth::id() );
-            $image->owner = $user->id;
-            $image->save();
-
-            $album->images()->save($image);
-            $user->my_images()->save($image);
-        }
-
-        return redirect()->route('album', ['id' => $album_id]);
     }
 
     public function action(Request $request)
