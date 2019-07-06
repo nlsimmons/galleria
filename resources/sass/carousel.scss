@@ -80,7 +80,8 @@ $album-cover-height: 600px;
     padding: 0;
     margin: 80px auto;
 
-    .carousel-image-control {
+    .carousel-image-control,
+    .carousel-album-control {
         opacity: 0;
         z-index: 999;
         position: absolute;
@@ -88,7 +89,8 @@ $album-cover-height: 600px;
     }
 
     .carousel-slide:hover {
-        .carousel-image-control {
+        .carousel-image-control,
+        .carousel-album-control {
             opacity: 1;
         }
     }

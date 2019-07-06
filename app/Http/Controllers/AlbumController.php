@@ -26,4 +26,21 @@ class AlbumController extends Controller
     	return view('album')
     		->with( compact('image_slides', 'id', 'album_title') );
     }
+
+    private function delete($id)
+    {
+        Album::destroy($id);
+    }
+
+    public function action($album_id, Request $request)
+    {
+        switch($request->action)
+        {
+            case 'delete':
+                $this->delete($album_id);
+                break;
+        }
+
+        return redirect()->route('home');
+    }
 }

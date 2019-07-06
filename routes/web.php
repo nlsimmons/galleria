@@ -24,6 +24,8 @@ Route::get('/home', 'PageController@home')
 
 Route::get('/album/{id}/', 'AlbumController@show')
 	->name('album');
+Route::post('/album/{id}/', 'AlbumController@action');
+
 Route::post('/upload/{album}', 'ImageController@upload')
 	->name('upload');
 
