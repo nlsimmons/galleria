@@ -23,6 +23,11 @@ class Album extends Model
 
     public function slideImages()
     {
+        if( ! $this->images->count() )
+        {
+            return collect([ 'url' => 'https://via.placeholder.com/500' ]);
+        }
+
         return $this->images->take(4);
     }
 

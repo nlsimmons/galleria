@@ -20,11 +20,11 @@ Auth::routes();
 
 Route::get('/home', 'PageController@home')
 	->name('home');
-Route::post('/home', 'PageController@action');
+// Route::post('/home', 'PageController@action');
 
 Route::get('/album/{id}/', 'AlbumController@show')
 	->name('album');
-Route::post('/upload/{album}', 'PageController@upload')
+Route::post('/upload/{album}', 'ImageController@upload')
 	->name('upload');
 
 Route::put('/image/{id}/title', 'ImageController@editTitle');

@@ -7,7 +7,7 @@
 	    @foreach($slide->images() as $image)
 	    	@php $s = !isset($s) ? 1 : ++$s; @endphp
 	        <div class="album-image-wrapper img-{{$s}}-of-{{$t}}">
-	            <div class="album-image" style="background-image: url({{ asset($image->url) }})"></div>
+	            <div class="album-image" style="background-image: url({{ $image instanceof \App\Image ? asset($image->url) : $image }})"></div>
 	        </div>
 	    @endforeach
 	</a>

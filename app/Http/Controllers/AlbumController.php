@@ -18,10 +18,12 @@ class AlbumController extends Controller
 
     public function show($id)
     {
-    	$images = Album::find($id)->images;
+        $album = Album::find($id);
+        $album_title = $album->title;
+    	$images = $album->images;
     	$image_slides = new Slideshow($images);
 
     	return view('album')
-    		->with( compact('image_slides', 'id') );
+    		->with( compact('image_slides', 'id', 'album_title') );
     }
 }
