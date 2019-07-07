@@ -29,7 +29,7 @@
 
             <div class="carousel-slide">
 
-                <p class="title slide-title not-editable">Add New</p>
+                <p class="title slide-title">Add New</p>
 
                 {{--
 

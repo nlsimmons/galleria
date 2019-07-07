@@ -11,24 +11,36 @@ export function addEvent(el, type, handler) {
 	}
 }
 
-export function listen(selector, trigger, callback) {
-	document.addEventListener(
-		trigger,
-		function (e) {
-			let path = e.path ? e.path : e.composedPath()
-			for(let el of path) {
-				if ( el.matches && el.matches(selector) ) {
-					callback(e, el);
-					return;
-				}
-			}
+export function listen(selector, trigger, callback, bubble_down = false) {
+	if(selector.split(' ')[0] == 'document')
+	{
+		let sel_arr = selector.split(' ')
+		sel_arr.shift()
+		selector = sel_arr.join(' ')
+	}
 
-			return;
-		}
-	);
+	selector = bubble_down ? `${selector}, ${selector} *` : selector
+	for ( let t of trigger.split(' ') )
+	{
+		document.addEventListener(
+			t,
+			function (e) {
+				let path = e.path ? e.path : e.composedPath()
+				for(let el of path) {
+					if ( el.matches && el.matches(selector) ) {
+						callback(e, el);
+						return;
+					}
+				}
+
+				return;
+			}
+		);
+	}
 }
 
-export function context(path, selector) {
+export function parent(event, selector) {
+	let path = event.path ? event.path : event.composedPath()
 	for(let p of path) {
 		if(p.matches(selector)) return p;
 	}

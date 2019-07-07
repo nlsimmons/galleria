@@ -1,8 +1,9 @@
-import * as fn from './functions.js'
+const fn = require('./functions.js')
+require ('./upload.js')
 /* Carousel */
 
 // Sync
-fn.listen(
+/*fn.listen(
 	'input#images-new-album',
 	'change',
 	function() {
@@ -14,33 +15,6 @@ fn.listen(
 	'change',
 	function() {
 		document.querySelector('form#form-album').submit();
-	}
-)
-
-// Async
-/*fn.listen(
-	'input#images-new-album',
-	'change',
-	function() {
-		document.querySelector("#images-new-album-modal").classList.add('is-active')
-		let files = document.querySelector("input#images-new-album").files
-		const image_display = document.querySelector("#images-uploading")
-
-		for(let file of files)
-		{
-			let fr = new FileReader();
-
-			fr.onload = function(e) {
-				console.log(e)
-				let src = e.target.result
-				let html = `<div>
-					<img class="img-preview" src="${src}">
-				</div>`
-				image_display.innerHTML += html
-		    }
-
-	    	fr.readAsDataURL(file);
-		}
 	}
 )*/
 
@@ -58,8 +32,7 @@ fn.addEvent(
 	'wheel',
 	function(e) {
 		e.preventDefault();
-		let path = e.path ? e.path : e.composedPath()
-		let slideshow_id = fn.context(path, '.carousel').id;
+		let slideshow_id = fn.parent(e, '.carousel').id
 		fn.scrollSlides(slideshow_id, e);
 	}
 )
