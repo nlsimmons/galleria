@@ -17,7 +17,7 @@
     }
 
     &:hover {
-        color: $blue; //$link-color
+        color: $blue;
     }
 }
 
@@ -33,16 +33,17 @@
     position: relative;
     justify-content: center;
 
-    & > * {
+    .upload-button-container {
+        position: absolute;
+        bottom: -65px;
+    }
+
+    & > *:not(.frame-element) {
         display: none;
     }
 
     & > .uploads-active {
         display: flex;
-    }
-
-    #upload-title {
-        display: block;
     }
 
     #uploads__initial {

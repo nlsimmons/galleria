@@ -1,11 +1,10 @@
 const fn = require('./functions.js')
 const EXIF = require('exif-js')
 
-if( can_drag_upload() )
+if( fn.qs('#dragndrop') && can_drag_upload() )
 {
-	let dropped_files
-    document.querySelector('#dragndrop').classList.add('disabled')
-    document.querySelector('#no-dragndrop').classList.remove('disabled')
+    fn.qs('#dragndrop').classList.add('disabled')
+    fn.qs('#no-dragndrop').classList.remove('disabled')
 
     fn.listen(
     	'.draggable',
@@ -39,8 +38,8 @@ if( can_drag_upload() )
     	function(e) {
     		loadFiles(e.dataTransfer.files)
 
-    		document.querySelector('.uploads-active').classList.remove('uploads-active')
-    		document.querySelector('#uploads__staging').classList.add('uploads-active')
+    		fn.qs('.uploads-active').classList.remove('uploads-active')
+    		fn.qs('#uploads__staging').classList.add('uploads-active')
 
     	}, true
     )
@@ -49,11 +48,11 @@ if( can_drag_upload() )
 		'input#images-new-album',
 		'change',
 		function() {
-			let files = document.querySelector('input#images-new-album').files
+			let files = fn.qs('input#images-new-album').files
 			loadFiles(files)
 
-			document.querySelector('.uploads-active').classList.remove('uploads-active')
-			document.querySelector('#uploads__staging').classList.add('uploads-active')
+			fn.qs('.uploads-active').classList.remove('uploads-active')
+			fn.qs('#uploads__staging').classList.add('uploads-active')
 		}
 	)
 
@@ -65,13 +64,35 @@ if( can_drag_upload() )
 		}
 	)
 
-	document.querySelector('#uploads__initial').classList.add('uploads-active')
+	fn.listen(
+		'button#upload-button',
+		'click',
+		submit
+	)
+
+	fn.qs('#uploads__initial').classList.add('uploads-active')
 }
 
 /* * * * Functions * * * */
 
 function submit() {
-	// document.querySelectorAll('#uploads__staging img.img-preview')
+
+	fn.request('POST', '/upload/album/new', {
+		title: fn.qs('#upload-title').value
+	})
+	.then( JSON.parse )
+	.then( res => {
+
+		let id = res.id
+		fn.qsa('img.img-preview').forEach( el => {
+			fn.request('POST', `/upload/album/${id}`, {
+				image: el.src
+			})
+			.then(res => {
+				console.log(res)
+			})
+		})
+	})
 }
 
 function can_drag_upload() {
@@ -90,7 +111,7 @@ function loadFiles(files) {
 	{
 		let container = document.createElement('div')
 		container.classList.add('img-preview-container')
-		document.querySelector('#uploads__staging').append(container)
+		fn.qs('#uploads__staging').append(container)
 
 		EXIF.getData(file, function() {
 			let orientation = this.exifdata.Orientation

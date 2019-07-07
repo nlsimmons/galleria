@@ -42,6 +42,11 @@ class Image extends Model
         );
         $new->url = $url;
 
+        if(!empty($album))
+        {
+            Album::find($album)->images()->save($new);
+        }
+
         return $new;
     }
 

@@ -12,8 +12,8 @@
     </label> --}}
     <div class="container">
         <div id="uploads__container">
-            <input type="text" id="upload-title" class="title slide-title" placeholder="Click to add a title">
-            <form method="post" action="" enctype="multipart/form-data" id="uploads__initial" class="draggable">
+            <input type="text" id="upload-title" class="title slide-title frame-element" placeholder="Click to add a title">
+            <form method="post" enctype="multipart/form-data" id="uploads__initial" class="draggable">
                 <label for="images-new-album" class="upload-label">
                     <span id="no-dragndrop" class="disabled">
                         <p>You have no images in your gallery.</p>
@@ -34,6 +34,9 @@
                         <p>Click or drag to upload more images.</p>
                     </label>
                 </div>
+            </div>
+            <div class="frame-element upload-button-container">
+                <button type="button" class="button is-dark" id="upload-button">Upload</button>
             </div>
         </div>
         {{-- <form method="post" action="{{ route('upload', ['album' => 'new']) }}" enctype="multipart/form-data" id="form-new-album">

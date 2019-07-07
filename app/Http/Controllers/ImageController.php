@@ -30,12 +30,12 @@ class ImageController extends Controller
         Image::destroy($id);
     }
 
-    public function action($image_id, Request $request)
+    public function action($id, Request $request)
     {
         switch($request->action)
         {
             case 'delete':
-                $this->delete($image_id);
+                $this->delete($id);
                 break;
         }
 
@@ -48,6 +48,8 @@ class ImageController extends Controller
         {
             return redirect()->route('welcome');
         }
+
+        return $request;
 
         $user = Auth::user();
 
