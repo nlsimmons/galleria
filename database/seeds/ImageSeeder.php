@@ -21,7 +21,7 @@ class ImageSeeder extends Seeder
         for($n=0; $n<5; $n++)
         {
             $album = new Album;
-            $album->owner = $user->id;
+            $album->owner_id = $user->id;
             $album->title = $faker->sentence(3);
             $album->description = $faker->sentence(10);
             $album->save();
@@ -34,7 +34,7 @@ class ImageSeeder extends Seeder
                 );
 
                 $image = Image::upload($image_path, $user->id);
-                $image->owner = $user->id;
+                $image->owner_id = $user->id;
                 $image->title = $faker->sentence(3);
                 $image->description = $faker->sentence(10);
                 $image->save();
@@ -55,7 +55,7 @@ class ImageSeeder extends Seeder
             for($i=0; $i<3; $i++)
             {
                 $album = new Album;
-                $album->owner = $user->id;
+                $album->owner_id = $user->id;
                 $album->title = $faker->sentence(3);
                 $album->description = $faker->sentence(10);
                 $album->save();
@@ -68,7 +68,7 @@ class ImageSeeder extends Seeder
                     );
 
                     $image = Image::upload($image_path, $user->id);
-                    $image->owner = $user->id;
+                    $image->owner_id = $user->id;
                     $image->title = $faker->sentence(3);
                     $image->description = $faker->sentence(10);
                     $image->save();

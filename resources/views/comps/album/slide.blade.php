@@ -1,7 +1,9 @@
 <div class="carousel-slide album-slide">
+    @if ( $slide->id != 'loose' )
 	<input type="text" id="album_{{ $slide->id }}_title" class="title slide-title"
         placeholder="Click to add a title"
         value="{{ $slide->title }}">
+    @endif
 	<a href="/album/{{ $slide->id }}/">
 		@php $t = $slide->images()->count(); @endphp
 	    @foreach($slide->images() as $image)
@@ -27,22 +29,4 @@
             <i class="fas fa-minus-circle"></i>
         </button>
     </form>
-
-	{{-- <div class="buttons carousel-album-control" style="z-index:999">
-        <span class="button button-no-border" title="Add">
-            <i class="fas fa-plus-circle"></i>
-        </span>
-        <span class="button button-no-border" title="Tags">
-            <i class="fas cs cs-tags"></i>
-        </span>
-        <span class="button button-no-border" title="Download">
-            <i class="fas fa-arrow-alt-circle-down"></i>
-        </span>
-        <span class="button button-no-border" title="Delete">
-            <i class="fas fa-minus-circle"></i>
-        </span>
-        <span class="button button-no-border" title="Add Person to Album">
-            <span>add person to this album</span>
-        </span>
-	</div> --}}
 </div>

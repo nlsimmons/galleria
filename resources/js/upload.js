@@ -3,8 +3,8 @@ const EXIF = require('exif-js')
 
 if( fn.qs('#dragndrop') && can_drag_upload() )
 {
-    fn.qs('#dragndrop').classList.add('disabled')
-    fn.qs('#no-dragndrop').classList.remove('disabled')
+    fn.qs('#dragndrop').classList.remove('disabled')
+    fn.qs('#no-dragndrop').classList.add('disabled')
 
     fn.listen(
     	'.draggable',

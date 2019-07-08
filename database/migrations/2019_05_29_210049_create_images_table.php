@@ -17,7 +17,7 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('owner');
+            $table->unsignedBigInteger('owner_id');
             $table->string('url');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
@@ -25,7 +25,7 @@ class CreateImagesTable extends Migration
             $table->boolean('hidden')->default(false);
             $table->timestamps();
 
-            $table->foreign('owner')
+            $table->foreign('owner_id')
                 ->references('id')
                 ->on('users');
         });

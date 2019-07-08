@@ -38,10 +38,16 @@ class Slide
 
     public function images()
     {
-        if( !is_array($this->item) )
+        if($this->item instanceof Collection)
         {
-            return $this->item->slideImages();
+            $images = $this->item->pluck('url')->take(4);
         }
+        else if( !is_array($this->item) )
+        {
+            $images = $this->item->slideImages();
+        }
+
+        return $images->take(3);
     }
 }
 

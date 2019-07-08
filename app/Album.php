@@ -28,7 +28,7 @@ class Album extends Model
             return collect([ 'url' => 'https://via.placeholder.com/500' ]);
         }
 
-        return $this->images->take(4);
+        return $this->images;
     }
 
     public function display_url()

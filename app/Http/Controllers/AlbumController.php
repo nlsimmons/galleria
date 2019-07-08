@@ -22,7 +22,7 @@ class AlbumController extends Controller
 
         $album = new Album;
         $album->title = $request->title;
-        $album->owner = Auth::id();
+        $album->owner_id = Auth::id();
         $album->save();
 
         return ['id' => $album->id];
@@ -59,7 +59,7 @@ class AlbumController extends Controller
 
     public function show($id)
     {
-        $album = Album::find($id);
+        $album = Album::findOrFail($id);
         $album_title = $album->title;
     	$images = $album->images;
     	$image_slides = new Slideshow($images);

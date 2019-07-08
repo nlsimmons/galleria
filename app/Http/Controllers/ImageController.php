@@ -56,7 +56,7 @@ class ImageController extends Controller
         if( $request->album == 'new' )
         {
             $album = new Album;
-            $album->owner = $user->id;
+            $album->owner_id = $user->id;
             $album->save();
             $album_id = $album->id;
 
@@ -73,7 +73,7 @@ class ImageController extends Controller
         foreach( $files as $file )
         {
             $image = Image::upload( $file, Auth::id() );
-            $image->owner = $user->id;
+            $image->owner_id = $user->id;
             $image->save();
 
             $album->images()->save($image);
