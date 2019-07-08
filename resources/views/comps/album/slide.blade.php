@@ -1,9 +1,9 @@
 <div class="carousel-slide album-slide">
-    @if ( $slide->id != 'loose' )
+    {{-- @if ( $slide->id != 'loose' ) --}}
 	<input type="text" id="album_{{ $slide->id }}_title" class="title slide-title"
         placeholder="Click to add a title"
         value="{{ $slide->title }}">
-    @endif
+    {{-- @endif --}}
 	<a href="/album/{{ $slide->id }}/">
 		@php $t = $slide->images()->count(); @endphp
 	    @foreach($slide->images() as $image)
@@ -13,6 +13,8 @@
 	        </div>
 	    @endforeach
 	</a>
+
+    @if ( $slide->id != 'loose' )
 
     <form class="buttons carousel-album-control" method="post" action="/album/{{ $slide->id }}">
         @csrf
@@ -29,4 +31,7 @@
             <i class="fas fa-minus-circle"></i>
         </button>
     </form>
+
+    @endif
+
 </div>

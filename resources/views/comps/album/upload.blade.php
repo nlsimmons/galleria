@@ -14,6 +14,6 @@
         </div>
     </div>
     <div class="frame-element upload-button-container">
-        <button type="button" class="button is-dark" id="upload-button">Upload</button>
+        <button type="button" class="button is-dark" id="upload-album-button">Upload</button>
     </div>
 </div>

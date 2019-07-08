@@ -34,8 +34,7 @@ class User extends Authenticatable
     {
         $loose = collect( $this->loose_images() );
         $loose->id = 'loose';
-        $loose->images = function() { return $this->get(); };
-        $loose->slideImages = function() { return []; };
+        $loose->title = 'Loose Images';
 
         $albums = $this->albums->concat( [$loose] );
         return $albums;

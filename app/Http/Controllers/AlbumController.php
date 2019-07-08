@@ -38,12 +38,6 @@ class AlbumController extends Controller
         $new_image = Image::upload($request->image, Auth::id(), $id);
 
         return $new_image->url;
-        return 'success';
-
-        // $image = ImageManager::make( $request->image );
-
-
-        // return $image;
     }
 
     /* * * * */

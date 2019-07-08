@@ -65,9 +65,14 @@ if( fn.qs('#dragndrop') && can_drag_upload() )
 	)
 
 	fn.listen(
-		'button#upload-button',
+		'button#upload-album-button',
 		'click',
-		submit
+		submitNewAlbum
+	)
+	fn.listen(
+		'button#upload-image-button',
+		'click',
+		submitNewImage
 	)
 
 	fn.qs('#uploads__initial').classList.add('uploads-active')
@@ -75,7 +80,11 @@ if( fn.qs('#dragndrop') && can_drag_upload() )
 
 /* * * * Functions * * * */
 
-function submit() {
+function submitNewImage() {
+	//
+}
+
+function submitNewAlbum() {
 
 	fn.request('POST', '/upload/album/new', {
 		title: fn.qs('#upload-title').value
