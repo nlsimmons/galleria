@@ -34,13 +34,18 @@ class Image extends Model
         $img = ImageManager::make($file)->orientate();
 
         $new = new self;
-        $new->owner = $owner_id;
+        $new->owner_id = $owner_id;
 
         Storage::put(
             $url = 'public/images/' . $image_name . '.jpg',
             $img->encode('jpg')
         );
         $new->url = $url;
+
+        if(!empty($album))
+        {
+            Album::find($album)->images()->save($new);
+        }
 
         return $new;
     }

@@ -10,19 +10,34 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public function my_images()
+    public function images()
     {
-        return $this->hasMany('App\Image', 'owner');
-    }
-
-    public function my_albums()
-    {
-        return $this->hasMany('App\Album', 'owner');
+        return $this->hasMany('App\Image', 'owner_id');
     }
 
     public function albums()
     {
+        return $this->hasMany('App\Album', 'owner_id');
+    }
+
+    public function all_albums()
+    {
         return $this->belongsToMany('App\Album');
+    }
+
+    public function loose_images()
+    {
+        return $this->images()->doesntHave('albums')->get();
+    }
+
+    public function my_albums()
+    {
+        $loose = collect( $this->loose_images() );
+        $loose->id = 'loose';
+        $loose->title = 'Loose Images';
+
+        $albums = $this->albums->concat( [$loose] );
+        return $albums;
     }
 
     /**

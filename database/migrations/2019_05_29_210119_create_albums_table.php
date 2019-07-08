@@ -15,13 +15,13 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('owner');
+            $table->unsignedBigInteger('owner_id');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('location')->nullable(); // Coordinates stored as a string
             $table->timestamps();
 
-            $table->foreign('owner')
+            $table->foreign('owner_id')
                 ->references('id')
                 ->on('users');
         });

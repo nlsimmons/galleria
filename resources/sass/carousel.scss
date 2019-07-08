@@ -80,7 +80,8 @@ $album-cover-height: 600px;
     padding: 0;
     margin: 80px auto;
 
-    .carousel-image-control {
+    .carousel-image-control,
+    .carousel-album-control {
         opacity: 0;
         z-index: 999;
         position: absolute;
@@ -88,7 +89,8 @@ $album-cover-height: 600px;
     }
 
     .carousel-slide:hover {
-        .carousel-image-control {
+        .carousel-image-control,
+        .carousel-album-control {
             opacity: 1;
         }
     }
@@ -223,6 +225,22 @@ $album-cover-height: 600px;
     transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
 }
 
+.slide-title {
+    text-align: center;
+    border: none;
+    padding: 10px 20px;
+    position: absolute;
+    top: -65px;
+    width: 100%;
+    line-height: 1em;
+
+    &:hover, &:focus {
+        border: 2px solid rgba(10,10,10,.5);
+        border-radius: 30px;
+        box-shadow: 3px 3px 10px 1px rgba(10, 10, 10, 0.5) inset;
+    }
+}
+
 .carousel-slide {
     height: 100%;
     display: flex;
@@ -257,24 +275,6 @@ $album-cover-height: 600px;
 
         .button {
             font-size: 2rem;
-        }
-    }
-
-    .slide-title {
-        text-align: center;
-        border: none;
-        padding: 10px 20px;
-        position: absolute;
-        top: -50px;
-        width: 100%;
-        line-height: 1em;
-
-        :not(.not-editable) {
-            &:hover, &:focus {
-                border: 2px solid rgba(10,10,10,.5);
-                border-radius: 30px;
-                box-shadow: 3px 3px 10px 1px rgba(10, 10, 10, 0.5) inset;
-            }
         }
     }
 }

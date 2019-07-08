@@ -30,12 +30,12 @@ class ImageController extends Controller
         Image::destroy($id);
     }
 
-    public function action($image_id, Request $request)
+    public function action($id, Request $request)
     {
         switch($request->action)
         {
             case 'delete':
-                $this->delete($image_id);
+                $this->delete($id);
                 break;
         }
 
@@ -49,12 +49,14 @@ class ImageController extends Controller
             return redirect()->route('welcome');
         }
 
+        return $request;
+
         $user = Auth::user();
 
         if( $request->album == 'new' )
         {
             $album = new Album;
-            $album->owner = $user->id;
+            $album->owner_id = $user->id;
             $album->save();
             $album_id = $album->id;
 
@@ -71,7 +73,7 @@ class ImageController extends Controller
         foreach( $files as $file )
         {
             $image = Image::upload( $file, Auth::id() );
-            $image->owner = $user->id;
+            $image->owner_id = $user->id;
             $image->save();
 
             $album->images()->save($image);

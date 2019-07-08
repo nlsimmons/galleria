@@ -38,14 +38,16 @@ class PageController extends Controller
     		return redirect()->route('welcome');
     	}
 
-        $albums = Auth::user()->my_albums;
+        $user = Auth::user();
 
-        if( ! $albums->count() )
+        if( $albums = $user->my_albums() )
+        {
+            $album_slides = new Slideshow( $albums );
+        }
+        else
         {
             return view('home_empty');
         }
-
-        $album_slides = new Slideshow( $albums );
 
 		return view('home')
             ->with( compact('album_slides') );

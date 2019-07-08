@@ -13,25 +13,32 @@
 
 Route::get('/etc/phpinfo', 'PageController@phpinfo');
 
-Route::get('/', 'PageController@welcome')
-	->name('welcome');
+Route::get('/', 'PageController@welcome')->name('welcome');
 
 Auth::routes();
 
-Route::get('/home', 'PageController@home')
-	->name('home');
 // Route::post('/home', 'PageController@action');
+// Route::post('/album/new/{name}', 'AlbumController@')
 
-Route::get('/album/{id}/', 'AlbumController@show')
-	->name('album');
-Route::post('/upload/{album}', 'ImageController@upload')
-	->name('upload');
+Route::get('/home', 'PageController@home')->name('home');
 
-Route::put('/image/{id}/title', 'ImageController@editTitle');
-Route::get('/download/image/{file}', 'ImageController@getFile');
-
+Route::get('/album/{id}/', 'AlbumController@show')->name('album');
+Route::post('/album/{id}/', 'AlbumController@action');
 Route::put('/album/{id}/title', 'AlbumController@editTitle');
 
-Route::post('/image/{image_id}', 'ImageController@action');
+Route::put('/image/{id}/title', 'ImageController@editTitle');
+Route::post('/image/{id}', 'ImageController@action');
+
+Route::post('/upload/{album}', 'ImageController@upload')->name('upload');
+
+Route::post('/upload/album/new', 'AlbumController@new');
+Route::post('/upload/album/{id}', 'AlbumController@upload');
+
+
+Route::get('/download/image/{file}', 'ImageController@getFile');
+
+
+
+
 
 Route::fallback('PageController@default');
