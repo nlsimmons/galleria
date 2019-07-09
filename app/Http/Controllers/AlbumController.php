@@ -49,6 +49,8 @@ class AlbumController extends Controller
 
     	$image->title = $request->value;
     	$image->save();
+
+        return 'success';
     }
 
     public function show($id)

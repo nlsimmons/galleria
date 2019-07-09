@@ -14,7 +14,6 @@
             'slide_columns' => $slide_columns
         ])
         @endcomponent
-
     </div>
 
 </section>

@@ -31,10 +31,6 @@
 
                 <p class="title slide-title">Add New</p>
 
-                {{--
-
-                 --}}
-
                 <div class="slide_image_wrapper display_wrapper">
                     <form method="post" action="{{ route('upload') }}" id="upload-image-no-album" enctype="multipart/form-data">
                         @csrf
@@ -47,32 +43,6 @@
 
             </div>
 
-            {{-- @if($type == 'image')
-
-                <div class="carousel-slide add-photo-slide">
-                    <span class="title">Add New</span>
-                    <form method="post" action="{{ route('upload') }}" id="upload-image-no-album" enctype="multipart/form-data">
-                        @csrf
-                        <label class="add-photo-btn">
-
-                            <i class="fas fa-plus-circle"></i>
-                        </label>
-                    </form>
-                </div>
-
-            @elseif($type == 'album')
-
-                <div class="carousel-slide add-photo-slide">
-                    <span class="title">Add New</span>
-                    <label class="add-photo-btn add-album">
-                        <input type="file" multiple class="add-photo-input" name="image-no-album[]">
-                        <i class="fas fa-plus-circle"></i>
-                    </label>
-                </div>
-
-            @endif --}}
-
-
         @else
 
             <div class="carousel-slide">
@@ -80,10 +50,6 @@
                 <input type="text" id="{{ $type }}_{{ $slide->id }}_title" class="title slide-title"
                     placeholder="Click to add a title"
                     value="{{ $slide->title }}">
-
-                {{-- <p  contenteditable class="title slide-title {{ $slide->title ? '' : 'placeholder'  }}">
-                    {{ $slide->title ?: 'Click to add a title' }}
-                </p> --}}
 
                 <div class="slide_image_wrapper display_wrapper" id="display_{{ $type }}_{{ $slide->id }}">
                     <img class="display_image" src="{{ asset($slide->url) }}">

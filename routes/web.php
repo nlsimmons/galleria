@@ -22,12 +22,14 @@ Auth::routes();
 
 Route::get('/home', 'PageController@home')->name('home');
 
+Route::put('/image/{id}/title', 'ImageController@editTitle');
+Route::post('/image/{id}', 'ImageController@action');
+
 Route::get('/album/{id}/', 'AlbumController@show')->name('album');
 Route::post('/album/{id}/', 'AlbumController@action');
 Route::put('/album/{id}/title', 'AlbumController@editTitle');
 
-Route::put('/image/{id}/title', 'ImageController@editTitle');
-Route::post('/image/{id}', 'ImageController@action');
+
 
 Route::post('/upload/{album}', 'ImageController@upload')->name('upload');
 

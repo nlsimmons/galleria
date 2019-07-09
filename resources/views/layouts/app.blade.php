@@ -13,9 +13,11 @@
 </head>
 <body class="is-clipped" spellcheck="false">
 
-@include('comps.navbar')
+	@include('comps.navbar')
 
-@yield('content')
+	@yield('content')
+
+	@include('comps.notification')
 
 <script type="text/javascript" src="/js/app.js"></script>
 

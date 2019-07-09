@@ -1,3 +1,16 @@
+@mixin fadeout-animation() {
+  	$name: fadeout-#{unique-id()};
+
+  	@-webkit-keyframes #{$name} {
+    	from { opacity: 1 } to { opacity: 0 };
+  	}
+  	@keyframes #{$name} {
+    	from { opacity: 1 } to { opacity: 0 };
+  	}
+  	-webkit-animation: $name 2s 1s forwards;
+  			animation: $name 2s 1s forwards;
+}
+
 body {
 	overflow-x: hidden;
 }
@@ -6,9 +19,24 @@ html, body {
 	height: 100%;
 }
 
+.notification-container {
+	justify-content: center;
+
+	.notification {
+		border-radius: 10px;
+
+		&.fadeout {
+			@include fadeout-animation();
+		}
+	}
+}
+
 .hidden {
 	width: 0;
 	height: 0;
+}
+.invisible {
+	opacity: 0;
 }
 .disabled {
 	display: none;

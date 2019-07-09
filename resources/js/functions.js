@@ -92,3 +92,18 @@ export function request(method, url, data) {
 	});
 }
 
+export function notify(type, message) {
+	let note_window = qs('.notification-container')
+
+	if( type == 'success' )
+	{
+		note_window.innerHTML = `<div class="notification is-success fadeout">
+			${message}
+		</div>`
+	}
+	if( type == 'error' ) {
+		note_window.innerHTML = `<div class="notification is-danger fadeout">
+			${message}
+		</div>`
+	}
+}

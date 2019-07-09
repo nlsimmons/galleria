@@ -82,17 +82,4 @@
 
 </div>
 
-{{-- <div class="modal" id="images-new-album-modal">
-    <div class="modal-background"></div>
-
-    <div class="modal-content">
-        <div class="box" id="images-uploading"></div>
-    </div>
-
-</div> --}}
-
-<style>
-
-</style>
-
 @endsection
