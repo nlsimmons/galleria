@@ -32,6 +32,8 @@ class User extends Authenticatable
 
     public function my_albums()
     {
+        return $this->albums->concat(['id' => 'new']);
+
         $loose = collect( $this->loose_images() );
         $loose->id = 'loose';
         $loose->title = 'Loose Images';

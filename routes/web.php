@@ -22,23 +22,20 @@ Auth::routes();
 
 Route::get('/home', 'PageController@home')->name('home');
 
-Route::get('/album/{id}/', 'AlbumController@show')->name('album');
-Route::post('/album/{id}/', 'AlbumController@action');
-Route::put('/album/{id}/title', 'AlbumController@editTitle');
-
-Route::put('/image/{id}/title', 'ImageController@editTitle');
 Route::post('/image/{id}', 'ImageController@action');
+Route::put('/image/{id}/title', 'ImageController@editTitle');
+
+Route::post('/album/new', 'AlbumController@new');
+Route::get('/album/{id}', 'PageController@album')->name('album');
+// Route::post('/album/{id}/', 'AlbumController@action');
+Route::post('/album/{id}/images', 'AlbumController@upload');
+Route::put('/album/{id}/title', 'AlbumController@editTitle');
 
 Route::post('/upload/{album}', 'ImageController@upload')->name('upload');
 
 Route::post('/upload/album/new', 'AlbumController@new');
 Route::post('/upload/album/{id}', 'AlbumController@upload');
 
-
 Route::get('/download/image/{file}', 'ImageController@getFile');
-
-
-
-
 
 Route::fallback('PageController@default');

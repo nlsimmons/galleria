@@ -1,6 +1,52 @@
 const fn = require('./functions.js')
 const EXIF = require('exif-js')
 
+fn.listen(
+	'#add-image-button',
+	'click',
+	function(e) {
+		fn.qs('#add-image-modal').classList.add('is-active')
+	}
+)
+fn.listen(
+	'#add-image-modal .modal-background',
+	'click',
+	function(e) {
+		fn.qs('#add-image-modal').classList.remove('is-active')
+	}
+)
+
+fn.listen(
+	'#add-image-simple',
+	'change',
+	function(e) {
+		let images = fn.qs('#add-image-simple').files
+		let album_id = fn.qs('#album_id').value
+
+		let upload_count = images.length
+		let uploads_complete = 0
+
+		for(let image of images) {
+			fn.request('post', `/album/${album_id}/images`, { image } )
+				.then( res => {
+					console.log(res)
+					fn.notify('success', 'Image uploaded')
+				})
+				.catch( err => {
+					uploads_complete++
+					fn.notify('error', 'An error occurred')
+					console.log(err)
+				})
+				.finally( _ => {
+					if( ++uploads_complete >= upload_count )
+					{
+						window.location.reload()
+					}
+				})
+		}
+	}
+)
+
 if( fn.qs('#dragndrop') && can_drag_upload() )
 {
     fn.qs('#dragndrop').classList.remove('disabled')
@@ -45,10 +91,10 @@ if( fn.qs('#dragndrop') && can_drag_upload() )
     )
 
     fn.listen(
-		'input#images-new-album',
+		'input#new-image',
 		'change',
 		function() {
-			let files = fn.qs('input#images-new-album').files
+			let files = fn.qs('input#new-image').files
 			loadFiles(files)
 
 			fn.qs('.uploads-active').classList.remove('uploads-active')
@@ -100,6 +146,9 @@ function submitNewAlbum() {
 			.then(res => {
 				console.log(res)
 			})
+			.catch(err => {
+				console.log(err)
+			})
 		})
 	})
 }
@@ -116,11 +165,13 @@ function can_drag_upload() {
 }
 
 function loadFiles(files) {
+	// Upload to server immediately
+
 	for(let file of files)
 	{
 		let container = document.createElement('div')
 		container.classList.add('img-preview-container')
-		fn.qs('#uploads__staging').append(container)
+		fn.qs('#uploads__staging #upload-images').append(container)
 
 		EXIF.getData(file, function() {
 			let orientation = this.exifdata.Orientation

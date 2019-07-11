@@ -38,6 +38,16 @@ fn.addEvent(
 
 	}
 )*/
+
+fn.listen(
+	'#toggle-album-carousel',
+	'click',
+	function(e) {
+		fn.toggle('#album-carousel')
+	}
+)
+
+// Carousel Scrolling
 fn.listen(
 	'.modal-background',
 	'click',
@@ -49,6 +59,7 @@ fn.listen(
 	}
 )
 
+// Slide Title Changing
 fn.listen(
 	'.carousel-slide .slide-title',
 	'change',
@@ -68,8 +79,14 @@ fn.listen(
 			.then( e => {
 				el.defaultValue = new_val;
 				el.value = new_val;
+
+				if(e == 'success')
+				{
+					fn.notify('success', 'Album title changed successfully')
+				}
 			})
 			.catch( err => {
+				alert('Error')
 				console.log(err)
 			});
 	}

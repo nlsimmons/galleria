@@ -53,6 +53,19 @@ class PageController extends Controller
             ->with( compact('album_slides') );
     }
 
+    public function album($album_id)
+    {
+        $album = Album::findOrFail($album_id);
+        $user = Auth::user();
+        $album_slides = new Slideshow( $user->my_albums() );
+
+        // $album_images = $album->getImages();
+        $album_waterfall = $album->getImages(true);
+
+        return view('album')
+            ->with( compact('album_slides', 'album_waterfall', 'album_id') );
+    }
+
     public function action(Request $request)
     {
         if( $request->has('delete') )

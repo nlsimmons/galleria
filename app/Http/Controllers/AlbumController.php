@@ -21,23 +21,23 @@ class AlbumController extends Controller
         }
 
         $album = new Album;
-        $album->title = $request->title;
+        // $album->title = $request->title;
         $album->owner_id = Auth::id();
         $album->save();
 
-        return ['id' => $album->id];
+        return redirect()->route('album', ['id' => $album->id]);
     }
 
     public function upload(Request $request, $id)
     {
         if(!Auth::check())
         {
-            throw new Exception('User not logged in');
+            abort(403, 'User not logged in');
         }
 
         $new_image = Image::upload($request->image, Auth::id(), $id);
 
-        return $new_image->url;
+        return $new_image;
     }
 
     /* * * * */
@@ -49,6 +49,8 @@ class AlbumController extends Controller
 
     	$image->title = $request->value;
     	$image->save();
+
+        return 'success';
     }
 
     public function show($id)

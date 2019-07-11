@@ -1,3 +1,16 @@
+@mixin fadeout-animation() {
+  	$name: fadeout-#{unique-id()};
+
+  	@-webkit-keyframes #{$name} {
+    	from { opacity: 1 } to { opacity: 0 };
+  	}
+  	@keyframes #{$name} {
+    	from { opacity: 1 } to { opacity: 0 };
+  	}
+  	-webkit-animation: $name 2s 1s forwards;
+  			animation: $name 2s 1s forwards;
+}
+
 body {
 	overflow-x: hidden;
 }
@@ -6,9 +19,75 @@ html, body {
 	height: 100%;
 }
 
+.items-centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button-bare {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	background: none;
+	border: none;
+
+	/*& > * {
+		background: white;
+		border-radius: 100%;
+	}*/
+}
+
+#album-carousel {
+
+	&, & + * {
+		position: relative;
+		top: 0;
+		transition: top 0.5s;
+	}
+
+	&.inactive,
+	&.inactive + * {
+		top: -150px;
+	}
+
+	#toggle-album-carousel {
+		position: absolute;
+        right: 30px;
+        bottom: -30px;
+        color: black;
+        background: #209cee;
+        padding: 5px;
+        border-radius: 5px;
+        z-index: 5;
+	}
+
+	.carousel {
+		height: 150px;
+	}
+}
+
+.notification-container {
+	position: fixed;
+	bottom: 100px;
+	width: 100%;
+	justify-content: center;
+
+	.notification {
+		border-radius: 10px;
+
+		&.fadeout {
+			@include fadeout-animation();
+		}
+	}
+}
+
 .hidden {
 	width: 0;
 	height: 0;
+}
+.invisible {
+	opacity: 0;
 }
 .disabled {
 	display: none;

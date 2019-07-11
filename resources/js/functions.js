@@ -5,6 +5,21 @@ export function qsa(selector) {
 	return document.querySelectorAll(selector)
 }
 
+export function toggle(selector) {
+	qsa(selector).forEach( el => {
+		if( el.classList.contains('active') )
+		{
+			el.classList.remove('active')
+			el.classList.add('inactive')
+		}
+		else if( el.classList.contains('inactive') )
+		{
+			el.classList.remove('inactive')
+			el.classList.add('active')
+		}
+	})
+}
+
 export function addEvent(el, type, handler) {
 	if(!el) return;
 
@@ -92,3 +107,18 @@ export function request(method, url, data) {
 	});
 }
 
+export function notify(type, message) {
+	let note_window = qs('.notification-container')
+
+	if( type == 'success' )
+	{
+		note_window.innerHTML = `<div class="notification is-success fadeout">
+			${message}
+		</div>`
+	}
+	if( type == 'error' ) {
+		note_window.innerHTML = `<div class="notification is-danger fadeout">
+			${message}
+		</div>`
+	}
+}

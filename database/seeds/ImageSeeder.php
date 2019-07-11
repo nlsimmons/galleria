@@ -28,7 +28,11 @@ class ImageSeeder extends Seeder
 
             for($i=0; $i<10; $i++)
             {
-                $image_path = $faker->image($path,
+                /*$image_path = $faker->image($path,
+                    $faker->numberBetween(960, 1920),
+                    $faker->numberBetween(540, 1028)
+                );*/
+                $image_path = $faker->imageUrl(
                     $faker->numberBetween(960, 1920),
                     $faker->numberBetween(540, 1028)
                 );
@@ -39,13 +43,13 @@ class ImageSeeder extends Seeder
                 $image->description = $faker->sentence(10);
                 $image->save();
 
-                unlink($image_path);
+                // unlink($image_path);
 
                 $album->images()->save($image);
-                $user->my_images()->save($image);
+                $user->images()->save($image);
             }
 
-            $user->my_albums()->save($album);
+            $user->albums()->save($album);
         }
 
         return;
