@@ -12,12 +12,17 @@
     <div id="album-{{ $album_id }}-waterfall" class="waterfall album-waterfall">
         <input type="hidden" name="album_id" id="album_id" value="{{ $album_id }}">
 
-        @foreach($album_waterfall as $column)
+        {{-- {{dd($album->columns)}} --}}
+
+        @foreach($album->columns as $column)
+
             <div class="waterfall-column">
+
                 @foreach($column as $image)
+
                     <div class="waterfall-image">
                         <div class="image-wrapper">
-                            <img src="{{ asset($image->url) }}">
+                            <img src="{{ asset($image->uri(1000) ?? '') }}">
                             <form class="image-control" method="post" action="/image/{{ $image->id }}">
                                 @csrf
                                 <input type="hidden" name="album" value="{{ $album_id }}">
@@ -40,8 +45,11 @@
                                 </div>
                             </form>
                         </div>
+
                     </div>
+
                 @endforeach
+
             </div>
         @endforeach
 

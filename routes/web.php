@@ -36,6 +36,8 @@ Route::post('/upload/{album}', 'ImageController@upload')->name('upload');
 Route::post('/upload/album/new', 'AlbumController@new');
 Route::post('/upload/album/{id}', 'AlbumController@upload');
 
+Route::get('/public/images/{filename}/{size?}', 'ImageController@retrieve');
+
 Route::get('/download/image/{file}', 'ImageController@getFile');
 
 Route::fallback('PageController@default');

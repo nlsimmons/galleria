@@ -18,7 +18,7 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('owner_id');
-            $table->string('url');
+            $table->string('hash')->unique();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('location')->nullable(); // Coordinates stored as a string

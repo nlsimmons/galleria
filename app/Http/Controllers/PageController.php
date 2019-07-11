@@ -57,13 +57,12 @@ class PageController extends Controller
     {
         $album = Album::findOrFail($album_id);
         $user = Auth::user();
-        $album_slides = new Slideshow( $user->my_albums() );
 
-        // $album_images = $album->getImages();
-        $album_waterfall = $album->getImages(true);
+        $album_slides = new Slideshow( $user->my_albums() );
+        $album = new Waterfall( $album->images, 3 );
 
         return view('album')
-            ->with( compact('album_slides', 'album_waterfall', 'album_id') );
+            ->with( compact('album_slides', 'album', 'album_id') );
     }
 
     public function action(Request $request)
@@ -78,16 +77,16 @@ class PageController extends Controller
 
     public function welcome()
     {
-        $slides = ( new Waterfall(
-            Image::where( ['hidden' => '0'] )
-                ->latest()
-                ->get()
-        , false) )->data;
-        $options = [];
+        // $slides = ( new Waterfall(
+        //     Image::where( ['hidden' => '0'] )
+        //         ->latest()
+        //         ->get()
+        // , false) )->data;
+        // $options = [];
 
-        $slide_columns = $slides->chunk( ceil($slides->count() / 3) );
+        // $slide_columns = $slides->chunk( ceil($slides->count() / 3) );
 
-        return view('welcome')
-            ->with( compact('slide_columns', 'options') );
+        return view('welcome');
+            // ->with( compact('slide_columns', 'options') );
     }
 }

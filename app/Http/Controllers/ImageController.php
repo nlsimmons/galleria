@@ -9,8 +9,37 @@ use Illuminate\Support\Facades\Storage;
 use App\Image;
 use App\Album;
 
+use Intervention\Image\ImageManagerStatic as ImageManager;
+ImageManager::configure(array('driver' => 'imagick'));
+
 class ImageController extends Controller
 {
+    public function retrieve($filename, $size=0)
+    {
+        $id = explode('-', $filename)[0];
+        $image = ImageManager::make( Image::findOrFail($id)->file() );
+
+        if($size)
+        {
+            if( $image->height() > $image->width() )
+            {
+                $image->resize(null, $size, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
+            else
+            {
+                $image->resize($size, null, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
+        }
+
+        return $image->response('jpg');
+    }
+
     public function editTitle(Request $request, $id)
     {
     	$image = Image::find($id);

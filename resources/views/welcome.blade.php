@@ -8,13 +8,13 @@
 
 <section class="section">
 
-	<div class="container-fluid">
+{{-- 	<div class="container-fluid">
         @component('comps.waterfall', [
             'id' => 'carousel-photos',
             'slide_columns' => $slide_columns
         ])
         @endcomponent
-    </div>
+    </div> --}}
 
 </section>
 
