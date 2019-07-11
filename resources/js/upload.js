@@ -40,7 +40,7 @@ fn.listen(
 				.finally( _ => {
 					if( ++uploads_complete >= upload_count )
 					{
-						// window.location.reload()
+						window.location.reload()
 					}
 				})
 		}

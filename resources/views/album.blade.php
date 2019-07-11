@@ -22,8 +22,11 @@
                                 @csrf
                                 <input type="hidden" name="album" value="{{ $album_id }}">
                                 <div class="button-wrapper">
-                                    <button class="button-bare" title="Add" name="action" value="add">
-                                        <i class="fas fa-plus-circle"></i>
+                                    <button class="button-bare" title="Rotate Left" name="action" value="rotate-left">
+                                        <i class="fas fa-undo"></i>
+                                    </button>
+                                    <button class="button-bare" title="Rotate Right" name="action" value="rotate-right">
+                                        <i class="fas fa-redo"></i>
                                     </button>
                                     <button class="button-bare" title="Add Tag" name="action" value="tag">
                                         <i class="fas cs cs-tags"></i>

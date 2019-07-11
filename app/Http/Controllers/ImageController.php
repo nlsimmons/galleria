@@ -25,17 +25,20 @@ class ImageController extends Controller
 		return response()->download( storage_path('app/public/images/' . $file . '.jpg') );
 	}
 
-    private function delete($id)
+    public function action(Request $request, $id)
     {
-        Image::destroy($id);
-    }
+        $image = Image::find($id);
 
-    public function action($id, Request $request)
-    {
         switch($request->action)
         {
             case 'delete':
-                $this->delete($id);
+                Image::destroy($id);
+                break;
+            case 'rotate-left':
+                Image::rotate($id, 90);
+                break;
+            case 'rotate-right':
+                Image::rotate($id, -90);
                 break;
         }
 

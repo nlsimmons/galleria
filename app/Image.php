@@ -4,7 +4,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use \Illuminate\Http\UploadedFile;
-use ImageManager;
+use Intervention\Image\ImageManagerStatic as ImageManager;
+
+ImageManager::configure(array('driver' => 'imagick'));
 
 class Image extends Model
 {
@@ -48,6 +50,17 @@ class Image extends Model
         }
 
         return $new;
+    }
+
+    public static function rotate($id, $dir)
+    {
+        $url = self::find($id)->url;
+        $img = ImageManager::make($url)->rotate($dir);
+
+        Storage::put(
+            $url,
+            $img->encode('jpg')
+        );
     }
 
     public static function destroy($id)

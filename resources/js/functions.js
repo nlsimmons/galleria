@@ -122,5 +122,3 @@ export function notify(type, message) {
 		</div>`
 	}
 }
-
-window.notify = notify
