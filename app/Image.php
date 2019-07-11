@@ -3,13 +3,25 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use \Illuminate\Http\UploadedFile;
+use Illuminate\Http\UploadedFile;
 use Intervention\Image\ImageManagerStatic as ImageManager;
 
 ImageManager::configure(array('driver' => 'imagick'));
 
 class Image extends Model
 {
+    public function uri($size=0)
+    {
+        $slug = \Str::slug( $this->title ?: $this->hash );
+        $s = $size != 0 ? '/' . $size : '';
+        return '/public/images/' . $uri = $this->id . '-' . $slug . $s;
+    }
+
+    public function file()
+    {
+        return storage_path('app\\public\\images\\') . $this->hash;
+    }
+
     public function owner()
     {
         return $this->belongsTo('App\User');
@@ -25,24 +37,19 @@ class Image extends Model
         return '/download/image/' . pathinfo($this->url, PATHINFO_FILENAME);
     }
 
-    public function display_url()
-    {
-        return $this->display_url;
-    }
-
     public static function upload($file, $owner_id, $album=null)
     {
-    	$image_name = md5($file);
         $img = ImageManager::make($file)->orientate();
+        $hash = md5($file);
 
         $new = new self;
         $new->owner_id = $owner_id;
 
         Storage::put(
-            $url = 'public/images/' . $image_name . '.jpg',
+            'public/images/' . $hash,
             $img->encode('jpg')
         );
-        $new->url = $url;
+        $new->hash = $hash;
 
         if(!empty($album))
         {
@@ -54,13 +61,20 @@ class Image extends Model
 
     public static function rotate($id, $dir)
     {
-        $url = self::find($id)->url;
-        $img = ImageManager::make($url)->rotate($dir);
+        $image = self::find($id);
+        // $old_file = $image->file();
+
+        $img = ImageManager::make($image->file())->rotate($dir);
+        // $hash = md5($new);
 
         Storage::put(
-            $url,
+            'public/images/' . $image->hash,
             $img->encode('jpg')
         );
+
+        // $image->hash = $hash;
+        // $image->save();
+        // unlink( $old_file );
     }
 
     public static function destroy($id)

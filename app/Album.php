@@ -21,20 +21,13 @@ class Album extends Model
     	return $this->belongsToMany('App\Image');
     }
 
-    public function first_image()
+    public function cover_image()
     {
-    	$first_image = $this->getImages()->first();
-        return $first_image->url ?? '';
-    }
+        // dd($this);
 
-    public function getImages($waterfall=false)
-    {
-        $images = $this->images->reverse();
-        if(!$waterfall)
-            return $images;
+    	$first_image = $this->images->last();
+        if(! $first_image) return null;
 
-        return $images->mapToGroups( function($item, $key) {
-            return [ $key % 3 => $item ];
-        });
+        return $first_image->uri(200) ?? '';
     }
 }
