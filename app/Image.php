@@ -19,7 +19,7 @@ class Image extends Model
 
     public function file()
     {
-        return storage_path('app\\public\\images\\') . $this->hash;
+        return storage_path('app/public/images/') . $this->hash;
     }
 
     public function owner()
