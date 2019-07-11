@@ -16,7 +16,7 @@ class Slideshow extends Model
         return $this->slides;
     }
 
-    public function __construct(Collection $items, $allow_add=true)
+    public function __construct(Collection $items, $allow_add=false)
     {
         foreach($items->all() as $item)
         {

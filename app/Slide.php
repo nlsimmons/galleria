@@ -22,6 +22,8 @@ class Slide
     {
         if( $name == 'id' )
             return $this->id();
+        if( $name == 'cover_image')
+            return $this->item->first_image();
         if( $name == 'display_url' || $name == 'download_link' )
             return $this->item->$name();
 

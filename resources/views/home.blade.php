@@ -57,29 +57,13 @@
 
 -->
 
-<div class="section is-paddingless">
+@component('comps.albumview', [
+    'album_slides' => $album_slides,
+])
+@endcomponent
 
-    @component('comps.slideshow', [
-        'id' => 'carousel-albums',
-        'slides' => $album_slides->slides->all(),
-    ])
+<section class="section">
 
-        @if( $album_slides->slides->count() > 1)
-            @php
-            $slides = $album_slides->slides;
-            $add_slide = $slides->pop();
-            @endphp
-
-            @foreach($slides as $slide)
-                @component('comps.album.slide', ['slide' => $slide]) @endcomponent
-            @endforeach
-        @endif
-
-        @component('comps.album.new')
-        @endcomponent
-
-    @endcomponent
-
-</div>
+</section>
 
 @endsection

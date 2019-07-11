@@ -1,4 +1,4 @@
-<nav class="navbar is-dark">
+<nav class="navbar is-dark is-fixed-top">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
             <span class="title has-text-white">{{ config('app.name') }}</span>

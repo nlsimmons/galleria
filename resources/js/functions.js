@@ -5,6 +5,21 @@ export function qsa(selector) {
 	return document.querySelectorAll(selector)
 }
 
+export function toggle(selector) {
+	qsa(selector).forEach( el => {
+		if( el.classList.contains('active') )
+		{
+			el.classList.remove('active')
+			el.classList.add('inactive')
+		}
+		else if( el.classList.contains('inactive') )
+		{
+			el.classList.remove('inactive')
+			el.classList.add('active')
+		}
+	})
+}
+
 export function addEvent(el, type, handler) {
 	if(!el) return;
 
@@ -107,3 +122,5 @@ export function notify(type, message) {
 		</div>`
 	}
 }
+
+window.notify = notify

@@ -3,6 +3,65 @@ body.prevent-scroll {
     overflow: hidden;
 }
 
+.album-waterfall {
+    display: flex;
+    flex-direction: row;
+
+    #add-image {
+        position: fixed;
+        right: 100px;
+        bottom: 100px;
+        width: 100px;
+        height: 100px;
+        background: white;
+        border-radius: 100%;
+
+        i {
+            font-size: 90px;
+        }
+    }
+
+    .waterfall-column {
+        display: flex;
+        flex-direction: column;
+        margin: 0 6px 10px 6px;
+
+        .waterfall-image {
+            margin-top: 8px;
+        }
+
+        .image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+
+            .image-control {
+                opacity: 0;
+                position: absolute;
+                bottom: 25px;
+
+                .button-wrapper {
+                    display: flex;
+                    background-color: lightgray;
+                    font-size: 2rem;
+                    width: 200px;
+                    justify-content: space-evenly;
+                    padding: 5px;
+                    border-radius: 50px;
+                }
+            }
+
+            &:hover .image-control {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
+
+
+/*
 .waterfall {
 
     .column {
@@ -14,4 +73,4 @@ body.prevent-scroll {
         padding: 5px;
         width: 100%;
     }
-}
+}*/

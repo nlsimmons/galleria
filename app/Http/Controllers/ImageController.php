@@ -39,7 +39,7 @@ class ImageController extends Controller
                 break;
         }
 
-        return redirect()->route('album', ['id' => $request->album_id] );
+        return redirect()->route('album', ['id' => $request->album] );
     }
 
     public function upload(Request $request, $album)

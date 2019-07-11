@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="is-clipped">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,13 +11,13 @@
 <link rel="stylesheet" type="text/css" href="/css/app.css">
 
 </head>
-<body class="is-clipped" spellcheck="false">
+<body spellcheck="false" class="has-navbar-fixed-top">
 
-	@include('comps.navbar')
+@include('comps.navbar')
 
-	@yield('content')
+@yield('content')
 
-	@include('comps.notification')
+@include('comps.notification')
 
 <script type="text/javascript" src="/js/app.js"></script>
 

@@ -1,9 +1,9 @@
 <div class="carousel" id="{{ $id }}">
 	@foreach( $slides as $slide )
-		@php $first = isset($first) ? false : true; @endphp
     	<input type="radio" id="{{ $slide->id }}"
     		class="carousel-activator"
-    		name="activator-{{ $id }}" {{ $first ? 'checked' : '' }}>
+    		name="activator-{{ $id }}"
+    		{{ isset($current_album) && $current_album == $slide->id ? 'checked' : '' }}>
     @endforeach
 
 	{{-- <div class="carousel-indicators">

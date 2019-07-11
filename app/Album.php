@@ -21,20 +21,20 @@ class Album extends Model
     	return $this->belongsToMany('App\Image');
     }
 
-    public function slideImages()
+    public function first_image()
     {
-        if( ! $this->images->count() )
-        {
-            return collect([ 'url' => 'https://via.placeholder.com/500' ]);
-        }
-
-        return $this->images;
+    	$first_image = $this->getImages()->first();
+        return $first_image->url ?? '';
     }
 
-    public function display_url()
+    public function getImages($waterfall=false)
     {
-    	$first_image = $this->images()->first();
-        return $first_image ? $first_image->display_url() : asset('/assets/placeholder.png');
-        ;
+        $images = $this->images->reverse();
+        if(!$waterfall)
+            return $images;
+
+        return $images->mapToGroups( function($item, $key) {
+            return [ $key % 3 => $item ];
+        });
     }
 }

@@ -19,7 +19,58 @@ html, body {
 	height: 100%;
 }
 
+.items-centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button-bare {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	background: none;
+	border: none;
+
+	/*& > * {
+		background: white;
+		border-radius: 100%;
+	}*/
+}
+
+#album-carousel {
+
+	&, & + * {
+		position: relative;
+		top: 0;
+		transition: top 0.5s;
+	}
+
+	&.inactive,
+	&.inactive + * {
+		top: -150px;
+	}
+
+	#toggle-album-carousel {
+		position: absolute;
+        right: 30px;
+        bottom: -30px;
+        color: black;
+        background: #209cee;
+        padding: 5px;
+        border-radius: 5px;
+        z-index: 5;
+	}
+
+	.carousel {
+		height: 150px;
+	}
+}
+
 .notification-container {
+	position: fixed;
+	bottom: 100px;
+	width: 100%;
 	justify-content: center;
 
 	.notification {
