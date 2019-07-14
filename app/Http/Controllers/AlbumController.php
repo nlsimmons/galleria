@@ -25,6 +25,9 @@ class AlbumController extends Controller
         $album->owner_id = Auth::id();
         $album->save();
 
+        if( !empty($request->_api) )
+            return $album->id;
+
         return redirect()->route('album', ['id' => $album->id]);
     }
 

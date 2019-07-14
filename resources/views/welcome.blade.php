@@ -17,7 +17,7 @@
 
                     <div class="waterfall-image">
                         <div class="image-wrapper">
-                            <img src="{{ asset($image->uri(500) ?? '') }}" title="{{ $image->title ?? 'Untitled Image' }}">
+                            <img src="{{ asset($image->uri(500) ?? '') }}" title="{{ $image->title ?? 'Untitled Image' }}" class="width-{{ $images->columns->count() }}-cols">
                         </div>
 
                     </div>

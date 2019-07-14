@@ -7,6 +7,26 @@ body.prevent-scroll {
     display: flex;
     flex-direction: row;
 
+    img.width-2-cols {
+        width: calc( 100vw/2 );
+    }
+
+    img.width-3-cols {
+        width: calc( 100vw/3 );
+    }
+
+    img.width-4-cols {
+        width: calc( 100vw/4 );
+    }
+
+    img.width-5-cols {
+        width: calc( 100vw/5 );
+    }
+
+    img.width-6-cols {
+        width: calc( 100vw/6 );
+    }
+
     #add-image {
         position: fixed;
         right: 100px;

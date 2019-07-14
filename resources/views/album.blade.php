@@ -20,7 +20,7 @@
 
                     <div class="waterfall-image">
                         <div class="image-wrapper">
-                            <img src="{{ asset($image->uri(800) ?? '') }}" title="{{ $image->title ?? 'Untitled Image' }}">
+                            <img src="{{ asset($image->uri(800) ?? '') }}" title="{{ $image->title ?? 'Untitled Image' }}" class="width-{{ $album->columns->count() }}-cols">
                             <form class="image-control" method="post" action="/image/{{ $image->id }}">
                                 @csrf
                                 <input type="hidden" name="album" value="{{ $album_id }}">
@@ -65,7 +65,7 @@
     <i class="fas fa-plus-circle"></i>
 </div> --}}
 
-<label id="add-image-button" class="items-centered">
+<label id="add-image-button" class="items-centered corner-fixed">
     <input type="file" class="hidden" id="add-image-simple" multiple>
     <i class="fas fa-plus-circle"></i>
 </label>

@@ -72,7 +72,7 @@ function get_csrf() {
 	return qs('meta[name=csrf-token]').content;
 }
 
-export function request(method, url, data) {
+export function request(method, url, data={}) {
 	return new Promise((resolve, reject) => {
 	    let xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 	    switch(method = method.toUpperCase())
@@ -82,7 +82,7 @@ export function request(method, url, data) {
 	    		data['_method'] = 'PUT';
 	    }
 
-	    xhr.open(method , url);
+	    xhr.open(method, url);
 	    xhr.onload = () => {
 	        if (xhr.status >= 200 && xhr.status < 300)
 	        	resolve(xhr.response);
@@ -92,18 +92,15 @@ export function request(method, url, data) {
 	    xhr.setRequestHeader('X-CSRF-TOKEN', get_csrf());
 	    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
-	    if(data) {
-	    	let form = new FormData();
+    	let form = new FormData();
+    	data['_api'] = true
 
-    		for(let d in data)
-    		{
-    			form.append(d, data[d]);
-    		}
+		for(let d in data)
+		{
+			form.append(d, data[d]);
+		}
 
-    		xhr.send(form);
-	    } else {
-	    	xhr.send();
-	    }
+		xhr.send(form);
 	});
 }
 

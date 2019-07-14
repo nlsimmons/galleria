@@ -5,14 +5,16 @@ fn.listen(
 	'#add-image-button',
 	'click',
 	function(e) {
-		fn.qs('#add-image-modal').classList.add('is-active')
+		if( fn.qs('#add-image-modal') )
+			fn.qs('#add-image-modal').classList.add('is-active')
 	}
 )
 fn.listen(
 	'#add-image-modal .modal-background',
 	'click',
 	function(e) {
-		fn.qs('#add-image-modal').classList.remove('is-active')
+		if( fn.qs('#add-image-modal') )
+			fn.qs('#add-image-modal').classList.remove('is-active')
 	}
 )
 
@@ -21,13 +23,15 @@ fn.listen(
 	'change',
 	function(e) {
 		let images = fn.qs('#add-image-simple').files
-		let album_id = fn.qs('#album_id').value
+		let album_id = fn.qs('#album_id') ? fn.qs('#album_id').value : ''
 
 		let upload_count = images.length
 		let uploads_complete = 0
 
+		let uri = album_id ? `/upload/album/${album_id}/image` : '/upload/image'
+
 		for(let image of images) {
-			fn.request('post', `/album/${album_id}/images`, { image } )
+			fn.request('post', uri, { image } )
 				.then( res => {
 					console.log(res)
 					fn.notify('success', 'Image uploaded')
@@ -37,7 +41,7 @@ fn.listen(
 					fn.notify('error', 'An error occurred')
 					console.log(err)
 				})
-				.finally( _ => {
+				.finally( () => {
 					if( ++uploads_complete >= upload_count )
 					{
 						window.location.reload()
@@ -165,8 +169,6 @@ function can_drag_upload() {
 }
 
 function loadFiles(files) {
-	// Upload to server immediately
-
 	for(let file of files)
 	{
 		let container = document.createElement('div')

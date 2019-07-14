@@ -39,6 +39,12 @@ class PageController extends Controller
     	}
 
         $user = Auth::user();
+
+        if( ! $user->images->count() && ! $user->albums->count() )
+        {
+            return view('home_empty');
+        }
+
         $album_slides = new Slideshow( $user->my_albums() );
 
         $home_images = $user->images->random( min(50, $user->images->count()) )->shuffle();
@@ -50,16 +56,12 @@ class PageController extends Controller
 
     public function welcome()
     {
-        // $slides = ( new Waterfall(
-        //     Image::where( ['hidden' => '0'] )
-        //         ->latest()
-        //         ->get()
-        // , false) )->data;
-        // $options = [];
+        $welcome_images = Image::all();
+        if( $welcome_images->count() )
+        {
+            $welcome_images = $welcome_images->random(50)->shuffle();
+        }
 
-        // $slide_columns = $slides->chunk( ceil($slides->count() / 3) );
-
-        $welcome_images = Image::all()->random(50)->shuffle();
         $images = new Waterfall( $welcome_images, 5 );
 
         return view('welcome')
