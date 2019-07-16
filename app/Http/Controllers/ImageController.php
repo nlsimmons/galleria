@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 use App\Image;
 use App\Album;
@@ -27,7 +28,9 @@ class ImageController extends Controller
             });
         }
 
-        return $image->response('jpg');
+        $response = Response::make($image->encode('jpg'));
+        $response->header('Cache-control', 'max-age=3600');
+        return $response;
     }
 
     public function editTitle(Request $request, $id)
