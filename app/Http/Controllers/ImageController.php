@@ -30,9 +30,8 @@ class ImageController extends Controller
         }
 
         $response = Response::make($in_image->encode('jpg'));
-        $response->header('ETag', md5($image->updated_at));
-        $response->header('Cache-Control', 'public, max-age=604800, must-revalidate');
-        // $response->header('Cache-Control', '');
+        $response->header('ETag', $image->check());
+        $response->header('Cache-Control', 'public, max-age=604800');
         $response->header('Content-Type', 'image/jpg');
         return $response;
     }
