@@ -16,7 +16,7 @@
                         <button type="submit" class="button is-light">Log Out</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="button is-primary">
+                    <a href="{{ route('login') }}" class="button is-info">
                         Login
                     </a>
                     <a href="{{ route('register') }}" class="button is-light">
