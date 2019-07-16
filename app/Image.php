@@ -10,11 +10,19 @@ ImageManager::configure(array('driver' => 'imagick'));
 
 class Image extends Model
 {
+    public function check($length=0)
+    {
+        $c = md5($this->updated_at);
+
+        $l = !$length ? strlen($c) : $length;
+        return substr($c, 0, $l);
+    }
+
     public function uri($size=0)
     {
         $slug = \Str::slug( $this->title ?: $this->hash );
         $s = $size != 0 ? '/' . $size : '';
-        return '/public/images/' . $uri = $this->id . '-' . $slug . $s;
+        return '/public/images/' . $this->id . '-' . $slug . $this->check(2) . $s;
     }
 
     public function file()
