@@ -29,7 +29,7 @@ class ImageController extends Controller
         }
 
         $response = Response::make($image->encode('jpg'));
-        $response->header('Cache-control', 'max-age=3600');
+        $response->header('Cache-control', 'public, max-age=3600');
         $response->header('Content-type', 'image/jpg');
         return $response;
     }
