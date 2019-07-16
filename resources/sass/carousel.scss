@@ -77,8 +77,10 @@ $album-cover-height: 600px;
     overflow: visible;
     text-align: center;
     position: relative;
-    // padding: 0;
-    // margin: 80px auto;
+
+    .slide-content.new-album {
+        border-radius: 100%;
+    }
 
     .carousel-image-control,
     .carousel-album-control {
@@ -253,15 +255,22 @@ $album-cover-height: 600px;
     left: 0;
     right: 0;
 
-    .album-cover {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
     .slide-content {
-        width: 80%;
-        height: 80%;
+        width: 90%;
+        height: 90%;
+        background: white;
+        position: relative;
+
+        .album-cover {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            top: 5px;
+            bottom: 25px;
+            left: 5px;
+            right: 5px;
+        }
     }
 
     .slide-image-container {

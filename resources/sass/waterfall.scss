@@ -3,9 +3,29 @@ body.prevent-scroll {
     overflow: hidden;
 }
 
-.album-waterfall {
+.waterfall {
     display: flex;
     flex-direction: row;
+
+    img.width-2-cols {
+        width: calc( 100vw/2 );
+    }
+
+    img.width-3-cols {
+        width: calc( 100vw/3 );
+    }
+
+    img.width-4-cols {
+        width: calc( 100vw/4 );
+    }
+
+    img.width-5-cols {
+        width: calc( 100vw/5 );
+    }
+
+    img.width-6-cols {
+        width: calc( 100vw/6 );
+    }
 
     #add-image {
         position: fixed;
@@ -24,10 +44,10 @@ body.prevent-scroll {
     .waterfall-column {
         display: flex;
         flex-direction: column;
-        margin: 0 6px 10px 6px;
+        margin: 0 4px;
 
         .waterfall-image {
-            margin-top: 8px;
+            margin-bottom: 8px;
         }
 
         .image-wrapper {

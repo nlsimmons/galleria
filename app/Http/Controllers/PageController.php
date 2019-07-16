@@ -40,17 +40,32 @@ class PageController extends Controller
 
         $user = Auth::user();
 
-        if( $albums = $user->my_albums() )
-        {
-            $album_slides = new Slideshow( $albums );
-        }
-        else
+        if( ! $user->images->count() && ! $user->albums->count() )
         {
             return view('home_empty');
         }
 
+        $album_slides = new Slideshow( $user->my_albums() );
+
+        $home_images = $user->images->random( min(50, $user->images->count()) )->shuffle();
+        $images = new Waterfall( $home_images, 3 );
+
 		return view('home')
-            ->with( compact('album_slides') );
+            ->with( compact('album_slides', 'images') );
+    }
+
+    public function welcome()
+    {
+        $welcome_images = Image::all();
+        if( $welcome_images->count() )
+        {
+            $welcome_images = $welcome_images->random(50)->shuffle();
+        }
+
+        $images = new Waterfall( $welcome_images, 5 );
+
+        return view('welcome')
+            ->with( compact('images') );
     }
 
     public function album($album_id)
@@ -73,20 +88,5 @@ class PageController extends Controller
         }
 
         return $this->home();
-    }
-
-    public function welcome()
-    {
-        // $slides = ( new Waterfall(
-        //     Image::where( ['hidden' => '0'] )
-        //         ->latest()
-        //         ->get()
-        // , false) )->data;
-        // $options = [];
-
-        // $slide_columns = $slides->chunk( ceil($slides->count() / 3) );
-
-        return view('welcome');
-            // ->with( compact('slide_columns', 'options') );
     }
 }

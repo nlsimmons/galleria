@@ -19,7 +19,14 @@ class UserSeeder extends Seeder
 	        'password' => Hash::make('password'),
 	        'remember_token' => Str::random(10),
     	]);
+        App\User::create([
+            'name' => 'Bob2',
+            'email' => 'bob2@bob.bob',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
 
-        factory(App\User::class, 9)->create();
+        factory(App\User::class, 3)->create();
     }
 }

@@ -12,8 +12,6 @@
     <div id="album-{{ $album_id }}-waterfall" class="waterfall album-waterfall">
         <input type="hidden" name="album_id" id="album_id" value="{{ $album_id }}">
 
-        {{-- {{dd($album->columns)}} --}}
-
         @foreach($album->columns as $column)
 
             <div class="waterfall-column">
@@ -22,7 +20,7 @@
 
                     <div class="waterfall-image">
                         <div class="image-wrapper">
-                            <img src="{{ asset($image->uri(1000) ?? '') }}">
+                            <img src="{{ asset($image->uri(800) ?? '') }}" title="{{ $image->title ?? 'Untitled Image' }}" class="width-{{ $album->columns->count() }}-cols">
                             <form class="image-control" method="post" action="/image/{{ $image->id }}">
                                 @csrf
                                 <input type="hidden" name="album" value="{{ $album_id }}">
@@ -39,7 +37,7 @@
                                     <button class="button-bare" title="Download" name="action" value="download">
                                         <i class="fas fa-arrow-alt-circle-down"></i>
                                     </button>
-                                    <button class="button-bare" title="Delete" name="action" value="delete">
+                                    <button class="button-bare button-delete-image" title="Delete" name="action" value="delete">
                                         <i class="fas fa-minus-circle"></i>
                                     </button>
                                 </div>
@@ -67,7 +65,7 @@
     <i class="fas fa-plus-circle"></i>
 </div> --}}
 
-<label id="add-image-button" class="items-centered">
+<label id="add-image-button" class="items-centered corner-fixed">
     <input type="file" class="hidden" id="add-image-simple" multiple>
     <i class="fas fa-plus-circle"></i>
 </label>

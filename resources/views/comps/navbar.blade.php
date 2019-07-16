@@ -4,13 +4,12 @@
             <span class="title has-text-white">{{ config('app.name') }}</span>
         </a>
     </div>
-
     <div class="navbar-end">
         <div class="navbar-item">
             <div class="buttons">
                 @auth
-                    <a href="{{ url('/home') }}" class="button is-primary">
-                        My Page
+                    <a href="{{ url('/home') }}" class="button is-info">
+                        Home
                     </a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf

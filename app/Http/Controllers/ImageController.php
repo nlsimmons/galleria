@@ -21,20 +21,10 @@ class ImageController extends Controller
 
         if($size)
         {
-            if( $image->height() > $image->width() )
-            {
-                $image->resize(null, $size, function($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-            }
-            else
-            {
-                $image->resize($size, null, function($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-            }
+            $image->resize(null, $size, function($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
         }
 
         return $image->response('jpg');
@@ -71,46 +61,31 @@ class ImageController extends Controller
                 break;
         }
 
-        return redirect()->route('album', ['id' => $request->album] );
+        if($request->album)
+            return redirect()->route('album', ['id' => $request->album ] );
+        else
+            return redirect()->route('home');
     }
 
-    public function upload(Request $request, $album)
+    public function upload(Request $request)
     {
         if(!Auth::check())
         {
             return redirect()->route('welcome');
         }
 
-        return $request;
-
         $user = Auth::user();
 
-        if( $request->album == 'new' )
-        {
-            $album = new Album;
-            $album->owner_id = $user->id;
-            $album->save();
-            $album_id = $album->id;
+        $file = $request->file('image');
 
-            $user->my_albums()->save($album);
-        }
-        else
-        {
-            $album = Album::find($request->album);
-            $album_id = $album->id;
-        }
+        $image = Image::upload( $file, $user->id );
+        $image->owner_id = $user->id;
+        $image->save();
 
-        $files = $request->file('images');
+        $user->images()->save($image);
 
-        foreach( $files as $file )
-        {
-            $image = Image::upload( $file, Auth::id() );
-            $image->owner_id = $user->id;
-            $image->save();
-
-            $album->images()->save($image);
-            $user->my_images()->save($image);
-        }
+        if( !empty($request->_api) )
+            return $image;
 
         return redirect()->route('album', ['id' => $album_id]);
     }

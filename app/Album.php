@@ -23,11 +23,9 @@ class Album extends Model
 
     public function cover_image()
     {
-        // dd($this);
-
     	$first_image = $this->images->last();
         if(! $first_image) return null;
 
-        return $first_image->uri(200) ?? '';
+        return $first_image->uri(150) ?? '';
     }
 }
