@@ -44,10 +44,10 @@ body.prevent-scroll {
     .waterfall-column {
         display: flex;
         flex-direction: column;
-        margin: 0 6px 10px 6px;
+        margin: 0 4px;
 
         .waterfall-image {
-            margin-top: 8px;
+            margin-bottom: 8px;
         }
 
         .image-wrapper {

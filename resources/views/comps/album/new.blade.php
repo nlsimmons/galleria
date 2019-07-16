@@ -1,6 +1,6 @@
 <div class="carousel-slide">
 
-    <form method="post" action="/album/new" class="slide-content items-centered">
+    <form method="post" action="/album/new" class="items-centered slide-content new-album">
         @csrf
         <button type="submit" class="button-bare" title="Create New Album">
             <i class="fas fa-plus is-size-1"></i>

@@ -77,8 +77,10 @@ $album-cover-height: 600px;
     overflow: visible;
     text-align: center;
     position: relative;
-    // padding: 0;
-    // margin: 80px auto;
+
+    .slide-content.new-album {
+        border-radius: 100%;
+    }
 
     .carousel-image-control,
     .carousel-album-control {

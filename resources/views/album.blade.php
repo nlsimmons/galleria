@@ -37,7 +37,7 @@
                                     <button class="button-bare" title="Download" name="action" value="download">
                                         <i class="fas fa-arrow-alt-circle-down"></i>
                                     </button>
-                                    <button class="button-bare" title="Delete" name="action" value="delete">
+                                    <button class="button-bare button-delete-image" title="Delete" name="action" value="delete">
                                         <i class="fas fa-minus-circle"></i>
                                     </button>
                                 </div>
