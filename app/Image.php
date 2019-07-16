@@ -62,19 +62,14 @@ class Image extends Model
     public static function rotate($id, $dir)
     {
         $image = self::find($id);
-        // $old_file = $image->file();
-
         $img = ImageManager::make($image->file())->rotate($dir);
-        // $hash = md5($new);
 
         Storage::put(
             'public/images/' . $image->hash,
             $img->encode('jpg')
         );
 
-        // $image->hash = $hash;
-        // $image->save();
-        // unlink( $old_file );
+        $image->touch();
     }
 
     public static function destroy($id)

@@ -18,20 +18,22 @@ class ImageController extends Controller
     public function retrieve($filename, $size=0)
     {
         $id = explode('-', $filename)[0];
-        $image = ImageManager::make( Image::findOrFail($id)->file() );
+        $image = Image::findOrFail($id);
+        $in_image = ImageManager::make( $image->file() );
 
         if($size)
         {
-            $image->resize(null, $size, function($constraint) {
+            $in_image->resize(null, $size, function($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
         }
 
-        $response = Response::make($image->encode('jpg'));
-        $response->header('ETag', md5($image));
-        $response->header('Cache-control', 'max-age=604800');
-        $response->header('Content-type', 'image/jpg');
+        $response = Response::make($in_image->encode('jpg'));
+        $response->header('ETag', md5($image->updated_at));
+        $response->header('Cache-Control', 'public, max-age=604800, must-revalidate');
+        // $response->header('Cache-Control', '');
+        $response->header('Content-Type', 'image/jpg');
         return $response;
     }
 
