@@ -8,7 +8,7 @@
         <div class="navbar-item">
             <div class="buttons">
                 @auth
-                    <a href="{{ url('/home') }}" class="button is-primary">
+                    <a href="{{ url('/home') }}" class="button is-info">
                         Home
                     </a>
                     <form action="{{ route('logout') }}" method="post">
