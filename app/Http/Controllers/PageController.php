@@ -47,7 +47,8 @@ class PageController extends Controller
 
         $album_slides = new Slideshow( $user->my_albums() );
 
-        $home_images = $user->images->random( min(50, $user->images->count()) )->shuffle();
+        $home_images = $user->images
+            ->random( min(50, $user->images->count()) )->shuffle();
         $images = new Waterfall( $home_images, 3 );
 
 		return view('home')
@@ -59,7 +60,8 @@ class PageController extends Controller
         $welcome_images = Image::all();
         if( $welcome_images->count() )
         {
-            $welcome_images = $welcome_images->random(50)->shuffle();
+            $welcome_images = $welcome_images
+                ->random( min(50, $welcome_images->count()) )->shuffle();
         }
 
         $images = new Waterfall( $welcome_images, 5 );
