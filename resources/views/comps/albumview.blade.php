@@ -15,7 +15,9 @@
                 @endphp
 
                 @foreach($slides as $slide)
-                    @component('comps.album.slide', ['slide' => $slide]) @endcomponent
+                    @component('comps.album.slide', ['slide' => $slide])
+                        @if($slide->id == ($current_album ?? 0)) <div class="albumview-indicator"></div> @endif
+                    @endcomponent
                 @endforeach
             @endif
 
