@@ -9,5 +9,6 @@
     		<i class="fas fa-times-circle"></i>
     	</button>
     </form>
+    {{ $slot }}
 
 </div>
