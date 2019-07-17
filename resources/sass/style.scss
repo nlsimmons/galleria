@@ -39,6 +39,11 @@ html, body {
 	}*/
 }
 
+.navbar {
+	display: flex;
+	justify-content: space-between;
+}
+
 .albumview-indicator {
 	width: 25px;
 	height: 25px;
