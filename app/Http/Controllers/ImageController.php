@@ -54,6 +54,11 @@ class ImageController extends Controller
     {
         $image = Image::find($id);
 
+        if( Auth::id() !== $image->owner->id )
+        {
+            throw new Exception('You are not authorized to access this resource.');
+        }
+
         switch($request->action)
         {
             case 'delete':

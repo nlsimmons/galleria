@@ -56,17 +56,6 @@ class AlbumController extends Controller
         return 'success';
     }
 
-    public function show($id)
-    {
-        $album = Album::findOrFail($id);
-        $album_title = $album->title;
-    	$images = $album->images;
-    	$image_slides = new Slideshow($images);
-
-    	return view('album')
-    		->with( compact('image_slides', 'id', 'album_title') );
-    }
-
     private function delete($id)
     {
         Album::destroy($id);
@@ -74,6 +63,13 @@ class AlbumController extends Controller
 
     public function action($album_id, Request $request)
     {
+        $album = Album::find($album_id);
+
+        if( Auth::id() !== $album->owner->id )
+        {
+            throw new Exception('You are not authorized to access this resource.');
+        }
+
         switch($request->action)
         {
             case 'delete':

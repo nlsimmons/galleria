@@ -74,12 +74,21 @@ class PageController extends Controller
     {
         $album = Album::findOrFail($album_id);
         $user = Auth::user();
+        $owner = $album->owner;
+        $album_waterfall = new Waterfall( $album->images, 3 );
 
-        $album_slides = new Slideshow( $user->my_albums() );
-        $album = new Waterfall( $album->images, 3 );
+        if($user->id === $owner->id)
+        {
+            $album_slides = new Slideshow( $user->my_albums() );
+            $includes = compact('album_slides', 'album', 'album_waterfall');
+        }
+        else
+        {
+            $includes = compact('album', 'album_waterfall');
+        }
 
         return view('album')
-            ->with( compact('album_slides', 'album', 'album_id') );
+            ->with( $includes );
     }
 
     public function action(Request $request)
