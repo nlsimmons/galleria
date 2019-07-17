@@ -2,6 +2,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\ImageManagerStatic as ImageManager;
@@ -43,6 +44,12 @@ class Image extends Model
     public function download_link()
     {
         return '/download/image/' . pathinfo($this->url, PATHINFO_FILENAME);
+    }
+
+    public function album_link()
+    {
+        $album = $this->albums->first();
+        return '/album/' . $album->id;
     }
 
     public static function upload($file, $owner_id, $album=null)

@@ -16,33 +16,34 @@ class ImageSeeder extends Seeder
     {
     	$faker = Faker\Factory::create();
 
-        $user = User::first();
-        for($n=0; $n<5; $n++)
-        {
-            $album = new Album;
-            $album->owner_id = $user->id;
-            $album->title = $faker->sentence(3);
-            $album->description = $faker->sentence(10);
-            $album->save();
-
-            for($i=0; $i<10; $i++)
+        User::all()->each(function($user) use ($faker){
+            for($n=0; $n<2; $n++)
             {
-                $image_path = $faker->imageUrl(
-                    $faker->numberBetween(1440, 1920),
-                    $faker->numberBetween(784, 1028)
-                );
+                $album = new Album;
+                $album->owner_id = $user->id;
+                $album->title = $faker->sentence(3);
+                $album->description = $faker->sentence(10);
+                $album->save();
 
-                $image = Image::upload($image_path, $user->id);
-                $image->owner_id = $user->id;
-                $image->title = $faker->sentence(3);
-                $image->description = $faker->sentence(10);
-                $image->save();
+                for($i=0; $i<8; $i++)
+                {
+                    $image_path = $faker->imageUrl(
+                        $faker->numberBetween(1440, 1920),
+                        $faker->numberBetween(784, 1028)
+                    );
 
-                $album->images()->save($image);
-                $user->images()->save($image);
+                    $image = Image::upload($image_path, $user->id);
+                    $image->owner_id = $user->id;
+                    $image->title = $faker->sentence(3);
+                    $image->description = $faker->sentence(10);
+                    $image->save();
+
+                    $album->images()->save($image);
+                    $user->images()->save($image);
+                }
+
+                $user->albums()->save($album);
             }
-
-            $user->albums()->save($album);
-        }
+        });
     }
 }
