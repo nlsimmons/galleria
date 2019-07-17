@@ -77,7 +77,7 @@ class PageController extends Controller
         $owner = $album->owner;
         $album_waterfall = new Waterfall( $album->images, 3 );
 
-        if($user->id === $owner->id)
+        if($user && $user->id === $owner->id)
         {
             $album_slides = new Slideshow( $user->my_albums() );
             $includes = compact('album_slides', 'album', 'album_waterfall');
