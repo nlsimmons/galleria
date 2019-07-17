@@ -19,6 +19,24 @@ html, body {
 	height: 100%;
 }
 
+.navbar {
+	.button {
+		min-width: 85px;
+	}
+
+	.navbar-item:last-of-type {
+		padding-right: 0;
+	}
+}
+
+.buttons {
+	justify-content: flex-end;
+
+	.button:not(.is-fullwidth) {
+		margin-right: 0.5rem;
+	}
+}
+
 .items-centered {
 	display: flex;
 	justify-content: center;
