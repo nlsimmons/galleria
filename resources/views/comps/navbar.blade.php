@@ -9,7 +9,7 @@
             <div class="buttons">
                 @auth
                     <a href="{{ url('/home') }}" class="button is-info">
-                        Home
+                        My Page
                     </a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
