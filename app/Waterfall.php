@@ -6,11 +6,15 @@ use Illuminate\Support\Collection;
 
 class Waterfall extends Model
 {
-	public $data;
+	public $columns;
 
-    public function __construct(Collection $items)
+    public function __construct(Collection $images, $num_cols)
     {
-    	$this->data = $items;
+    	$images = $images->reverse();
+
+        $this->columns = $images->mapToGroups( function($item, $key) use ($num_cols) {
+            return [ $key % $num_cols => $item ];
+        });
     }
 }
 

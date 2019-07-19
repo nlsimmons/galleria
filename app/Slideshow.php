@@ -4,32 +4,52 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * Wrapper for Collection class
+ */
 class Slideshow extends Model
 {
-	public $data;
+	public $slides;
 
-    public function __construct(Collection $items, $allow_add=true)
+    public function get()
     {
-    	if($allow_add)
-    	{
-    		$items->push( new class { public $id = 'add'; } );
-    	}
+        return $this->slides;
+    }
 
-        $slides = [];
-        $next_keys = $items->pluck('id');
-        $prev_keys = $items->pluck('id');
-        $next_keys = $next_keys->push( $next_keys->shift() )->toArray();
-        $prev_keys = $prev_keys->prepend( $prev_keys->pop() )->toArray();
-
-        $i = 0;
+    public function __construct(Collection $items, $allow_add=false)
+    {
         foreach($items->all() as $item)
         {
-            $item->next = $next_keys[$i];
-            $item->previous = $prev_keys[$i];
-            $i++;
+            $this->slides[] = new Slide( $item );
         }
 
-    	$this->data = $items;
+        if($allow_add)
+        {
+            $this->slides[] = new Slide('add');
+        }
+
+        $this->slides = collect($this->slides);
+        $this->assignOrder();
+    }
+
+    protected function assignOrder()
+    {
+        foreach($this->slides as $i => $v)
+        {
+            $this->slides[$i]->previous = $this->id_of($i - 1);
+            $this->slides[$i]->next = $this->id_of($i + 1);
+        }
+    }
+
+    protected function id_of($i)
+    {
+        if( $i < 0 )
+            return $this->slides->last()->id();
+
+        if( $i >= $this->slides->count() )
+            return $this->slides->first()->id();
+
+        return $this->slides[$i]->id();
     }
 }
 

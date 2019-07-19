@@ -1,3 +1,156 @@
+@mixin fadeout-animation() {
+  	$name: fadeout-#{unique-id()};
+
+  	@-webkit-keyframes #{$name} {
+    	from { opacity: 1 } to { opacity: 0 };
+  	}
+  	@keyframes #{$name} {
+    	from { opacity: 1 } to { opacity: 0 };
+  	}
+  	-webkit-animation: $name 2s 1s forwards;
+  			animation: $name 2s 1s forwards;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+html, body {
+	height: 100%;
+}
+
+.navbar {
+	.button {
+		min-width: 85px;
+	}
+
+	.navbar-item:last-of-type {
+		padding-right: 0;
+	}
+}
+
+.buttons {
+	justify-content: flex-end;
+
+	.button:not(.is-fullwidth) {
+		margin-right: 0.5rem;
+	}
+}
+
+.items-centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button-bare {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	/*& > * {
+		background: white;
+		border-radius: 100%;
+	}*/
+}
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+}
+
+.albumview-indicator {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	bottom: -5px;
+	background: $info;
+	transform: rotate(45deg);
+}
+
+.button-delete-album {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	background: white;
+	border-radius: 100%;
+	height: 20px;
+	width: 20px;
+	opacity: 0;
+}
+
+.carousel-slide:hover {
+	.button-delete-album {
+		opacity: 1;
+	}
+}
+
+#album-carousel {
+	&, & + * {
+		padding: 15px;
+		position: relative;
+		top: 0;
+		transition: top 0.5s;
+	}
+
+	&.inactive,
+	&.inactive + * {
+		top: -180px;
+	}
+
+	#toggle-album-carousel {
+		position: absolute;
+        right: 30px;
+        bottom: -30px;
+        color: black;
+        background: $info;
+        padding: 5px;
+        border-radius: 5px;
+        z-index: 5;
+	}
+
+	.carousel {
+		height: 150px;
+	}
+}
+
+.notification-container {
+	position: fixed;
+	bottom: 100px;
+	width: 100%;
+	justify-content: center;
+
+	.notification {
+		border-radius: 10px;
+
+		&.fadeout {
+			@include fadeout-animation();
+		}
+	}
+}
+
+.hidden {
+	width: 0;
+	height: 0;
+}
+.invisible {
+	opacity: 0;
+}
+.disabled {
+	display: none;
+}
+
+:focus {
+	outline: none;
+}
+
+.has-pointer {
+	cursor: pointer;
+}
+
 .add-photo-btn {
     font-size: 10em;
     border: 5px dotted #4a4a4a;
@@ -10,6 +163,7 @@
 	align-items: center;
 	cursor: pointer;
 	transition: all 0.5s ease;
+	margin: auto;
 }
 
 .add-photo-btn:hover {
@@ -18,8 +172,7 @@
 	transition: all 0.5s ease;
 }
 
-.add-photo-btn input[type=file].add-photo-input {
-	cursor: pointer;
+input[type=file].add-photo-input {
 	opacity: 0;
 	height: 0;
 	width: 0;
@@ -29,15 +182,67 @@ img.slide-image {
 	max-height: 500px;
 }
 
-.carousel-slide {
-	display: flex;
-	flex-direction: column;
-}
-
-.carousel-slide .carousel-slide-control {
-	font-size: 1.5em;
-}
-
 .button.button-no-border {
 	border: none;
+}
+
+.navbar.is-fixed-top {
+	z-index: 99999
+}
+
+.modal.active {
+    display: block;
+    z-index: 100
+}
+
+.modal .modal-card {
+    top: 30vh;
+}
+
+.expanded-image-container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    .expanded-image {
+		max-width: 80vw;
+		max-height: 80vh;
+		z-index: 999;
+    }
+}
+
+.modal .expanded-image {
+	box-shadow: 0 0 50px 30px rgba(10, 10, 10);
+}
+
+i.fas.cs,
+i.far.cs {
+	color: white;
+    background: #363636;
+    padding: .5em;
+    border-radius: 100%;
+    font-size: 50%;
+    align-self: center;
+    width: 2em;
+    height: 2em;
+    display: flex;
+}
+
+i.fas.cs-edit-circle:before {
+    content: "\F044";
+}
+
+i.fas.cs-tags:before {
+    content: "\F02C";
+}
+
+i.far.cs-album:before,
+i.fas.cs-album:before {
+	content: "\F302";
+}
+
+img.display_image {
+	cursor: pointer;
 }

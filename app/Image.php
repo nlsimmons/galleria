@@ -2,40 +2,89 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use \Illuminate\Http\UploadedFile;
-use ImageManager;
+use Illuminate\Http\UploadedFile;
+use Intervention\Image\ImageManagerStatic as ImageManager;
+
+ImageManager::configure(array('driver' => 'imagick'));
 
 class Image extends Model
 {
-	private static $display_size = 500;
-	private static $thumb_size = 100;
-
-    public static function upload($file, $owner_id)
+    public function check($length=0)
     {
-    	$name = md5($file);
-        $img = ImageManager::make($file);
+        $c = md5($this->updated_at);
 
-        Storage::put(
-            $main_img = 'public/images/' . $name . '.jpg',
-            $img->encode('jpg')
-        );
-        Storage::put(
-            $display_img = 'public/images/' . $name . '_display.jpg',
-            $img->widen( self::$display_size )->encode('jpg')
-        );
-        Storage::put(
-            $thumb_img = 'public/images/' . $name . '_thumb.jpg',
-            $img->widen( self::$thumb_size )->encode('jpg')
-        );
+        $l = !$length ? strlen($c) : $length;
+        return substr($c, 0, $l);
+    }
+
+    public function uri($size=0)
+    {
+        $slug = \Str::slug( $this->title ?: $this->hash );
+        $s = $size != 0 ? '/' . $size : '';
+        return '/public/images/' . $this->id . '-' . $slug . $this->check(2) . $s;
+    }
+
+    public function file()
+    {
+        return storage_path('app/public/images/') . $this->hash;
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function albums()
+    {
+        return $this->belongsToMany('App\Album');
+    }
+
+    public function download_link()
+    {
+        return '/download/image/' . pathinfo($this->url, PATHINFO_FILENAME);
+    }
+
+    public function album_link()
+    {
+        $album = $this->albums->first();
+        return '/album/' . $album->id;
+    }
+
+    public static function upload($file, $owner_id, $album=null)
+    {
+        $img = ImageManager::make($file)->orientate();
+        $hash = md5($file);
 
         $new = new self;
-        $new->url = $main_img;
-        $new->display_url = $display_img;
-        $new->thumbnail_url = $thumb_img;
-        $new->owner = $owner_id;
+        $new->owner_id = $owner_id;
+
+        Storage::put(
+            'public/images/' . $hash,
+            $img->encode('jpg')
+        );
+        $new->hash = $hash;
+
+        if(!empty($album))
+        {
+            Album::find($album)->images()->save($new);
+        }
 
         return $new;
+    }
+
+    public static function rotate($id, $dir)
+    {
+        $image = self::find($id);
+        $img = ImageManager::make($image->file())->rotate($dir);
+
+        Storage::put(
+            'public/images/' . $image->hash,
+            $img->encode('jpg')
+        );
+
+        $image->touch();
     }
 
     public static function destroy($id)
@@ -44,13 +93,9 @@ class Image extends Model
 
         if($image)
         {
-            Storage::delete([
-                $image->url,
-                $image->display_url,
-                $image->thumbnail_url
-            ]);
+            parent::destroy($id);
 
-            return parent::destroy($id);
+            Storage::delete($image->url);
         }
     }
 }

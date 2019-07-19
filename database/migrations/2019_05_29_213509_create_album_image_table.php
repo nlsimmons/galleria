@@ -19,11 +19,11 @@ class CreateAlbumImageTable extends Migration
             $table->unsignedBigInteger('image_id');
 
             $table->foreign('album_id')
-                ->references('id')
-                ->on('albums');
+                ->references('id')->on('albums')
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('image_id')
-                ->references('id')
-                ->on('images');
+                ->references('id')->on('images')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

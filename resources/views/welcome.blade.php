@@ -2,42 +2,36 @@
 
 @section('content')
 
+<!--
+	Tags at top of screen, filter by that
+-->
+
 <section class="section">
+    <div class="container-fluid">
+        <div id="welcome-waterfall" class="waterfall">
 
-	<div class="container-fluid">
-        @component('components.waterfall', [
-            'id' => 'carousel-photos',
-            'slide_columns' => $slide_columns
-        ])
-        @endcomponent
+            @foreach($images->columns as $column)
 
+                <div class="waterfall-column">
+
+                    @foreach($column as $image)
+
+                        <div class="waterfall-image">
+                            <div class="image-wrapper">
+                                <a href="{{ url( $image->album_link() ) }}" target="_blank">
+                                    <img src="{{ asset($image->uri(500) ?? '') }}" title="{{ $image->title ?? 'Untitled Image' }}" class="width-{{ $images->columns->count() }}-cols">
+                                </a>
+                            </div>
+
+                        </div>
+
+                    @endforeach
+
+                </div>
+            @endforeach
+
+        </div>
     </div>
-
-</section>
-
-<section class="section">
-
-	<ul class="container">
-		<h3 class="title">Todo</h3>
-		<li>Pick a domain</li>
-		<li>&nbsp;</li>
-		<li>Buttons:</li>
-		<li>&nbsp;</li>
-		<li>Delete</li>
-		<li>Download</li>
-		<li>Move to Album</li>
-		<li>Edit</li>
-		<li>Make Private/Public</li>
-		<li>Share</li>
-		<li>&nbsp;</li>
-		<li>Clicking on picture expands it to fill screen</li>
-		<li>Fillable title over slide</li>
-		<li>Mouseover shows fillable description</li>
-		<li>Host on heroku</li>
-		<li>Loading wheel</li>
-		<li>Prevent reupload on refresh</li>
-	</ul>
-
 </section>
 
 @endsection

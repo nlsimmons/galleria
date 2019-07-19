@@ -17,17 +17,15 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('owner');
-            $table->string('url');
-            $table->string('display_url');
-            $table->string('thumbnail_url');
+            $table->unsignedBigInteger('owner_id');
+            $table->string('hash')->unique();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('location')->nullable(); // Coordinates stored as a string
             $table->boolean('hidden')->default(false);
             $table->timestamps();
 
-            $table->foreign('owner')
+            $table->foreign('owner_id')
                 ->references('id')
                 ->on('users');
         });
@@ -42,7 +40,7 @@ class CreateImagesTable extends Migration
     {
         array_map(
             'unlink',
-            glob(storage_path('app\\public\\images\\*'))
+            glob(storage_path('app/public/images/*'))
         );
 
         Schema::dropIfExists('images');
