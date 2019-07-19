@@ -64,7 +64,7 @@ class PageController extends Controller
                 ->random( min(50, $welcome_images->count()) )->shuffle();
         }
 
-        $images = new Waterfall( $welcome_images, 5 );
+        $images = new Waterfall( $welcome_images, 3 );
 
         return view('welcome')
             ->with( compact('images') );
