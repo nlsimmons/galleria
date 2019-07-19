@@ -15,10 +15,36 @@ ImageManager::configure(array('driver' => 'imagick'));
 
 class ImageController extends Controller
 {
-    public function retrieve($filename, $size=0)
+    public function welcomeImages(Request $request)
     {
-        $id = explode('-', $filename)[0];
-        $image = Image::findOrFail($id);
+        // $request->num_columns
+        $size = $request->size;
+
+        // album_link
+        // uri
+
+        $welcome_images = Image::all();
+        if( $welcome_images->count() )
+        {
+            $welcome_images = $welcome_images
+                ->random( min(50, $welcome_images->count()) )->shuffle();
+            $welcome_images->each(function($img) use ($size) {
+                $img->image_url = $img->uri($size);
+            });
+        }
+
+        return $welcome_images;
+
+        $images = new Waterfall( $welcome_images, 3 );
+
+        return view('welcome')
+            ->with( compact('images') );
+    }
+
+    public function retrieve($string, $size=0)
+    {
+        $hash = substr($string, 0, -2);
+        $image = Image::where('hash', '=', $hash)->firstOrFail();
         $in_image = ImageManager::make( $image->file() );
 
         if($size)
@@ -31,7 +57,7 @@ class ImageController extends Controller
 
         $response = Response::make($in_image->encode('jpg'));
         $response->header('ETag', $image->check());
-        $response->header('Cache-Control', 'public, max-age=604800');
+        $response->header('Cache-Control', 'public, max-age=31536000');
         $response->header('Content-Type', 'image/jpg');
         return $response;
     }
