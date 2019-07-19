@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
 	        'email_verified_at' => now(),
 	        'password' => Hash::make('password'),
 	        'remember_token' => Str::random(10),
+            'api_token' => Str::random(60),
     	]);
         App\User::create([
             'name' => 'Bob2',
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
+            'api_token' => Str::random(60),
         ]);
 
         factory(App\User::class, 3)->create();

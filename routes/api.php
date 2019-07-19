@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', 'UserController@get');
+Route::middleware('auth:api')->group(function(){
+	Route::get('/user', 'UserController@get');
+	Route::get('/images/home', 'ImageController@home');
 
-Route::get('/welcome_images', 'ImageController@welcomeImages');
+	Route::delete('/images/{id}', 'ImageController@delete');
+});
+
+Route::get('/images/welcome', 'ImageController@welcome');

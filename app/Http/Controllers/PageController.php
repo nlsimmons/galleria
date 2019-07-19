@@ -35,7 +35,7 @@ class PageController extends Controller
     {
     	if(!Auth::check())
     	{
-    		return redirect()->route('welcome');
+    		return redirect()->route('login');
     	}
 
         $user = Auth::user();
@@ -47,27 +47,15 @@ class PageController extends Controller
 
         $album_slides = new Slideshow( $user->my_albums() );
 
-        $home_images = $user->images
-            ->random( min(50, $user->images->count()) )->shuffle();
-        $images = new Waterfall( $home_images, 3 );
+        $token = $user->api_token;
 
 		return view('home')
-            ->with( compact('album_slides', 'images') );
+            ->with( compact('album_slides', 'token') );
     }
 
     public function welcome()
     {
-        $welcome_images = Image::all();
-        if( $welcome_images->count() )
-        {
-            $welcome_images = $welcome_images
-                ->random( min(50, $welcome_images->count()) )->shuffle();
-        }
-
-        $images = new Waterfall( $welcome_images, 3 );
-
-        return view('welcome')
-            ->with( compact('images') );
+        return view('welcome');
     }
 
     public function album($album_id)

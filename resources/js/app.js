@@ -13,12 +13,19 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.component( 'Waterfall', require('./components/Waterfall.vue').default );
 
-Vue.component( 'waterfall', require('./components/Waterfall.vue').default );
+if( fn.qs('#welcome') )
+{
+	const waterfall = new Vue({
+		el: '#welcome',
+	});
+}
+if( fn.qs('#user-home') )
+{
+	const waterfall = new Vue({
+		el: '#user-home',
+	});
+}
 
-const waterfall = new Vue({
-    el: '#welcome',
-});
 

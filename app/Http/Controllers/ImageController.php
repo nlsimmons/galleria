@@ -15,13 +15,23 @@ ImageManager::configure(array('driver' => 'imagick'));
 
 class ImageController extends Controller
 {
-    public function welcomeImages(Request $request)
+    public function home(Request $request)
     {
-        // $request->num_columns
         $size = $request->size;
 
-        // album_link
-        // uri
+        $user = Auth::user();
+
+        $home_images = $user->images->sortByDesc('created_at')->take(50);
+        $home_images = $home_images->each(function($img) use ($size) {
+            $img->image_url = $img->uri($size);
+        });
+
+        return $home_images->values();
+    }
+
+    public function welcome(Request $request)
+    {
+        $size = $request->size;
 
         $welcome_images = Image::all();
         if( $welcome_images->count() )
@@ -33,12 +43,7 @@ class ImageController extends Controller
             });
         }
 
-        return $welcome_images;
-
-        $images = new Waterfall( $welcome_images, 3 );
-
-        return view('welcome')
-            ->with( compact('images') );
+        return $welcome_images->values();
     }
 
     public function retrieve($string, $size=0)
@@ -76,6 +81,17 @@ class ImageController extends Controller
 		return response()->download( storage_path('app/public/images/' . $file . '.jpg') );
 	}
 
+    public function delete(Request $request, $id)
+    {
+        try {
+            Image::destroy($id);
+        } catch( \Exception $e ) {
+            throw $e;
+        }
+
+        return 'success';
+    }
+
     public function action(Request $request, $id)
     {
         $image = Image::find($id);
@@ -87,9 +103,6 @@ class ImageController extends Controller
 
         switch($request->action)
         {
-            case 'delete':
-                Image::destroy($id);
-                break;
             case 'rotate-left':
                 Image::rotate($id, 90);
                 break;

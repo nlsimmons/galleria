@@ -6,9 +6,9 @@
 	Tags at top of screen, filter by that
 -->
 
-<section class="section" id="welcome">
-    <div class="container-fluid">
-        <waterfall></waterfall>
+<section class="section">
+    <div class="container-fluid" id="welcome">
+        <Waterfall src="welcome"></Waterfall>
     </div>
 </section>
 
