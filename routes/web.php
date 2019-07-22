@@ -37,6 +37,7 @@ Route::put('/album/{id}/title', 'AlbumController@editTitle');
 // Route::post('/upload/album/{id}', 'AlbumController@upload');
 
 Route::get('/public/images/{filename}/{size?}', 'ImageController@retrieve');
+Route::get('/upload/images/tmp/{ref}', 'ImageController@retrievePreview');
 
 Route::get('/download/image/{file}', 'ImageController@getFile');
 

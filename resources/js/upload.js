@@ -168,68 +168,6 @@ function can_drag_upload() {
     }()
 }
 
-function loadFiles(files) {
-	for(let file of files)
-	{
-		let container = document.createElement('div')
-		container.classList.add('img-preview-container')
-		fn.qs('#uploads__staging #upload-images').append(container)
-
-		EXIF.getData(file, function() {
-			let orientation = this.exifdata.Orientation
-			let fr = new FileReader();
-
-			fr.onload = function() {
-	    		resetOrientation(this.result, orientation, appendImage, container)
-	    	}
-
-		    fr.readAsDataURL(file);
-		})
-	}
-}
-
-// Taken from StackOverflow
-function resetOrientation(srcBase64, srcOrientation, callback, container) {
-  	var img = new Image();
-
-  	img.onload = function() {
-    	var width = img.width,
-        	height = img.height,
-        	canvas = document.createElement('canvas'),
-        	ctx = canvas.getContext("2d");
-
-	    // set proper canvas dimensions before transform & export
-	    if (4 < srcOrientation && srcOrientation < 9) {
-	      	canvas.width = height;
-	      	canvas.height = width;
-	    }
-	    else
-	    {
-	      	canvas.width = width;
-	      	canvas.height = height;
-	    }
-
-	    // transform context before drawing image
-	    switch (srcOrientation) {
-			case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-			case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
-			case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
-			case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-			case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
-			case 7: ctx.transform(0, -1, -1, 0, height, width); break;
-			case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-			default: break;
-	    }
-
-	    // draw image
-	    ctx.drawImage(img, 0, 0);
-
-	    // export base64
-	    callback(canvas.toDataURL(), container);
-  	};
-
-  	img.src = srcBase64;
-};
 
 function appendImage(data, container) {
 	let html =

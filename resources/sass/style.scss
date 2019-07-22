@@ -43,6 +43,39 @@ html, body {
 	align-items: center;
 }
 
+.user-panel {
+	position: fixed;
+	bottom: 60px;
+	width: 100%;
+	overflow: visible;
+
+	.upload .image-preview {
+		display: flex;
+		flex-direction: row;
+		background: white;
+		padding: 10px;
+		align-items: center;
+		border-radius: 30px;
+
+		.image-wrapper {
+			padding: 7px;
+			height: 120px;
+
+			img {
+				max-height: 100%;
+			}
+		}
+
+		.buttons {
+			display: flex;
+            flex-direction: column;
+            font-size: 1.8em;
+            height: 100px;
+            justify-content: space-around;
+		}
+	}
+}
+
 .button-bare {
 	margin: 0;
 	padding: 0;
@@ -50,11 +83,6 @@ html, body {
 	background: none;
 	border: none;
 	cursor: pointer;
-
-	/*& > * {
-		background: white;
-		border-radius: 100%;
-	}*/
 }
 
 .navbar {
@@ -145,6 +173,20 @@ html, body {
 
 :focus {
 	outline: none;
+}
+
+.panel-upload {
+	position: fixed;
+	bottom: 0;
+
+    #add-image-button {
+    	position: absolute;
+		bottom: -100px;
+		right: -25px;
+		font-size: 5em;
+		width: 100%;
+		height: 100%;
+    }
 }
 
 .has-pointer {

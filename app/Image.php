@@ -52,13 +52,25 @@ class Image extends Model
         return '/album/' . $album->id;
     }
 
-    public static function upload($file, $owner_id, $album=null)
+    public static function uploadPreview($file)
+    {
+        $img = ImageManager::make($file)->orientate();
+        $hash = md5($file);
+
+        Storage::put(
+            '/tmp/images/' . $hash,
+            $img->encode('jpg')
+        );
+        return $hash;
+    }
+
+    public static function upload($file, $owner, $album=null)
     {
         $img = ImageManager::make($file)->orientate();
         $hash = md5($file);
 
         $new = new self;
-        $new->owner_id = $owner_id;
+        $new->owner_id = $owner;
 
         Storage::put(
             'public/images/' . $hash,

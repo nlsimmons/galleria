@@ -67,6 +67,22 @@ class ImageController extends Controller
         return $response;
     }
 
+    public function retrievePreview($ref)
+    {
+        $file = storage_path('app/tmp/images/') . $ref;
+
+        $image = ImageManager::make($file);
+
+        $image->resize(null, 120, function($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
+        $response = Response::make($image->encode('jpg'));
+        $response->header('Content-Type', 'image/jpg');
+        return $response;
+    }
+
     public function editTitle(Request $request, $id)
     {
     	$image = Image::find($id);
@@ -115,6 +131,14 @@ class ImageController extends Controller
             return redirect()->route('album', ['id' => $request->album ] );
         else
             return redirect()->route('home');
+    }
+
+    public function preupload(Request $request)
+    {
+        $file = $request->file('image');
+        $image_ref = Image::uploadPreview($file);
+        return ['src' => $image_ref];
+        // return $this->retrievePreview($image_ref);
     }
 
     public function upload(Request $request)

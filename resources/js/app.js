@@ -14,18 +14,14 @@ window.Vue = require('vue');
  */
 
 Vue.component( 'Waterfall', require('./components/Waterfall.vue').default );
+Vue.component( 'Panel', require('./components/Panel.vue').default );
 
-if( fn.qs('#welcome') )
-{
+if( fn.qs('#welcome') ) {
 	const waterfall = new Vue({
 		el: '#welcome',
 	});
-}
-if( fn.qs('#user-home') )
-{
+} else if( fn.qs('#user-home') ) {
 	const waterfall = new Vue({
 		el: '#user-home',
 	});
 }
-
-

@@ -1,19 +1,22 @@
 <template>
-    <div class="waterfall">
-        <div class="waterfall-column" v-for="column in columns">
-            <div class="waterfall-image" v-for="image in column">
-                <div class="image-wrapper">
-                <!-- <a href="{{ url( $image->album_link() ) }}" target="_blank"> -->
-                    <img :src="image.image_url" :title="image.title" :class="columnClass">
-                    <Buttons v-if="typeof token != 'undefined'"
-                        :image_id="image.id"
-                        :token="token"
-                        v-on:reload="fetchImages"
-                    ></Buttons>
-                <!-- </a> -->
+    <div class="wrapper">
+        <div class="waterfall">
+            <div class="waterfall-column" v-for="column in columns">
+                <div class="waterfall-image" v-for="image in column">
+                    <div class="image-wrapper">
+                    <!-- <a href="{{ url( $image->album_link() ) }}" target="_blank"> -->
+                        <img :src="image.image_url" :title="image.title" :class="columnClass">
+                        <Buttons v-if="typeof token != 'undefined'"
+                            :image_id="image.id"
+                            :token="token"
+                            v-on:reload="fetchImages"
+                        ></Buttons>
+                    <!-- </a> -->
+                    </div>
                 </div>
             </div>
         </div>
+        <Panel v-if="has_panel" :token="token"></Panel>
     </div>
 </template>
 
@@ -34,7 +37,7 @@ export default {
         Buttons
     },
     props: [
-        'src', 'token'
+        'src', 'token', 'has_panel'
     ],
     computed: {
         columnClass: function() {
