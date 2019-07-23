@@ -43,11 +43,12 @@ export default {
                 let that = this
                 fn.request('delete', `/api/images/${this.image_id}?api_token=${this.token}`)
                     .then( res => {
-                        if(res == 'success')
-                            that.$emit('reload')
-                    })
+                        that.$emit('reload')
+                        fn.notify('success', 'The image was deleted.')
+                    } )
                     .catch( err => {
-                        console.log(err)
+                        fn.notify('error', 'An error occurred.')
+                        console.log( JSON.parse(err.response) )
                     })
             }
         },

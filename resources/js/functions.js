@@ -20,16 +20,16 @@ export function toggle(selector) {
 	})
 }
 
-export function addEvent(el, type, handler) {
+export function addEvent(el, trigger, handler) {
 	if(!el) return;
 
 	if(el instanceof NodeList)
 	{
-		el.forEach( e => e.addEventListener(type, handler) )
+		el.forEach( e => e.addEventListener(trigger, handler) )
 	}
 	else
 	{
-		el.addEventListener(type, handler);
+		el.addEventListener(trigger, handler);
 	}
 }
 
@@ -85,9 +85,9 @@ export function request(method, url, data={}) {
 	    xhr.open(method, url);
 	    xhr.onload = () => {
 	        if (xhr.status >= 200 && xhr.status < 300)
-	        	resolve(xhr.response);
+	        	resolve(xhr);
 	    	else
-	    		reject(xhr.status + ' ' + xhr.statusText);
+	    		reject(xhr);
 	    }
 	    xhr.setRequestHeader('X-CSRF-TOKEN', get_csrf());
 	    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -105,17 +105,21 @@ export function request(method, url, data={}) {
 }
 
 export function notify(type, message) {
-	let note_window = qs('.notification-container')
 
+	let note
 	if( type == 'success' )
-	{
-		note_window.innerHTML = `<div class="notification is-success fadeout">
-			${message}
-		</div>`
-	}
-	if( type == 'error' ) {
-		note_window.innerHTML = `<div class="notification is-danger fadeout">
-			${message}
-		</div>`
-	}
+		note = qs('.notification.is-success')
+	if( type == 'error' )
+		note = qs('.notification.is-danger')
+
+	note.classList.add('fadeout')
+	note.innerText = message
 }
+listen(
+	'.notification',
+	'animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd',
+	function(e) {
+		e.target.classList.remove('fadeout')
+		e.target.innerText = ''
+	}
+)

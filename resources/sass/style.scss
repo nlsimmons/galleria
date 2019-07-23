@@ -46,7 +46,8 @@ html, body {
 .user-panel {
 	position: fixed;
 	bottom: 60px;
-	width: 100%;
+	right: 0;
+	left: 0;
 	overflow: visible;
 
 	.upload .image-preview {
@@ -69,9 +70,11 @@ html, body {
 		.buttons {
 			display: flex;
             flex-direction: column;
+            justify-content: space-around;
             font-size: 1.8em;
             height: 100px;
-            justify-content: space-around;
+            margin: 0;
+            cursor: pointer;
 		}
 	}
 }
@@ -153,8 +156,10 @@ html, body {
 
 	.notification {
 		border-radius: 10px;
+		display: none;
 
 		&.fadeout {
+			display: block;
 			@include fadeout-animation();
 		}
 	}

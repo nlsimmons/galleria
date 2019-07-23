@@ -138,7 +138,24 @@ class ImageController extends Controller
         $file = $request->file('image');
         $image_ref = Image::uploadPreview($file);
         return ['src' => $image_ref];
-        // return $this->retrievePreview($image_ref);
+    }
+
+    public function confirm($ref)
+    {
+        Storage::move( 'tmp/images/' . $ref, 'public/images/' . $ref );
+
+        $new = new Image;
+        $new->hash = $ref;
+        $new->owner_id = Auth::id();
+
+        /*if(!empty($album))
+        {
+            Album::find($album)->images()->save($new);
+        }*/
+
+        $new->save();
+
+        return $new;
     }
 
     public function upload(Request $request)

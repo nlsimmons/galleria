@@ -18,6 +18,7 @@ Route::middleware('auth:api')->group(function(){
 	Route::get('/images/home', 'ImageController@home');
 
 	Route::post('/images/preupload', 'ImageController@preupload');
+	Route::post('/images/confirm/{image}', 'ImageController@confirm');
 
 	Route::delete('/images/{id}', 'ImageController@delete');
 });

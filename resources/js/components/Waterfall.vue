@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <Panel v-if="has_panel" :token="token"></Panel>
+        <Panel v-if="has_panel" :token="token" v-on:reload="fetchImages"></Panel>
     </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
 
             fn.request('get', uri)
                 .then( res => {
-                    return JSON.parse(res)
+                    return JSON.parse(res.response)
                 } )
                 .then( images => {
                     this.processImages(images)
