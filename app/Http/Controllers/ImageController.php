@@ -102,11 +102,8 @@ class ImageController extends Controller
 
     public function editTitle(Request $request, $id)
     {
-    	$image = Image::find($id);
-    	// Do some validation
-
-    	$image->title = $request->new_title;
-    	$image->save(['timestamps' => false]);
+        Image::where('id', $id)
+            ->update(['title' => $request->new_title]);
     }
 
     public function getFile($file)
