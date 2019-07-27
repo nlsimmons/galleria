@@ -2,27 +2,24 @@
     <div class="wrapper">
         <div class="waterfall">
             <div class="waterfall-column" v-for="column in columns">
-                <div class="waterfall-image" v-for="image in column">
-                    <div class="image-wrapper">
-                    <!-- <a href="{{ url( $image->album_link() ) }}" target="_blank"> -->
-                        <img :src="image.image_url" :title="image.title" :class="columnClass">
-                        <Buttons v-if="typeof token != 'undefined'"
-                            :image_id="image.id"
-                            :token="token"
-                            v-on:reload="fetchImages"
-                        ></Buttons>
-                    <!-- </a> -->
-                    </div>
-                </div>
+                <WaterfallImage v-for="image in column" :image="image" :columnClass="columnClass"
+                    v-bind:key="image.id">
+                    <Buttons v-if="typeof token != 'undefined'"
+                        :image_id="image.id"
+                        :token="token"
+                        v-on:reload="fetchImages"
+                    ></Buttons>
+                </WaterfallImage>
             </div>
         </div>
-        <Panel v-if="has_panel" :token="token" v-on:reload="fetchImages"></Panel>
+        <Panel v-if="has_panel" :token="token" :album="album" v-on:reload="fetchImages"></Panel>
     </div>
 </template>
 
 <script>
 const fn = require('../functions.js')
 import Buttons from './Buttons.vue'
+import WaterfallImage from './WaterfallImage.vue'
 // Need an on-resize
 
 export default {
@@ -34,10 +31,10 @@ export default {
         }
     },
     components: {
-        Buttons
+        Buttons, WaterfallImage
     },
     props: [
-        'src', 'token', 'has_panel'
+        'src', 'token', 'has_panel', 'album'
     ],
     computed: {
         columnClass: function() {
@@ -56,11 +53,12 @@ export default {
             else
                 this.num_columns = 3
 
-            let uri = `/api/images/${this.src}?size=500`
+            let params = {}
+            let uri = `/api/images/${this.src}`
             if( typeof this.token != 'undefined' )
-                uri += '&api_token=' + this.token
+                params.api_token = this.token
 
-            fn.request('get', uri)
+            fn.request('get', uri, params)
                 .then( res => {
                     return JSON.parse(res.response)
                 } )

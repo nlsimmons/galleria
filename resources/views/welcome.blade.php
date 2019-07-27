@@ -7,7 +7,7 @@
 -->
 
 <section class="section">
-    <div class="container-fluid" id="welcome">
+    <div class="container-fluid" id="waterfall">
         <Waterfall src="welcome"></Waterfall>
     </div>
 </section>

@@ -5,6 +5,7 @@
     </a>
     <form class="items-centered button-delete-album" action="/album/{{ $slide->id }}" method="post">
     	@csrf
+        @method('delete')
     	<button type="submit" class="button-bare items-centered" title="Delete" name="action" value="delete">
     		<i class="fas fa-times-circle"></i>
     	</button>

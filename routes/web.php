@@ -22,10 +22,10 @@ Route::get('/home', 'PageController@home')->name('home');
 // Route::post('/image/{id}', 'ImageController@action');
 // Route::put('/image/{id}/title', 'ImageController@editTitle');
 
-// Route::post('/album/new', 'AlbumController@new');
 Route::get('/album/{id}', 'PageController@album')->name('album');
-// Route::post('/album/{id}', 'AlbumController@action');
-// Route::post('/album/{id}/', 'AlbumController@action');
+Route::post('/album/new', 'AlbumController@new');
+Route::delete('/album/{id}', 'AlbumController@delete');
+
 Route::post('/upload/album/{id}/image', 'AlbumController@upload');
 Route::post('/upload/image', 'ImageController@upload');
 

@@ -18,6 +18,11 @@ class PageController extends Controller
         return view('phpinfo');
     }
 
+    public function welcome()
+    {
+        return view('welcome');
+    }
+
     public function default()
     {
         return redirect()->route('welcome');
@@ -46,37 +51,25 @@ class PageController extends Controller
         }
 
         $album_slides = new Slideshow( $user->my_albums() );
-
         $token = $user->api_token;
-
 		return view('home')
             ->with( compact('album_slides', 'token') );
     }
 
-    public function welcome()
-    {
-        return view('welcome');
-    }
-
     public function album($album_id)
     {
+        if(!Auth::check())
+        {
+            return redirect()->route('login');
+        }
+
         $album = Album::findOrFail($album_id);
         $user = Auth::user();
-        $owner = $album->owner;
-        $album_waterfall = new Waterfall( $album->images, 3 );
-
-        if($user && $user->id === $owner->id)
-        {
-            $album_slides = new Slideshow( $user->my_albums() );
-            $includes = compact('album_slides', 'album', 'album_waterfall');
-        }
-        else
-        {
-            $includes = compact('album', 'album_waterfall');
-        }
+        $album_slides = new Slideshow( $user->my_albums() );
+        $token = $user->api_token;
 
         return view('album')
-            ->with( $includes );
+            ->with( compact('album_slides', 'album_id', 'token') );
     }
 
     public function action(Request $request)

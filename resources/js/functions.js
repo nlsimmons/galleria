@@ -78,8 +78,15 @@ export function request(method, url, data={}) {
 	    switch(method = method.toUpperCase())
 	    {
 	    	case 'PUT':
-	    		method = 'POST';
-	    		data['_method'] = 'PUT';
+	    		method = 'POST'
+	    		data['_method'] = 'PUT'
+	    		break
+	    	case 'GET':
+	    		for(let p in data)
+	    		{
+	    			url += url.indexOf('?') === -1 ? '?' : '&'
+	    			url += `${p}=${data[p]}`
+	    		}
 	    }
 
 	    xhr.open(method, url);

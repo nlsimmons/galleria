@@ -13,12 +13,13 @@
         <div style="display: flex;
                     flex-direction: row;
                     justify-content: space-around;
-                    align-items: center">
+                    align-items: center;
+                    margin-top: 100px;">
             <div>
                 <form method="post" action="/album/new">
                     @csrf
 
-                    <button type="submit" class="button-bare" title="Create New Album">
+                    <button type="submit" title="Create New Album">
                         <p>Get started by creating a new album.</p>
                         <i class="far fa-images"></i>
                     </button>

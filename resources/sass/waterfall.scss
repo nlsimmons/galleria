@@ -46,32 +46,30 @@ body.prevent-scroll {
         flex-direction: column;
         margin: 0 4px;
 
-        .waterfall-image {
-            margin-bottom: 8px;
+        .image-control {
+            opacity: 0;
+            position: absolute;
+            bottom: 25px;
+
+            .button-wrapper {
+                display: flex;
+                background-color: lightgray;
+                font-size: 2rem;
+                width: 200px;
+                justify-content: space-evenly;
+                padding: 5px;
+                border-radius: 50px;
+            }
         }
 
-        .image-wrapper {
+        .waterfall-image {
             position: relative;
             display: flex;
             justify-content: center;
+            margin-bottom: 5px;
 
-            .image-control {
-                opacity: 0;
-                position: absolute;
-                bottom: 25px;
-
-                .button-wrapper {
-                    display: flex;
-                    background-color: lightgray;
-                    font-size: 2rem;
-                    width: 200px;
-                    justify-content: space-evenly;
-                    padding: 5px;
-                    border-radius: 50px;
-                }
-            }
-
-            &:hover .image-control {
+            &:hover .image-control,
+            .image-control.is-active {
                 opacity: 1;
             }
         }

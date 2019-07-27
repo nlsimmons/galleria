@@ -56,9 +56,11 @@ class AlbumController extends Controller
         return 'success';
     }
 
-    private function delete($id)
+    public function delete($id)
     {
         Album::destroy($id);
+
+        return redirect()->route('home');
     }
 
     public function action($album_id, Request $request)

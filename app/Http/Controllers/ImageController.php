@@ -29,6 +29,23 @@ class ImageController extends Controller
         return $home_images->values();
     }
 
+    public function album(Request $request, $album_id)
+    {
+        $size = $request->size;
+
+        $album = Album::find($album_id);
+
+        // dd($album);
+        // dd($album->images);
+
+        $album_images = $album->images->sortByDesc('created_at');
+        $album_images = $album_images->each(function($img) use ($size) {
+            $img->image_url = $img->uri($size);
+        });
+
+        return $album_images->values();
+    }
+
     public function welcome(Request $request)
     {
         $size = $request->size;
@@ -54,7 +71,7 @@ class ImageController extends Controller
 
         if($size)
         {
-            $in_image->resize(null, $size, function($constraint) {
+            $in_image->resize($size, null, function($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -140,13 +157,18 @@ class ImageController extends Controller
         return ['src' => $image_ref];
     }
 
-    public function confirm($ref)
+    public function confirm(Request $request, $ref)
     {
         Storage::move( 'tmp/images/' . $ref, 'public/images/' . $ref );
 
         $new = new Image;
         $new->hash = $ref;
         $new->owner_id = Auth::id();
+
+        if($request->album)
+        {
+            Album::find($request->album)->images()->save($new);
+        }
 
         /*if(!empty($album))
         {

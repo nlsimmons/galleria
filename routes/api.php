@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(function(){
 	Route::get('/user', 'UserController@get');
 	Route::get('/images/home', 'ImageController@home');
+	Route::get('/images/album/{album_id}', 'ImageController@album');
 
 	Route::post('/images/preupload', 'ImageController@preupload');
 	Route::post('/images/confirm/{image}', 'ImageController@confirm');

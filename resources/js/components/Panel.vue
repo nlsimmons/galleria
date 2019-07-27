@@ -33,7 +33,7 @@ export default {
         }
     },
     props: [
-        'token',
+        'token', 'album'
     ],
     computed: {
 
@@ -49,6 +49,7 @@ export default {
                     image: file,
                 })
                 .then( res => {
+                    console.log(res)
                     return JSON.parse(res.response)
                 })
                 .then( img => {
@@ -60,10 +61,16 @@ export default {
             }
         },
         upload() {
+            let params = { api_token: this.token }
+            if(this.album)
+            {
+                params.album = this.album
+            }
+
             let that = this
             for(let image of this.preview_images)
             {
-                fn.request('post', `/api/images/confirm/${image.src}`, {api_token: this.token})
+                fn.request('post', `/api/images/confirm/${image.src}`, params)
                     .then(res => {
                         that.$emit('reload')
                         fn.notify('success', 'Image(s) uploaded successfully.')

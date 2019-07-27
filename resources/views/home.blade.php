@@ -8,17 +8,9 @@
 @endcomponent
 
 <section class="section">
-    <div class="container-fluid" id="user-home">
-        <Waterfall src="home" token="{{ $token }}" has_panel="true"></Waterfall>
+    <div class="container-fluid" id="waterfall">
+        <Waterfall src="home" token="{{ $token }}" has_panel="true" />
     </div>
 </section>
-
-{{-- <Panel>
-	<social></social>
-
-	<notifications-whatever></notifications-whatever>
-
-	<upload></upload>
-</Panel> --}}
 
 @endsection
