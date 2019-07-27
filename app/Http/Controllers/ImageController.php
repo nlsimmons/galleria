@@ -105,8 +105,8 @@ class ImageController extends Controller
     	$image = Image::find($id);
     	// Do some validation
 
-    	$image->title = $request->value;
-    	$image->save();
+    	$image->title = $request->new_title;
+    	$image->save(['timestamps' => false]);
     }
 
     public function getFile($file)

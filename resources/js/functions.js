@@ -5,6 +5,17 @@ export function qsa(selector) {
 	return document.querySelectorAll(selector)
 }
 
+export function addClass(selector, className) {
+	qsa(selector).forEach( el => {
+		el.classList.add(className)
+	})
+}
+export function removeClass(selector, className) {
+	qsa(selector).forEach( el => {
+		el.classList.remove(className)
+	})
+}
+
 export function toggle(selector) {
 	qsa(selector).forEach( el => {
 		if( el.classList.contains('active') )

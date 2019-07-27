@@ -18,6 +18,8 @@ Route::middleware('auth:api')->group(function(){
 	Route::get('/images/home', 'ImageController@home');
 	Route::get('/images/album/{album_id}', 'ImageController@album');
 
+	Route::put('/images/{id}/title', 'ImageController@editTitle');
+
 	Route::post('/images/preupload', 'ImageController@preupload');
 	Route::post('/images/confirm/{image}', 'ImageController@confirm');
 

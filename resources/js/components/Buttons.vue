@@ -74,6 +74,13 @@ export default {
             //
         },
         openTagMenu: function() {
+            let close = false
+            if( fn.qs('#' + this.buttons_id).classList.contains('is-active') )
+                close = true
+
+            fn.removeClass('.is-active', 'is-active')
+            if(close) return
+
             fn.qs('#' + this.drop_id).classList.add('is-active')
             fn.qs('#' + this.buttons_id).classList.add('is-active')
         },

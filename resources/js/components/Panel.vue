@@ -49,7 +49,6 @@ export default {
                     image: file,
                 })
                 .then( res => {
-                    console.log(res)
                     return JSON.parse(res.response)
                 })
                 .then( img => {
