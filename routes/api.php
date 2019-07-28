@@ -20,7 +20,8 @@ Route::middleware('auth:api')->group(function(){
 
 	Route::put('/images/{id}/title', 'ImageController@editTitle');
 
-	Route::post('/images/preupload', 'ImageController@preupload');
+	Route::post('/images/upload', 'ImageController@upload');
+	Route::post('/images/uploaddirect', 'ImageController@uploadDirect');
 	Route::post('/images/confirm/{image}', 'ImageController@confirm');
 
 	Route::delete('/images/{id}', 'ImageController@delete');

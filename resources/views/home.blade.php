@@ -9,7 +9,7 @@
 
 <section class="section">
     <div class="container-fluid" id="waterfall">
-        <Waterfall src="home" token="{{ $token }}" has_panel="true" />
+        <Waterfall src="home" token="{{ $token }}" has_panel="true" editable="true" />
     </div>
 </section>
 

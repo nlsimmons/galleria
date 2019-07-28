@@ -9,9 +9,13 @@
             <div class="modal-content expanded-image-container">
                 <div class="image-title-wrapper">
                     <input v-if="editable" type="text" placeholder="Click to add a title to this image" :value="image.title" v-on:change="changeTitle($event)">
-                    <input v-else-if="image.title" type="text" :value="image.title">
+                    <input v-else-if="image.title" type="text" :value="image.title" readonly>
                 </div>
                 <img :src="expanded_url">
+                <div class="image-desc-wrapper">
+                    <textarea v-if="editable" placeholder="Click to add a description"></textarea>
+                    <!-- <p v-if="image.description">{{ image.description }}</p> -->
+                </div>
                 <button class="modal-close is-large" v-on:click="unexpand"></button>
             </div>
         </div>

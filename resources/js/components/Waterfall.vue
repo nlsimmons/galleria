@@ -2,8 +2,7 @@
     <div class="wrapper">
         <div class="waterfall">
             <div class="waterfall-column" v-for="column in columns">
-                <WaterfallImage v-for="image in column" :image="image" :columnClass="columnClass" v-bind:key="image.id"
-                    :token="token">
+                <WaterfallImage v-for="image in column" :image="image" :columnClass="columnClass" v-bind:key="image.id" :token="token" :editable="editable">
                     <Buttons v-if="typeof token != 'undefined'"
                         :image_id="image.id"
                         :token="token"
@@ -34,7 +33,7 @@ export default {
         Buttons, WaterfallImage
     },
     props: [
-        'src', 'token', 'has_panel', 'album'
+        'src', 'token', 'has_panel', 'album', 'editable'
     ],
     computed: {
         columnClass: function() {
