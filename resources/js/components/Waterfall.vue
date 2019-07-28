@@ -2,8 +2,8 @@
     <div class="wrapper">
         <div class="waterfall">
             <div class="waterfall-column" v-for="column in columns">
-                <WaterfallImage v-for="image in column" :image="image" :columnClass="columnClass" :token="token"
-                    v-bind:key="image.id">
+                <WaterfallImage v-for="image in column" :image="image" :columnClass="columnClass" v-bind:key="image.id"
+                    :token="token">
                     <Buttons v-if="typeof token != 'undefined'"
                         :image_id="image.id"
                         :token="token"

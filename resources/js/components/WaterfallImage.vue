@@ -8,9 +8,10 @@
             <div class="modal-background"></div>
             <div class="modal-content expanded-image-container">
                 <div class="image-title-wrapper">
-                    <input type="text" placeholder="Click to add a title to this image" :value="image.title" v-on:change="changeTitle($event)">
+                    <input v-if="editable" type="text" placeholder="Click to add a title to this image" :value="image.title" v-on:change="changeTitle($event)">
+                    <input v-else-if="image.title" type="text" :value="image.title">
                 </div>
-                <img :src="expanded_url" loading="eager">
+                <img :src="expanded_url">
                 <button class="modal-close is-large" v-on:click="unexpand"></button>
             </div>
         </div>
@@ -27,7 +28,15 @@ export default {
             expanded: false
         }
     },
-    props: ['image', 'columnClass', 'token'],
+    created() {
+        let that = this
+        window.addEventListener('keydown', e => {
+            if(that.expanded && e.code == 'Escape')
+                that.expanded = false
+
+        })
+    },
+    props: ['image', 'columnClass', 'editable', 'token'],
     computed: {
         url: function() {
             return this.image.image_url + '/650'
@@ -37,6 +46,10 @@ export default {
         }
     },
     methods: {
+        alert: function(e) {
+            console.log(e)
+            alert(e)
+        },
         expand: function() {
             this.expanded = true
         },
@@ -57,6 +70,9 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
+        },
+        thing: function(e) {
+            console.log(e)
         }
     },
 }
