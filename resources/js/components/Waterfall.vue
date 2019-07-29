@@ -19,18 +19,19 @@
 const fn = require('../functions.js')
 import Buttons from './Buttons.vue'
 import WaterfallImage from './WaterfallImage.vue'
+import Empty from './Empty.vue'
 // Need an on-resize
 
 export default {
     data() {
         return {
-            images: [],
             num_columns: 3,
             columns: [],
+            is_empty: false,
         }
     },
     components: {
-        Buttons, WaterfallImage
+        Buttons, WaterfallImage, Empty
     },
     props: [
         'src', 'token', 'has_panel', 'album', 'editable'
@@ -65,13 +66,14 @@ export default {
                     if(images.length)
                         this.processImages(images)
                     else
-                        window.location.reload()
+                        this.is_empty = true
                 } )
                 .catch( err => {
                     console.log(err)
                 } )
         },
         processImages(images) {
+            this.is_empty = false
             let n = 0
             let columns = []
             for( let i=0; i<this.num_columns; i++ )

@@ -3,33 +3,21 @@
 @section('content')
 
 <section class="section">
-    <div class="container" style="display: flex;
-                                  flex-direction: column;
-                                  text-align: center;">
-        <div style="margin: 50px 0;
-                    font-size: 1.5rem">
+    <div class="container flex-vertical">
+        <div class="empty-container-header">
             <p>Your gallery is empty.</p>
         </div>
-        <div style="display: flex;
-                    flex-direction: row;
-                    justify-content: space-around;
-                    align-items: baseline;
-                    flex-wrap: wrap;">
-            <form method="post" action="/album/new" style="width: 400px">
+        <div class="empty-container">
+            <form method="post" action="/album/new">
                 @csrf
                 <input type="hidden" id="api_token" value="{{ $token }}">
-                <button class="button flex-vertical" type="submit" title="Create New Album"
-                    style="font-size: 1em;
-                           padding: 50px 30px;
-                           width: 100%;">
+                <button class="button flex-vertical" id="add-album" type="submit" title="Create New Album">
                     <p>Get started by creating an album.</p>
                     <i class="far fa-images"></i>
                 </button>
             </form>
-            <div style="width: 400px">
-                <label class="button flex-vertical" for="add-image-input"
-                    style="font-size: 1em;
-                           padding: 50px 30px;">
+            <div>
+                <label class="button flex-vertical" id="add-images" for="add-image-input">
                     <p>Or just pick some photos to upload.</p>
                     <i class="far fa-image"></i>
                 </label>

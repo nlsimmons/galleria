@@ -13,7 +13,7 @@
                 </div>
                 <img :src="expanded_url">
                 <div class="image-desc-wrapper">
-                    <textarea v-if="editable" placeholder="Click to add a description"></textarea>
+                    <!-- <textarea v-if="editable" placeholder="Click to add a description"></textarea> -->
                     <!-- <p v-if="image.description">{{ image.description }}</p> -->
                 </div>
                 <button class="modal-close is-large" v-on:click="unexpand"></button>

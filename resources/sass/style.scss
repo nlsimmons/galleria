@@ -22,6 +22,35 @@ html, body {
 .flex-vertical {
 	display: flex;
 	flex-direction: column;
+	text-align: center;
+}
+
+.empty-container-header {
+	margin: 50px 0;
+    font-size: 1.5rem
+}
+
+.empty-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: baseline;
+	flex-wrap: wrap;
+
+	& > * {
+		width: 400px;
+	}
+
+	#add-album {
+		font-size: 1em;
+		padding: 50px 30px;
+		width: 100%;
+	}
+
+	#add-images {
+		font-size: 1em;
+       	padding: 50px 30px;
+	}
 }
 
 .modal.expanded-image {
