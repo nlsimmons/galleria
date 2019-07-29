@@ -1,37 +1,38 @@
 const fn = require('./functions.js')
 const EXIF = require('exif-js')
 
-fn.listen(
+/*fn.listen(
 	'#add-image-button',
 	'click',
 	function(e) {
 		if( fn.qs('#add-image-modal') )
 			fn.qs('#add-image-modal').classList.add('is-active')
 	}
-)
-fn.listen(
+)*/
+/*fn.listen(
 	'#add-image-modal .modal-background',
 	'click',
 	function(e) {
 		if( fn.qs('#add-image-modal') )
 			fn.qs('#add-image-modal').classList.remove('is-active')
 	}
-)
+)*/
 
 fn.listen(
-	'#add-image-simple',
+	'#add-image-input',
 	'change',
 	function(e) {
-		let images = fn.qs('#add-image-simple').files
-		let album_id = fn.qs('#album_id') ? fn.qs('#album_id').value : ''
+		let images = fn.qs('#add-image-input').files
+		// let album_id = fn.qs('#album_id') ? fn.qs('#album_id').value : ''
 
 		let upload_count = images.length
 		let uploads_complete = 0
 
-		let uri = album_id ? `/upload/album/${album_id}/image` : '/upload/image'
-
 		for(let image of images) {
-			fn.request('post', uri, { image } )
+			fn.request('post', '/api/images/uploaddirect', {
+				image,
+				api_token: fn.qs('#api_token').value
+			} )
 				.then( res => {
 					console.log(res)
 					fn.notify('success', 'Image uploaded')

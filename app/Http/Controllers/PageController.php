@@ -44,14 +44,16 @@ class PageController extends Controller
     	}
 
         $user = Auth::user();
+        $token = $user->api_token;
 
         if( ! $user->images->count() && ! $user->albums->count() )
         {
-            return view('home_empty');
+            return view('home_empty')
+                ->with( compact('token') );
         }
 
         $album_slides = new Slideshow( $user->my_albums() );
-        $token = $user->api_token;
+
 		return view('home')
             ->with( compact('album_slides', 'token') );
     }

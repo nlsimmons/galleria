@@ -62,7 +62,10 @@ export default {
                     return JSON.parse(res.response)
                 } )
                 .then( images => {
-                    this.processImages(images)
+                    if(images.length)
+                        this.processImages(images)
+                    else
+                        window.location.reload()
                 } )
                 .catch( err => {
                     console.log(err)
