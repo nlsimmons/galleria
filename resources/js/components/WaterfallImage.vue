@@ -11,12 +11,17 @@
                     <input v-if="editable" type="text" placeholder="Click to add a title to this image" :value="image.title" v-on:change="changeTitle($event)">
                     <input v-else-if="image.title" type="text" :value="image.title" readonly>
                 </div>
-                <img :src="expanded_url">
-                <div class="image-desc-wrapper">
+                <!-- <div class="image-desc-wrapper"> -->
                     <!-- <textarea v-if="editable" placeholder="Click to add a description"></textarea> -->
                     <!-- <p v-if="image.description">{{ image.description }}</p> -->
-                </div>
-                <button class="modal-close is-large" v-on:click="unexpand"></button>
+                <!-- </div> -->
+                <img :src="expanded_url">
+                <a href="#" style="position: absolute;
+                                   font-size: 1.5rem;
+                                   float: left;
+                                   left: 0;
+                                   bottom: -2rem;">See more in this album</a>
+               <button class="modal-close is-large" v-on:click="unexpand"></button>
             </div>
         </div>
     </div>
@@ -46,7 +51,7 @@ export default {
             return this.image.image_url + '/650'
         },
         expanded_url: function() {
-            return this.image.image_url
+            return this.image.image_url + '/1500'
         }
     },
     methods: {

@@ -52,7 +52,7 @@ class ImageController extends Controller
         if( $welcome_images->count() )
         {
             $welcome_images = $welcome_images
-                ->random( min(50, $welcome_images->count()) )->shuffle();
+                ->random( min(30, $welcome_images->count()) )->shuffle();
             $welcome_images->each(function($img) use ($size) {
                 $img->image_url = $img->uri($size);
             });

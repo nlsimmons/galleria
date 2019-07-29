@@ -3,7 +3,7 @@
         <div class="waterfall">
             <div class="waterfall-column" v-for="column in columns">
                 <WaterfallImage v-for="image in column" :image="image" :columnClass="columnClass" v-bind:key="image.id" :token="token" :editable="editable">
-                    <Buttons v-if="typeof token != 'undefined'"
+                    <Buttons v-if="has_panel"
                         :image_id="image.id"
                         :token="token"
                         v-on:reload="fetchImages"
