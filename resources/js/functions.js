@@ -16,18 +16,19 @@ export function removeClass(selector, className) {
 	})
 }
 
-export function toggle(selector) {
+export function toggleElement(element, className="active") {
+	if( element.classList.contains(className) )
+	{
+		element.classList.remove(className)
+	}
+	else
+	{
+		element.classList.add(className)
+	}
+}
+export function toggleSelector(selector, className="active") {
 	qsa(selector).forEach( el => {
-		if( el.classList.contains('active') )
-		{
-			el.classList.remove('active')
-			el.classList.add('inactive')
-		}
-		else if( el.classList.contains('inactive') )
-		{
-			el.classList.remove('inactive')
-			el.classList.add('active')
-		}
+		toggleElement(el, selector)
 	})
 }
 

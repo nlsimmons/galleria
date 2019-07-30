@@ -17,7 +17,7 @@
                 <!-- </div> -->
                 <img :src="expanded_url">
                 <a href="#" style="position: absolute;
-                                   font-size: 1.5rem;
+                                   font-size: 1rem;
                                    float: left;
                                    left: 0;
                                    bottom: -2rem;">See more in this album</a>
@@ -39,10 +39,10 @@ export default {
     },
     created() {
         let that = this
+        console.log(this.image)
         window.addEventListener('keydown', e => {
             if(that.expanded && e.code == 'Escape')
                 that.expanded = false
-
         })
     },
     props: ['image', 'columnClass', 'editable', 'token'],

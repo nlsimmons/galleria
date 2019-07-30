@@ -21,3 +21,50 @@ if( fn.qs('#waterfall') ) {
 		el: '#waterfall',
 	});
 }
+
+fn.addEvent(
+	document,
+	'click',
+	function(e) {
+		if( e.target.matches('.menu-toggle:not(.active)') )
+		{
+			fn.removeClass('.menu-toggle', 'active')
+			e.target.classList.add('active')
+		}
+		else
+		{
+			fn.removeClass('.menu-toggle', 'active')
+		}
+	}
+)
+/*fn.addEvent(
+	fn.qsa('.menu-toggle'),
+	'click',
+	function(e) {
+		fn.toggleElement(e.target)
+	}
+)*/
+
+window.addEventListener('keydown', e => {
+    if(e.code == 'Escape') {
+    	fn.qsa('.menu-toggle').forEach( el => {
+    		el.classList.remove('active')
+    	})
+    }
+})
+
+/*fn.listen(
+	'.menu-toggle',
+	'click',
+	function(el) {
+		fn.toggleElement(el.target)
+	}
+)
+fn.listen(
+	':not(.menu-toggle)',
+	'click',
+	function(e) {
+		console.log(e.target)
+		fn.removeClass('.menu-toggle', 'active')
+	}
+)*/

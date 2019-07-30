@@ -157,6 +157,7 @@ $album-cover-height: 600px;
     .carousel-track .carousel-slide:nth-of-type( #{$i} ) {
         -webkit-transform: translateX( percentage($i - 1) );
                 transform: translateX( percentage($i - 1) );
+        z-index: -($i - 1);
     }
     .carousel-activator:nth-of-type( #{$i} ):checked ~ .carousel-buttons .carousel-slide-control:nth-of-type( #{$i} ) {
         display: flex;
