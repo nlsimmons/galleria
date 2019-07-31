@@ -6,11 +6,17 @@
     		{{ isset($current_album) && $current_album == $slide->id ? 'checked' : '' }}>
     @endforeach
 
-	{{-- <div class="carousel-indicators">
-		@foreach( $slides as $slide )
-    		<label for="{{ $slide->id }}" class="carousel-indicator"></label>
-    	@endforeach
-	</div> --}}
+
+    @foreach( $slides as $slide )
+	   <div class="carousel-controls">
+    		<label for="{{ $slide->previous }}" class="carousel-previous">
+                <i class="fas fa-chevron-circle-left"></i>
+            </label>
+            <label for="{{ $slide->next }}" class="carousel-next">
+                <i class="fas fa-chevron-circle-right"></i>
+            </label>
+	   </div>
+    @endforeach
 
     <div class="carousel-track">
 		{{ $slot }}

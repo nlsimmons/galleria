@@ -37,14 +37,6 @@ fn.addEvent(
 		}
 	}
 )
-/*fn.addEvent(
-	fn.qsa('.menu-toggle'),
-	'click',
-	function(e) {
-		fn.toggleElement(e.target)
-	}
-)*/
-
 window.addEventListener('keydown', e => {
     if(e.code == 'Escape') {
     	fn.qsa('.menu-toggle').forEach( el => {
@@ -52,19 +44,3 @@ window.addEventListener('keydown', e => {
     	})
     }
 })
-
-/*fn.listen(
-	'.menu-toggle',
-	'click',
-	function(el) {
-		fn.toggleElement(el.target)
-	}
-)
-fn.listen(
-	':not(.menu-toggle)',
-	'click',
-	function(e) {
-		console.log(e.target)
-		fn.removeClass('.menu-toggle', 'active')
-	}
-)*/

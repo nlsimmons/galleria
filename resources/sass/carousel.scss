@@ -126,6 +126,24 @@ $album-cover-height: 600px;
     display: none;
 }
 
+.carousel-controls {
+    font-size: 3em;
+
+    .carousel-previous,
+    .carousel-next {
+        position: absolute;
+        top: 40px;
+    }
+
+    .carousel-previous {
+        left: -40vw;
+    }
+
+    .carousel-next {
+        right: -40vw;
+    }
+}
+
 @mixin carousel-slide( $i ) {
 
     .carousel-activator:nth-of-type( #{$i} ):checked ~ .carousel-track {
@@ -142,6 +160,10 @@ $album-cover-height: 600px;
         opacity: 1;
         -webkit-transform: scale(1);
                 transform: scale(1);
+    }
+    .carousel-activator:nth-of-type( #{$i} ):checked ~ .carousel-controls:nth-of-type( #{$i} ) {
+        display: block;
+        opacity: 1;
     }
     .carousel-activator:nth-of-type( #{$i} ):checked ~ .carousel-slide-control:nth-of-type( #{$i} ) {
         display: block;
