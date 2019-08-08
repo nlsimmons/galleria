@@ -2,7 +2,9 @@
 
 @section('content')
 
-<album-view token="{{ $token }}"></album-view>
+<album-view token="{{ $token }}" active="{{ $album_id }}">
+	@csrf
+</album-view>
 
 <section class="section">
     <div class="container-fluid" id="waterfall">

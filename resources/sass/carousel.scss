@@ -76,7 +76,7 @@ $album-cover-height: 600px;
     width: 150px;
     overflow: visible;
     text-align: center;
-    position: relative;
+    // position: relative;
 
     .slide-content.new-album {
         border-radius: 100%;
@@ -133,14 +133,16 @@ $album-cover-height: 600px;
     .carousel-next {
         position: absolute;
         top: 40px;
+        z-index: 100;
+        color: lightgray;
     }
 
     .carousel-previous {
-        left: -40vw;
+        left: calc(150px - 55vw);
     }
 
     .carousel-next {
-        right: -40vw;
+        right: calc(150px - 55vw);
     }
 }
 

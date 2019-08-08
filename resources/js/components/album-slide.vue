@@ -13,7 +13,7 @@
                 <li class="click-menu-item" v-on:click="changeCover">Change cover photo</li>
             </ul>
         </div>
-        <div class="albumview-indicator"></div>
+        <!-- <div class="albumview-indicator"></div> -->
     </div>
 </template>
 
