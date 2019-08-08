@@ -60,9 +60,12 @@ export default {
 
             fn.request('get', uri, params)
                 .then( res => {
+                    console.log(res)
                     return JSON.parse(res.response)
                 } )
                 .then( images => {
+                    console.log(images)
+
                     if(images.length)
                         this.processImages(images)
                     else

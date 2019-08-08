@@ -15,7 +15,11 @@
 
 @include('comps.navbar')
 
-@yield('content')
+<div id="vw">
+
+	@yield('content')
+
+</div>
 
 @include('comps.notification')
 
