@@ -39,13 +39,13 @@ fn.addEvent(
 	}
 )*/
 
-fn.listen(
+/*fn.listen(
 	'#toggle-album-carousel',
 	'click',
 	function(e) {
 		fn.toggle('#album-carousel')
 	}
-)
+)*/
 
 // Carousel Scrolling
 fn.listen(

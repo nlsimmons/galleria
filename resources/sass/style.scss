@@ -11,6 +11,34 @@
   			animation: $name 2s 1s forwards;
 }
 
+html.has-navbar-fixed-top,
+body.has-navbar-fixed-top {
+	padding-top: 6rem;
+}
+
+.navbar.is-fixed-top {
+	height: 6rem;
+
+	.navbar-end {
+		width: 120px;
+	}
+}
+
+@media (min-width: 460px) {
+	html.has-navbar-fixed-top,
+	body.has-navbar-fixed-top {
+		padding-top: 3rem;
+	}
+
+	.navbar.is-fixed-top {
+		height: 3rem;
+
+		.navbar-end {
+			width: 100%;
+		}
+	}
+}
+
 body {
 	overflow-x: hidden;
 }
