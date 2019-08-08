@@ -3,8 +3,8 @@
 @section('content')
 
 <section class="section">
-    <div class="container-fluid" id="waterfall">
-        <Waterfall src="welcome"></Waterfall>
+    <div class="container-fluid">
+        <waterfall src="welcome"></waterfall>
     </div>
 </section>
 

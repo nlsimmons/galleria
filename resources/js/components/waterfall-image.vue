@@ -31,7 +31,6 @@
 const fn = require('../functions.js')
 
 export default {
-    name: 'WaterfallImage',
     data() {
         return {
             expanded: false
@@ -39,7 +38,7 @@ export default {
     },
     created() {
         let that = this
-        console.log(this.image)
+        // console.log(this.image)
         window.addEventListener('keydown', e => {
             if(that.expanded && e.code == 'Escape')
                 that.expanded = false
@@ -80,9 +79,6 @@ export default {
                     console.log(err)
                 })
         },
-        thing: function(e) {
-            console.log(e)
-        }
     },
 }
 </script>

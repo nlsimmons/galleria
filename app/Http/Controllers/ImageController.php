@@ -148,6 +148,7 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $file = $request->file('image');
+        // return $file;
 
         $image_ref = Image::uploadPreview($file);
         return ['src' => $image_ref];

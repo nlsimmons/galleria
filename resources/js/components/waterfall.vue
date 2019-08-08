@@ -2,24 +2,24 @@
     <div class="wrapper">
         <div class="waterfall">
             <div class="waterfall-column" v-for="column in columns">
-                <WaterfallImage v-for="image in column" :image="image" :columnClass="columnClass" v-bind:key="image.id" :token="token" :editable="editable">
-                    <Buttons v-if="has_panel"
+                <waterfall-image v-for="image in column" :image="image" :columnClass="columnClass" v-bind:key="image.id" :token="token" :editable="editable">
+                    <waterfall-image-buttons v-if="has_panel"
                         :image_id="image.id"
                         :token="token"
                         v-on:reload="fetchImages"
-                    ></Buttons>
-                </WaterfallImage>
+                    ></waterfall-image-buttons>
+                </waterfall-image>
             </div>
         </div>
-        <Panel v-if="has_panel" :token="token" :album="album" v-on:reload="fetchImages"></Panel>
+        <waterfall-panel v-if="has_panel" :token="token" :album="album" v-on:reload="fetchImages"></waterfall-panel>
     </div>
 </template>
 
 <script>
 const fn = require('../functions.js')
-import Buttons from './Buttons.vue'
-import WaterfallImage from './WaterfallImage.vue'
-import Empty from './Empty.vue'
+import WaterfallImageButtons from './waterfall-image-buttons.vue'
+import WaterfallImage from './waterfall-image.vue'
+import Empty from './empty.vue'
 // Need an on-resize
 
 export default {
@@ -31,7 +31,7 @@ export default {
         }
     },
     components: {
-        Buttons, WaterfallImage, Empty
+        WaterfallImageButtons, WaterfallImage, Empty
     },
     props: [
         'src', 'token', 'has_panel', 'album', 'editable'

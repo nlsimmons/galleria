@@ -13,16 +13,17 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component( 'Waterfall', require('./components/Waterfall.vue').default );
-Vue.component( 'Panel', require('./components/Panel.vue').default );
+Vue.component( 'waterfall', require('./components/waterfall.vue').default );
+Vue.component( 'waterfall-panel', require('./components/waterfall-panel.vue').default );
+Vue.component( 'album-view', require('./components/album-view.vue').default );
 
-if( fn.qs('#waterfall') ) {
-	const waterfall = new Vue({
-		el: '#waterfall',
+if( fn.qs('#vw') ) {
+	const vw = new Vue({
+		el: '#vw',
 	});
 }
 
-fn.addEvent(
+/*fn.addEvent(
 	document,
 	'click',
 	function(e) {
@@ -36,7 +37,7 @@ fn.addEvent(
 			fn.removeClass('.menu-toggle', 'active')
 		}
 	}
-)
+)*/
 window.addEventListener('keydown', e => {
     if(e.code == 'Escape') {
     	fn.qsa('.menu-toggle').forEach( el => {

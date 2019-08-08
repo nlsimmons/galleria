@@ -66,7 +66,7 @@ class Image extends Model
 
     public static function upload($file, $owner, $album=null)
     {
-        $img = ImageManager::make($file)->orientate();
+        $img = ImageManager::make($file);//->orientate();
         $hash = md5($file);
 
         $new = new self;

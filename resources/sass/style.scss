@@ -368,3 +368,66 @@ i.fas.cs-album:before {
 img.display_image {
 	cursor: pointer;
 }
+
+.click-menu {
+    color: black;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    left: 25px;
+
+    & > * {
+        display: none;
+        position: absolute;
+        font-size: 1.25em;
+    }
+
+    .menu-toggle {
+        display: block;
+        background: white;
+        border-radius: 100%;
+        padding: 4px 5px;
+        left: -12px;
+
+        &.menu-toggle:hover {
+	        background: rgba(255, 255, 255, 0.5);
+		}
+    }
+
+    .menu-toggle.active ~ .click-menu-items {
+	    display: block;
+	}
+
+    .click-menu-items {
+        position: absolute;
+        right: 28px;
+        top: -12px;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: .9rem;
+        background: lightgray;
+
+	    &::before {
+	        content: "";
+	        position: absolute;
+	        left: 100%;
+	        pointer-events: none;
+	        border-style: solid;
+	        border-width: 10px;
+	        border-color: transparent
+	                      transparent
+	                      transparent
+	                      black;
+	    }
+
+	    .click-menu-item {
+	        padding: 5px;
+	        width: 175px;
+
+	        &:not(:last-of-type) {
+		        border-bottom: 1px solid black;
+		    }
+	    }
+    }
+}

@@ -2,15 +2,14 @@
 
 @section('content')
 
-@component('comps.albumview', [
-    'album_slides' => $album_slides,
-])
-@endcomponent
+<div id="vw">
+	<album-view token="{{ $token }}"></album-view>
 
-<section class="section">
-    <div class="container-fluid" id="waterfall">
-        <Waterfall src="album/{{ $album_id }}" token="{{ $token }}" has_panel="true" album="{{ $album_id }}" />
-    </div>
-</section>
+	<section class="section">
+	    <div class="container-fluid" id="waterfall">
+	        <waterfall src="album/{{ $album_id }}" token="{{ $token }}" has_panel="true" album="{{ $album_id }}" />
+	    </div>
+	</section>
+</div>
 
 @endsection

@@ -45,23 +45,43 @@ class AlbumController extends Controller
 
     /* * * * */
 
+    public function get(Request $request)
+    {
+        $albums = Auth::user()->albums;
+        $albums->each(function($item, $key){
+            if( empty($item->cover_image) && $item->images->count() )
+            {
+                $image = $item->images->random();
+                $item->cover_image = url( $image->uri(150) );
+            }
+        });
+
+        return $albums;
+    }
+
     public function editTitle(Request $request, $id)
     {
     	$image = Album::find($id);
     	// Do some validation
 
-    	$image->title = $request->value;
+    	$image->title = $request->title;
     	$image->save();
 
         return 'success';
     }
 
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
-        Album::destroy($id);
+        try {
+            Album::destroy($id);
+        } catch( \Exception $e ) {
+            throw $e;
+        }
 
-        return redirect()->route('home');
+        return 'success';
     }
+
+    /* * * * * * * */
 
     public function action($album_id, Request $request)
     {

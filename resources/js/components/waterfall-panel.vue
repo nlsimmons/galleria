@@ -74,7 +74,7 @@ export default {
                     album: this.album || null
                 };
 
-                console.log(params)
+                // console.log(params)
                 fn.request('post', '/api/images/uploaddirect', params).then(res => {
                     that.$emit('reload')
                     fn.notify('success', 'Image(s) uploaded successfully.')
@@ -82,7 +82,7 @@ export default {
                     return JSON.parse(res.response)
                 })
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                 })
 
             }

@@ -18,6 +18,9 @@ Route::middleware('auth:api')->group(function(){
 	Route::get('/images/home', 'ImageController@home');
 	Route::get('/images/album/{album_id}', 'ImageController@album');
 
+	Route::get('/albums', 'AlbumController@get');
+	Route::put('/albums/{id}/title', 'AlbumController@editTitle');
+
 	Route::put('/images/{id}/title', 'ImageController@editTitle');
 
 	Route::post('/images/upload', 'ImageController@upload');
@@ -25,6 +28,7 @@ Route::middleware('auth:api')->group(function(){
 	Route::post('/images/confirm/{image}', 'ImageController@confirm');
 
 	Route::delete('/images/{id}', 'ImageController@delete');
+	Route::delete('/albums/{id}', 'AlbumController@delete');
 });
 
 Route::get('/images/welcome', 'ImageController@welcome');
