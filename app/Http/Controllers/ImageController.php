@@ -31,6 +31,7 @@ class ImageController extends Controller
         $home_images = $user->images->sortByDesc('created_at')->take(50);
         $home_images = $home_images->each(function($img) use ($size) {
             $img->image_url = $img->uri($size);
+            $img->album_id = $img->albums->count() ? $img->albums->first()->id : null;
         });
 
         return $home_images->values();
