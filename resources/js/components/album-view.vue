@@ -94,6 +94,7 @@ export default {
                     this.setControls()
                 } )
                 .catch( err => {
+                    console.log(err)
                     console.log(err.response, err.responseURL)
                 } )
         },
@@ -118,6 +119,13 @@ export default {
             }
             this.new_prev = prev_ids.shift()
             this.new_next = next_ids.shift()
+
+            if( typeof this.active == 'undefined' )
+            {
+                console.log(this.new_next)
+                fn.qs('#' + this.new_next).checked = true
+            }
+
         }
     },
     beforeMount() {
