@@ -60,12 +60,13 @@ class PageController extends Controller
 
     public function album($album_id)
     {
-        if(!Auth::check())
+        if( !Auth::check() )
         {
-            return redirect()->route('login');
+            return view('album_anon')
+                ->with( compact('album_id') );
         }
 
-        $album = Album::findOrFail($album_id);
+        // $album = Album::findOrFail($album_id);
         $user = Auth::user();
         $album_slides = new Slideshow( $user->my_albums() );
         $token = $user->api_token;

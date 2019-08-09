@@ -16,7 +16,8 @@
                     <!-- <p v-if="image.description">{{ image.description }}</p> -->
                 <!-- </div> -->
                 <img :src="expanded_url">
-                <a href="#" style="position: absolute;
+                <a v-if="image.album_id" :href="/album/ + image.album_id"
+                    style="position: absolute;
                                    font-size: 1rem;
                                    float: left;
                                    left: 0;
@@ -59,6 +60,7 @@ export default {
             alert(e)
         },
         expand: function() {
+            console.log(this.image)
             this.expanded = true
         },
         unexpand: function() {

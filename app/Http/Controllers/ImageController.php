@@ -16,6 +16,12 @@ ImageManager::configure(array('driver' => 'imagick'));
 
 class ImageController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        if( $user = Auth::guard('api')->user() )
+            Auth::login($user);
+    }
+
     public function home(Request $request)
     {
         $size = $request->size;
@@ -53,8 +59,9 @@ class ImageController extends Controller
         {
             $welcome_images = $welcome_images
                 ->random( min(30, $welcome_images->count()) )->shuffle();
-            $welcome_images->each(function($img) use ($size) {
+            $welcome_images->each( function($img) use ($size) {
                 $img->image_url = $img->uri($size);
+                $img->album_id = $img->albums->count() ? $img->albums->first()->id : null;
             });
         }
 
@@ -148,7 +155,6 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $file = $request->file('image');
-        // return $file;
 
         $image_ref = Image::uploadPreview($file);
         return ['src' => $image_ref];

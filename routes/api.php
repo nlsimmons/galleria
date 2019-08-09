@@ -15,10 +15,7 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->group(function(){
 	Route::get('/user', 'UserController@get');
-	Route::get('/images/home', 'ImageController@home');
-	Route::get('/images/album/{album_id}', 'ImageController@album');
 
-	Route::get('/albums', 'AlbumController@get');
 	Route::put('/albums/{id}/title', 'AlbumController@editTitle');
 
 	Route::put('/images/{id}/title', 'ImageController@editTitle');
@@ -32,3 +29,7 @@ Route::middleware('auth:api')->group(function(){
 });
 
 Route::get('/images/welcome', 'ImageController@welcome');
+Route::get('/images/home', 'ImageController@home');
+Route::get('/images/album/{album_id}', 'ImageController@album');
+
+Route::get('/albums', 'AlbumController@get');

@@ -13,6 +13,12 @@ use App\Slideshow;
 
 class AlbumController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        if( $user = Auth::guard('api')->user() )
+            Auth::login($user);
+    }
+
     public function new(Request $request)
     {
         if(!Auth::check())
